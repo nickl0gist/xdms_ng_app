@@ -57,6 +57,12 @@
   border-color: #ffffff00;
   margin-left: 5px;
 }
+
+.date_picker {
+  width: fit-content;
+  float: left;
+}
+
 @media screen and (max-width: 1139px){
 
   .navbar-collapse {
