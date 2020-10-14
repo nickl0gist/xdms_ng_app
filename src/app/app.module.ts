@@ -8,7 +8,7 @@ import {WarehouseComponent} from './warehouse/warehouse.component';
 import {HomeComponent} from './home/home.component';
 import {TttComponent} from './ttt/ttt.component';
 import {TpaComponent} from './tpa/tpa.component';
-import {Router, Routes} from "@angular/router";
+import {Router, RouterModule, Routes} from "@angular/router";
 import {TttRootComponent} from './ttt-root/ttt-root.component';
 import {TpaRootComponent} from './tpa-root/tpa-root.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -20,10 +20,11 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
 import {AaDatepickerModule} from 'ngx-animating-datepicker';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   {
-    path: 'warehouse/home',
+    path: 'warehouse',
     component: HomeComponent
   },
   {
@@ -47,6 +48,10 @@ const appRoutes: Routes = [
         component: TpaComponent
       }
     ]
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
@@ -60,7 +65,8 @@ const appRoutes: Routes = [
     TpaRootComponent,
     TttComponent,
     TpaComponent,
-    DatePickComponent
+    DatePickComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +80,8 @@ const appRoutes: Routes = [
     NoopAnimationsModule,
     AaDatepickerModule,
     DatePickerModule,
-    BrowserModule, BrowserAnimationsModule, DateTimePickerModule
+    BrowserModule, BrowserAnimationsModule, DateTimePickerModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

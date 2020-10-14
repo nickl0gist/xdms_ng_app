@@ -28,6 +28,7 @@
     "@progress/kendo-angular-l10n": "^2.0.2",
     "@progress/kendo-angular-popup": "^3.0.6",
     "@syncfusion/ej2-angular-calendars": "^18.3.35",
+    "@syncfusion/ej2-ng-buttons": "^16.2.50",
     "bootstrap": "^4.5.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",

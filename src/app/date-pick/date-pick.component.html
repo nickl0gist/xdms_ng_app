@@ -1,9 +1,14 @@
-<ejs-datepicker  id='datetimepicker' placeholder='Select a date' [value]='dateValue'
-                    [min]='minDate'
-                    [max]='maxDate'
-                    [allowEdit]="false"
-                    [weekNumber]="1"
-                    [firstDayOfWeek]="1"
-                    [showClearButton]="false"
-                    format='dd MMM yyyy HH:mm:ss'
+<form [formGroup]="skillForm">
+<ejs-datepicker id='datetimepicker' placeholder='{{dateValue}}'
+                [value]='dateValue'
+                [min]='minDate'
+                [max]='maxDate'
+                [allowEdit]="false"
+                [weekNumber]="1"
+                [firstDayOfWeek]="1"
+                [showClearButton]="false"
+                format='dd MMM yyyy HH:mm'
+                formControlName="datetime"
+                (ngModelChange)="changeLink()"
 ></ejs-datepicker>
+</form>

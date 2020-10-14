@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DatePickComponent} from "../date-pick/date-pick.component";
 import { DatePipe } from '@angular/common';
 import {ChangeDetectorRef } from '@angular/core';
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-navigation',
@@ -25,7 +26,10 @@ export class NavigationComponent implements OnInit {
     setTimeout(() => {
       Promise.resolve(null).then(() => this.currentDate = this.datePipe.transform(this.datePickComponent.dateValue, 'yyyy-MM-dd'));
     });
+  }
 
+  onVoted(str: string) {
+    this.currentDate = str;
   }
 
 }
