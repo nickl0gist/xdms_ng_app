@@ -1,0 +1,38 @@
+<div class="container-fluid" style="display: inline-grid;">
+  <div class="row wh-cc-type">
+    <ng-container *ngFor="let warehouse of warehouses">
+      <ng-container *ngIf="warehouse.whType.type == 'CC'">
+        <div [routerLink]="['/warehouse', warehouse.urlCode]" class="card col-2 btn btn-outline-primary" (click)="nav.getCurrentWarehouseUrl(warehouse.urlCode)">
+            <div class="card-body">
+              <h5 class="card-title">{{warehouse.name}}</h5>
+              <p class="card-text">{{warehouse.country}} / {{warehouse.city}}</p>
+            </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="row wh-xd-type">
+    <ng-container *ngFor="let warehouse of warehouses">
+      <ng-container *ngIf="warehouse.whType.type == 'XD'">
+        <div [routerLink]="['/warehouse', warehouse.urlCode]" class="card col-2 btn btn-outline-primary" (click)="nav.getCurrentWarehouseUrl(warehouse.urlCode)">
+            <div class="card-body">
+              <h5 class="card-title">{{warehouse.name}}</h5>
+              <p class="card-text">{{warehouse.country}} / {{warehouse.city}}</p>
+            </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="row wh-txd-type">
+    <ng-container *ngFor="let warehouse of warehouses">
+      <ng-container *ngIf="warehouse.whType.type == 'TXD'">
+        <div [routerLink]="['/warehouse', warehouse.urlCode]" class="card col-2 btn btn-outline-primary" (click)="nav.getCurrentWarehouseUrl(warehouse.urlCode)">
+            <div class="card-body">
+              <h5 class="card-title">{{warehouse.name}}</h5>
+              <p class="card-text">{{warehouse.country}} / {{warehouse.city}}</p>
+            </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

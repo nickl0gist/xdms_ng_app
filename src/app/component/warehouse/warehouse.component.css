@@ -1,0 +1,219 @@
+.truck-table-brief {
+  display: contents;
+}
+
+.ttt_table_box {
+  background-color: rgba(11, 165, 151, 0);
+  display: inline-grid;
+  max-width: 47%;
+  padding: 0;
+  margin-left: 2%;
+  margin-right: 1%;
+  line-height: 2rem;
+  width: 100%;
+}
+
+.tpa_table_box {
+  background-color: rgba(11, 165, 151, 0);
+  display: inline-grid;
+  max-width: 47%;
+  padding: 0;
+  margin-right: 1%;
+  line-height: 2rem;
+  width: 100%;
+}
+.ttt_row_head, .ttt_row_content, .tpa_row_head, .tpa_row_content  {
+  margin-left: 0;
+  margin-right: 0;
+  height: 3rem;
+}
+
+.icon-login:before {
+  content: '\e801';
+  font-size: 3rem;
+  transform: translateY(-1px);
+}
+
+.icon-logout:before {
+  content: '\e802';
+  font-size: 3rem;
+  transform: translateY(-1px);
+}
+
+a#TTT {
+  color: #1116a1;
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 3rem 0.5rem 0 0;
+  background-color: rgb(255, 226, 177);
+  border-left: 0.15rem solid #0705ff;
+  border-top: 0.15rem solid #0705ff;
+  border-right: 0.15rem solid #0705ff;
+  transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+a#TPA {
+  color: #1116a1;
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 0.5rem 3rem 0 0;
+  background-color: rgb(187, 255, 193);
+  border-left: 0.15rem solid rgba(78, 179, 13, 0.78);
+  border-top: 0.15rem solid rgba(78, 179, 13, 0.78);
+  border-right: 0.15rem solid rgba(78, 179, 13, 0.78);
+  transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+a#TTT:hover, a#TPA:hover {
+  color: #e6e8eb;
+  text-decoration: none;
+  background-color: rgba(0, 0, 255, 0.53);
+  border-left: 0.15rem solid #5279c5;
+  border-top: 0.15rem solid #5279c5;
+  border-right: 0.15rem solid #5279c5;
+}
+
+.ttt_text {
+  display: inline-table;
+  transform: translate3d(0px, -6px, 0px);
+}
+
+.odd_row, .tpa-odd {
+  background-color: rgba(225, 225, 225, 0.9) !important;
+  transition: background-color 0.3s;
+}
+
+.even_row, .tpa-even {
+  background-color: rgba(225, 225, 225, 0.95) !important;
+  transition: background-color 0.3s;
+}
+
+.odd_row:hover, .tpa-odd:hover {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.even_row:hover, .tpa-even:hover {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.ttt_head th,.tpa_head th {
+  vertical-align: bottom;
+}
+
+.ttt_row_content tbody {
+  overflow-y: auto;
+  height: 30rem;
+}
+
+table.ttt_table, table.ttt_table thead, table.tpa_table, table.tpa_table thead {
+  display: inline-grid;
+  width: 100%;
+}
+
+.ttt_head th.truck_id, .ttt_head th.truck_arr_plan, .ttt_head th.truck_arr_real, .ttt_head th.truck_status {
+  background-color: rgb(162, 255, 140) !important;
+}
+.tpa_head th.truck_id, .tpa_head th.truck_arr_plan, .tpa_head th.truck_arr_real, .tpa_head th.truck_status {
+  background-color: rgb(255, 246, 144) !important;
+}
+.truck_id, .truck_arr_plan, .truck_arr_real, .truck_status {
+  display: inline-grid;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  border-right: 0.1rem solid #4664ff;
+  border-bottom: 0.15rem solid #4664ff;
+  border-top: 0.15rem solid #4664ff;
+  padding-top: 0.1rem;
+  padding-bottom: 0.2rem;
+  line-height: 1.5rem;
+  padding-left: 1rem;
+}
+
+.truck_id {
+  width: 30%;
+  border-left: 0.15rem solid #4664ff !important;
+}
+
+.odd_row, .even_row, .tpa-even, .tpa-odd {
+  display: inline-block;
+  width: 100%;
+}
+
+.odd_row th, .even_row th {
+  display: inline-grid;
+  width: 30%;
+  border-left: 0.15rem solid #4664ff !important;
+  border-bottom: 0.15rem solid #4664ff;
+  border-right: 0.1rem solid #4664ff;
+  padding-left: 1rem;
+}
+
+.tpa-odd th, .tpa-even th {
+  display: inline-grid;
+  width: 30%;
+  border-left: 0.15rem solid #4664ff !important;
+  border-bottom: 0.15rem solid #4664ff;
+  border-right: 0.1rem solid #4664ff;
+  padding-left: 1rem;
+}
+
+.truck_arr_plan, .truck_arr_real {
+  width: 25%;
+}
+
+.truck_status {
+  width: 20%;
+}
+
+.odd_row td, .even_row td {
+  display: inline-grid;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  border-bottom: 0.15rem solid #4664ff;
+  border-right: 0.1rem solid #4664ff;
+  padding-left: 1rem;
+}
+
+.tpa-odd td, .tpa-even td {
+  display: inline-grid;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  border-bottom: 0.15rem solid #4664ff;
+  border-right: 0.1rem solid #4664ff;
+  padding-left: 1rem;
+}
+
+.odd_row td:nth-child(4), .even_row td:nth-child(4) {
+  width: 20%;
+}
+
+.odd_row td:nth-child(2), .even_row td:nth-child(2) {
+  width: 25%;
+}
+
+.odd_row td:nth-child(3), .even_row td:nth-child(3) {
+  width: 25%;
+}
+
+.tpa-odd td:nth-child(4), .tpa-even td:nth-child(4) {
+  width: 20%;
+}
+
+.tpa-odd td:nth-child(2), .tpa-even td:nth-child(2) {
+  width: 25%;
+}
+
+.tpa-odd td:nth-child(3), .tpa-even td:nth-child(3) {
+  width: 25%;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+
+
+
+

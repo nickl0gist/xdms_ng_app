@@ -11,17 +11,19 @@
   <div class="navbar-collapse collapse" id="mainmenu">
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink='/warehouse'>Home</a>
+        <a class="nav-link" routerLink='/warehouse'>Warehouses</a>
       </li>
       <div class="grid-divider"></div>
-      <li class="nav-item">
-        <a [routerLink]="['/warehouse/url_code/ttt', currentDate]" class="nav-link">TTT</a>
-      </li>
-      <div class="grid-divider"></div>
-      <li class="nav-item">
-        <a [routerLink]="['/warehouse/url_code/tpa', currentDate]" class="nav-link">TPA</a>
-      </li>
-      <div class="grid-divider"></div>
+      <ng-container *ngIf="nav.visible">
+        <li class="nav-item">
+          <a [routerLink]="['/warehouse', nav.warehouseUrlCode ,'ttt', currentDate]" class="nav-link">TTT</a>
+        </li>
+        <div class="grid-divider"></div>
+        <li class="nav-item">
+          <a [routerLink]="['/warehouse', nav.warehouseUrlCode ,'tpa', currentDate]" class="nav-link">TPA</a>
+        </li>
+        <div class="grid-divider"></div>
+      </ng-container>
       <li class="nav-item">
         <a href="#" class="nav-link">Notification TPA</a>
       </li>
@@ -52,5 +54,5 @@
   </div>
 </nav>
 <div class="container-fluid date_picker">
-<app-date-pick (voted)="onVoted($event)"></app-date-pick>
+  <app-date-pick (voted)="onDayPicked($event)"></app-date-pick>
 </div>

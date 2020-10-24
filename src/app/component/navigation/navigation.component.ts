@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DatePickComponent} from "../date-pick/date-pick.component";
 import { DatePipe } from '@angular/common';
-import {ChangeDetectorRef } from '@angular/core';
-import {AppComponent} from "../app.component";
+import {AppComponent} from "../../app.component";
+import {NavbarService} from "../../shared/service/navbar.service";
 
 @Component({
   selector: 'app-navigation',
@@ -13,10 +13,10 @@ export class NavigationComponent implements OnInit {
 
   @ViewChild(DatePickComponent) datePickComponent;
 
-  currentDate: string;
+  public currentDate: string;
   public datePipe: DatePipe = new DatePipe('en-Eu');
 
-  constructor(private cdref: ChangeDetectorRef) {
+  constructor( public nav: NavbarService) {
   }
 
   ngOnInit(): void {
@@ -24,12 +24,16 @@ export class NavigationComponent implements OnInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      Promise.resolve(null).then(() => this.currentDate = this.datePipe.transform(this.datePickComponent.dateValue, 'yyyy-MM-dd'));
+      Promise.resolve(null).then(() => {
+        this.currentDate = this.datePipe.transform(this.datePickComponent.dateValue, 'yyyy-MM-dd');
+        this.nav.setCurrentDate(this.datePipe.transform(this.datePickComponent.dateValue, 'yyyy-MM-dd'));
+      });
     });
   }
 
-  onVoted(str: string) {
+  onDayPicked(str: string) {
     this.currentDate = str;
+    this.nav.setCurrentDate(str);
   }
 
 }

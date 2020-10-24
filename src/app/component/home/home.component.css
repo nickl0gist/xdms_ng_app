@@ -1,0 +1,16 @@
+.card{
+  margin: 1rem;
+  display: block;
+  width: 18rem;
+  border-radius: 0.5rem;
+  background-color:rgba(255,255,255,0.80);
+  border-color: #f8f8f8;
+}
+
+.btn-outline-primary{
+  color: #1116a1;
+}
+.btn-outline-primary:hover{
+  color: #eaf1ff;
+  background-color: rgba(30,37,232,0.5);
+}

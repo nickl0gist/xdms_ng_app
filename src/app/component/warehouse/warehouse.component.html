@@ -1,0 +1,75 @@
+<div class="row truck-table-brief">
+  <!--TTT PART-->
+  <div class="col-6 ttt_table_box">
+    <div class="row ttt_row_head">
+      <a id="TTT" class="ttt_header" [routerLink]="['/warehouse', nav.warehouseUrlCode ,'ttt', this.nav.currentDate]">
+        <div class="ttt_text">TTT</div>
+        <i class="icon-login"></i>
+      </a>
+    </div>
+    <div class="row ttt_row_content">
+      <table class="ttt_table table-hover table-striped">
+        <thead class="ttt_head">
+        <tr>
+          <th scope="colgroup" class="truck_id">Truck ID</th>
+          <th scope="colgroup" class="truck_arr_plan">Plan Arrival</th>
+          <th scope="colgroup" class="truck_arr_real">Arrived Real</th>
+          <th scope="colgroup" class="truck_status">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let ttt of tttList; let index = index">
+          <tr [ngClass]="index % 2 === 0 ? 'even_row' : 'odd_row'">
+            <th>{{ttt.truckName}}</th>
+            <td>{{ttt.tttArrivalDatePlan.substring(11)}}</td>
+            <td>{{ttt.tttArrivalDateReal === undefined ? symbolNotArrived : ttt.tttArrivalDateReal}}</td>
+            <td>{{ttt.tttStatus.tttStatusName}}</td>
+            <td hidden>{{ttt.tttID}}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--TPA PART-->
+  <div class="col-6 tpa_table_box">
+    <div class="row tpa_row_head">
+      <a id="TPA" class="ttt_header" [routerLink]="['/warehouse', nav.warehouseUrlCode ,'tpa', this.nav.currentDate]">
+        <div class="ttt_text">TPA</div>
+        <i class="icon-logout"></i>
+      </a>
+    </div>
+    <div class="row ttt_row_content">
+      <table class="tpa_table table-hover table-striped">
+        <thead class="tpa_head">
+        <tr>
+          <th scope="colgroup" class="truck_id">Truck ID</th>
+          <th scope="colgroup" class="truck_arr_plan">Plan Departure</th>
+          <th scope="colgroup" class="truck_arr_real">Departed Real</th>
+          <th scope="colgroup" class="truck_status">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let tpa of tpaListDelayed; let index = index">
+          <tr [ngClass]="index % 2 === 0 ? 'tpa-even' : 'tpa-odd'">
+            <th>{{tpa.name}}</th>
+            <td>{{tpa.departurePlan.substring(11)}}</td>
+            <td>{{tpa.departureReal === undefined ? symbolNotArrived : tpa.departureReal}}</td>
+            <td>{{tpa.status.statusName}}</td>
+            <td hidden>{{tpa.tpaID}}</td>
+          </tr>
+        </ng-container>
+        <ng-container *ngFor="let tpa of tpaListByDate; let i = index">
+          <tr [ngClass]="i % 2 === 0 ? 'tpa-even' : 'tpa-odd'">
+            <th>{{tpa.name}}</th>
+            <td>{{tpa.departurePlan.substring(11)}}</td>
+            <td>{{tpa.departureReal === undefined ? symbolNotArrived : tpa.departureReal}}</td>
+            <td>{{tpa.status.statusName}}</td>
+            <td hidden>{{tpa.tpaID}}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
