@@ -81,21 +81,17 @@ a#TTT:hover, a#TPA:hover {
 }
 
 .odd_row, .tpa-odd {
-  background-color: rgba(225, 225, 225, 0.9) !important;
+  background-color: rgba(249, 249, 249, 1) !important;
   transition: background-color 0.3s;
 }
 
 .even_row, .tpa-even {
-  background-color: rgba(225, 225, 225, 0.95) !important;
+  background-color: rgba(255, 255, 255, 1) !important;
   transition: background-color 0.3s;
 }
 
-.odd_row:hover, .tpa-odd:hover {
-  background-color: rgb(255, 255, 255) !important;
-}
-
-.even_row:hover, .tpa-even:hover {
-  background-color: rgb(255, 255, 255) !important;
+.odd_row:hover, .tpa-odd:hover, .even_row:hover, .tpa-even:hover {
+  background-color: rgb(240, 240, 240) !important;
 }
 
 .ttt_head th,.tpa_head th {
