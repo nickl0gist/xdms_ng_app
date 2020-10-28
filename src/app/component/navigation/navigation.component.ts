@@ -3,6 +3,7 @@ import {DatePickComponent} from "../date-pick/date-pick.component";
 import { DatePipe } from '@angular/common';
 import {AppComponent} from "../../app.component";
 import {NavbarService} from "../../shared/service/navbar.service";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',

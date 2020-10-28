@@ -4,6 +4,7 @@ import * as myGlobals from "../../global";
 import {ApiService} from "../../shared/service/api.service";
 import {NavbarService} from "../../shared/service/navbar.service";
 import {Router} from "@angular/router";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',

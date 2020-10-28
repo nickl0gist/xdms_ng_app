@@ -6,6 +6,7 @@ import * as myGlobals from "../../global";
 import {Tpa} from "../../model/tpa/tpa";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-warehouse',

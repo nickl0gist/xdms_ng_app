@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation, Inject, Output, EventEmitter} from '@angul
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {now} from "moment";
 import {formatDate} from "@angular/common";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-date-pick',

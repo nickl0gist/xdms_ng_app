@@ -94,6 +94,16 @@ a#TTT:hover, a#TPA:hover {
   background-color: rgb(240, 240, 240) !important;
 }
 
+.even_row a, .odd_row a, .tpa-odd a, .tpa-even a{
+  text-decoration: none;
+  color: black;
+}
+
+.even_row a:hover, .odd_row a:hover, .tpa-odd a:hover, .tpa-even a:hover{
+  text-decoration: none;
+  color: #0705ff;
+}
+
 .ttt_head th,.tpa_head th {
   vertical-align: bottom;
 }

@@ -1,0 +1,179 @@
+.truck-table {
+  display: contents;
+}
+.tttable table thead{
+  display: inline-table;
+}
+.tttable {
+  width: 98%;
+  display: block;
+  margin-left: 1rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 1);
+}
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: rgba(230, 230, 230, 1);
+}
+
+
+.tttable tbody {
+  overflow-y: auto;
+  height: 30rem;
+}
+
+.clear-table{
+  display: table;
+}
+
+/*.tttable tbody tr {*/
+/*  display: inline-block;*/
+/*  width: 100%;*/
+/*}*/
+.head-row{
+  display: inline-table;
+  width: 100%;
+}
+
+/*----------*/
+.table {
+  display: inline-grid;
+}
+
+.table td, .table th {
+  padding: 0;
+  border: 1px solid #4f5c68;
+
+}
+
+.table thead th {
+  display: table-cell;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  border: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
+  background: dimgrey;
+  color: aliceblue;
+}
+
+.table td {
+  text-align: center;
+  padding-bottom: 1px;
+  padding-top: 1px;
+  vertical-align: middle;
+}
+
+/*---------------*/
+
+.line_through {
+  display: inline;
+  text-decoration: line-through;
+  padding-right: 10px;
+}
+
+a.table_link {
+  text-decoration: none;
+  color: black;
+  font-weight: 550;
+  transition: color 0.2s;
+}
+
+a.table_link:hover {
+  text-decoration: none;
+  color: #f6055c;
+}
+
+tbody tr{
+  display: inline-table;
+  width: 100%;
+}
+
+tr.red_row a.table_link:hover {
+  text-decoration: none;
+  color: #000dff;
+}
+
+tr.red_row {
+  background-color: #f68585 !important;
+}
+
+tr.green_row {
+  background-color: #a2ff8c !important;
+}
+
+table.upper-table {
+  width: 98%;
+  margin: auto;
+}
+/*
+.ttt_truck_id, .ttt_depart, .ttt_manQty, .ttt_palQty,
+.ttt_weight, .ttt_arr, .ttt_util, .ttt_arr_real, .ttt_delay,
+.ttt_Date, .ttt_Hour, .ttt_ldm, .ttt_wg{
+  display: table;
+  box-sizing: border-box;
+  border-collapse: collapse;
+}
+*/
+.ttt_truck_id {
+  width: 20%;
+}
+
+.ttt_depart {
+  width: 15%;
+}
+
+.ttt_manQty {
+  width: 10%;
+}
+
+.ttt_palQty {
+  width: 7%;
+}
+
+.ttt_weight {
+  width: 7%;
+}
+
+.ttt_arr {
+  width: 10%;
+}
+
+.ttt_util {
+  width: 10%;
+}
+
+.ttt_arr_real {
+  width: 5%;
+}
+
+.ttt_delay {
+  width: 10%;
+}
+.ttt_Date{
+  width: 10%;
+}
+.ttt_Hour{
+  width: 5%;
+}
+.ttt_ldm{
+  width: 7%;
+}
+.ttt_wg{
+  width: 8%;
+}
+::-webkit-scrollbar {
+  width: 0;
+}
+.fa-square {
+  content: "\f0c8";
+  font-size: 2rem;
+  vertical-align: -webkit-baseline-middle;
+}
+.fa-check-square {
+  content: "\f0c8";
+  font-size: 2rem;
+  vertical-align: -webkit-baseline-middle;
+}
+

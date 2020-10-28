@@ -8,7 +8,7 @@ import {WarehouseComponent} from "./component/warehouse/warehouse.component";
 import {HomeComponent} from './component/home/home.component';
 import {TttComponent} from './component/ttt/ttt.component';
 import {TpaComponent} from './component/tpa/tpa.component';
-import {Router, RouterModule, Routes} from "@angular/router";
+import {Route, Router, RouterModule, Routes} from "@angular/router";
 import {TttRootComponent} from './component/ttt-root/ttt-root.component';
 import {TpaRootComponent} from './component/tpa-root/tpa-root.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -22,6 +22,8 @@ import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import {HttpClientModule} from "@angular/common/http";
+import {CustomUrlMatcher} from "./custom.url.matcher";
+import { NgVarDirective } from './shared/directives/ng-var.directive';
 
 const appRoutes: Routes = [
   {
@@ -30,24 +32,38 @@ const appRoutes: Routes = [
   },
   {
     path: 'warehouse/:url_code',
-    component: WarehouseComponent,
     children: [
       {
-        path: "ttt",
-        component: TttRootComponent
+        path: '',
+        pathMatch: 'full',
+        component: WarehouseComponent
       },
       {
-        path: "tpa",
-        component: TpaRootComponent
+        path: 'ttt',
+        children: [
+          {
+            matcher: CustomUrlMatcher("date", /^20[0-9]{2}-[0-1][0-9]-[0-3][0-9]?$/),
+            component: TttRootComponent
+          },
+          {
+            matcher: CustomUrlMatcher("id", /^\d+$/),
+            component: TttComponent
+          },
+        ]
       },
       {
-        path: "ttt/:id",
-        component: TttComponent
+        path: 'tpa',
+        children: [
+          {
+            matcher: CustomUrlMatcher("date", /^20[0-9]{2}-[0-1][0-9]-[0-3][0-9]?$/),
+            component: TpaRootComponent
+          },
+          {
+            matcher: CustomUrlMatcher("id", /^\d+$/),
+            component: TpaComponent
+          },
+        ]
       },
-      {
-        path: "tpa/:id",
-        component: TpaComponent
-      }
     ]
   },
   {
@@ -62,12 +78,13 @@ const appRoutes: Routes = [
     NavigationComponent,
     HomeComponent,
     WarehouseComponent,
-    TttRootComponent,
     TpaRootComponent,
+    TttRootComponent,
     TttComponent,
     TpaComponent,
     DatePickComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NgVarDirective
   ],
   imports: [
     BrowserModule,
@@ -89,4 +106,5 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }
