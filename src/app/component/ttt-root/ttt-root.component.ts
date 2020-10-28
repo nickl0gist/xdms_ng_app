@@ -1,4 +1,4 @@
-import {OnInit, OnDestroy, Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from "../../shared/service/api.service";
 import {NavbarService} from "../../shared/service/navbar.service";
 import {ActivatedRoute} from "@angular/router";
@@ -8,7 +8,6 @@ import {Manifest} from "../../model/manifest/manifest";
 import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {TttEnum} from "../../model/ttt/ttt-enum";
 import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dto";
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ttt-root',
@@ -104,5 +103,15 @@ export class TttRootComponent implements OnInit, OnDestroy{
       }
     });
     return counter;
+  }
+
+  /**
+   * Return TRUE id Truck delayed
+   * @param ttt
+   */
+  isDelayed(ttt: Ttt): boolean {
+    let now = new Date();
+    let arrival = new Date(ttt.tttArrivalDatePlan);
+    return now > arrival && ttt.tttStatus.tttStatusName !== this.arrived;
   }
 }

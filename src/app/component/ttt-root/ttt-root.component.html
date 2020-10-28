@@ -23,7 +23,7 @@
       </thead>
       <tbody>
       <ng-container *ngFor="let tttWarehouseManifestDTO of this.tttWarehouseManifestDTOSet; let index = index;">
-        <tr>
+        <tr [ngClass]="isDelayed(tttWarehouseManifestDTO.ttt) ? 'red_row' : tttWarehouseManifestDTO.ttt.tttStatus.tttStatusName === arrived ? 'green_row' : ''">
           <td class="ttt_truck_id"><a href="{{tttWarehouseManifestDTO.ttt.tttID}}"
                                       class="table_link">{{tttWarehouseManifestDTO.ttt.truckName}}</a></td>
           <td class="ttt_depart">{{tttWarehouseManifestDTO.ttt.dispatchedFrom}}</td>
