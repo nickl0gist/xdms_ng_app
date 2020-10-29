@@ -54,68 +54,14 @@
           <td class="ttt_delay"><a href="#" class="table_link"><i class="icon-mail"></i></a></td>
         </tr>
       </ng-container>
-
-      <tr class="green_row">
-        <td class="ttt_truck_id"><a href="xdms_ttt_truck_cc.html" class="table_link">CAS/01042019/1</a></td>
-        <td class="ttt_depart">CC Cassier</td>
-        <td class="ttt_manQty">
-          <div class="line_through">28</div>
-          25
-        </td>
-        <td class="ttt_palQty">
-          <div class="line_through">87</div>
-          85
-        </td>
-        <td class="ttt_weight">
-          <div class="line_through">19.5</div>
-          18.75
-        </td>
-        <td class="ttt_Date">2019-03-26</td>
-        <td class="ttt_Hour">6:00</td>
-        <td class="ttt_ldm">33.23</td>
-        <td class="ttt_wg">18.62</td>
-        <td class="ttt_arr_real"><a href="#" class="table_link"><i class="far fa-square"></i></a></td>
-        <td class="ttt_delay"><a href="#" class="table_link"><i class="icon-mail"></i></a></td>
-      </tr>
-      <tr class="white_row">
-        <td class="ttt_truck_id"><a href="xdms_ttt_truck_xd.html" class="table_link">CAS/01042019/2</a></td>
-        <td class="ttt_depart">CC Cassier</td>
-        <td class="ttt_manQty">
-          <div class="line_through">30</div>
-          32
-        </td>
-        <td class="ttt_palQty">82</td>
-        <td class="ttt_weight">28.55
-        </td>
-        <td class="ttt_Date">2019-03-27</td>
-        <td class="ttt_Hour">6:00</td>
-        <td class="ttt_ldm">3.23</td>
-        <td class="ttt_wg">1.23</td>
-        <td class="ttt_arr_real"><a href="#" class="table_link"><i class="far fa-check-square"></i></a></td>
-        <td class="ttt_delay"><a href="#" class="table_link"><i class="icon-mail"></i></a></td>
-      </tr>
-      <tr class="red_row">
-        <td class="ttt_truck_id"><a href="#" class="table_link">IRU/31032019/1</a></td>
-        <td class="ttt_depart">CC Irun</td>
-        <td class="ttt_manQty">
-          <div class="line_through">30</div>
-          32
-        </td>
-        <td class="ttt_palQty">82</td>
-        <td class="ttt_weight">28.55</td>
-        <td class="ttt_Date">2019-03-27</td>
-        <td class="ttt_Hour">6:00</td>
-        <td class="ttt_ldm">3.23</td>
-        <td class="ttt_wg">1.23</td>
-        <td class="ttt_arr_real"><a href="#" class="table_link"><i class="far fa-square"></i></a></td>
-        <td class="ttt_delay"><a href="#" class="table_link"><i class="icon-mail"></i></a></td>
-      </tr>
       </tbody>
     </table>
+    <div class="legend">
     <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #99FF99;">truck arrived</div>
     <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FF9999;">truck not arrived / is late</div>
-    <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;">truck not arrived but still has
-      time
+    <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;">truck not arrived but still has time</div>
     </div>
+    <div [routerLink]="['/warehouse', this.nav.warehouseUrlCode]"  class="btn btn-primary back_to_wh">Back to Warehouse</div>
+    <div class="btn btn-primary add_truck">ADD TRUCK</div>
   </div>
 </div>

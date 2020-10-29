@@ -177,3 +177,27 @@ table.upper-table {
   vertical-align: -webkit-baseline-middle;
 }
 
+.legend {
+  display: inline;
+  margin-bottom: auto;
+  float: left;
+}
+
+.back_to_wh{
+  margin-left: 8rem;
+  transition: color .5s, background-color .3s;
+  font-weight: bold;
+
+}
+.add_truck{
+  margin-left: 4rem;
+  margin-right: 3rem;
+  float: right;
+  transition: color .5s, background-color .3s;
+  font-weight: bold;
+}
+
+.back_to_wh:hover, .add_truck:hover{
+  background-color: #f6055c;
+  color: gold;
+}
