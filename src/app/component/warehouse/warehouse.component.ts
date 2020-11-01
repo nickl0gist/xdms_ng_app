@@ -6,7 +6,8 @@ import * as myGlobals from "../../global";
 import {Tpa} from "../../model/tpa/tpa";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
+import {LocalStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'app-warehouse',
@@ -19,7 +20,8 @@ export class WarehouseComponent implements OnInit {
   tpaListDelayed: Tpa[] = [];
   private symbolNotArrived = myGlobals.SYMBOL_NOT_ARRIVED;
   private routeSub: Subscription;
-  constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute) {
+
+  constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, private localStorage: LocalStorageService) {
   }
 
   ngOnInit(): void {
@@ -33,6 +35,8 @@ export class WarehouseComponent implements OnInit {
         this.getTpaSetForWarehouseDelayed();
       }
     );
+    if (this.nav.currentDate === undefined)
+      this.nav.currentDate = this.localStorage.retrieve('date');
     this.getTttSetForWarehouseByDate(this.nav.currentDate);
     this.getTpaSetForWarehouseByDate(this.nav.currentDate);
     this.getTpaSetForWarehouseDelayed();

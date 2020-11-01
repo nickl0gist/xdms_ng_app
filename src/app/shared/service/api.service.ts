@@ -39,4 +39,8 @@ export class ApiService {
   getListWarehouseManifestForCertainWarehouseAndTtt(urlCode: string, date: string): Observable<TttWarehouseManifestDTO[]> {
     return this.httpWithoutInterceptor.get<TttWarehouseManifestDTO[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/full/' + date);
   }
+
+  getTttWarehouseManifestDtoByWarehouseAndTtt(urlCode: string, tttId: number): Observable<TttWarehouseManifestDTO> {
+    return this.httpWithoutInterceptor.get<TttWarehouseManifestDTO>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId);
+  }
 }

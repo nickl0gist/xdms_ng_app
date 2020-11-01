@@ -2,7 +2,6 @@
   <div class="tttable">
     <table class="table table-striped">
       <thead class="head-row">
-      <!--        <div class="clear-table">-->
       <tr>
         <th rowspan=2 scope="col" class="ttt_truck_id">Truck ID</th>
         <th rowspan=2 scope="col" class="ttt_depart">Place of Departure</th>
@@ -24,8 +23,8 @@
       <tbody>
       <ng-container *ngFor="let tttWarehouseManifestDTO of this.tttWarehouseManifestDTOSet; let index = index;">
         <tr [ngClass]="isDelayed(tttWarehouseManifestDTO.ttt) ? 'red_row' : tttWarehouseManifestDTO.ttt.tttStatus.tttStatusName === arrived ? 'green_row' : ''">
-          <td class="ttt_truck_id"><a href="{{tttWarehouseManifestDTO.ttt.tttID}}"
-                                      class="table_link">{{tttWarehouseManifestDTO.ttt.truckName}}</a></td>
+          <td class="ttt_truck_id"><a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO.ttt.truckName]"
+              (click)="getChosenTttId(tttWarehouseManifestDTO)" class="table_link">{{tttWarehouseManifestDTO.ttt.truckName}}</a></td>
           <td class="ttt_depart">{{tttWarehouseManifestDTO.ttt.dispatchedFrom}}</td>
           <ng-container
             *ngVar="getRealQtyOfManifestsInTtt(tttWarehouseManifestDTO?.warehouseManifestList) as realQtyOfManifest">

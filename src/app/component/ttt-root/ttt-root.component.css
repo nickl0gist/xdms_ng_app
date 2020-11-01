@@ -17,7 +17,6 @@
   background-color: rgba(230, 230, 230, 1);
 }
 
-
 .tttable tbody {
   overflow-y: auto;
   height: 30rem;
@@ -27,16 +26,11 @@
   display: table;
 }
 
-/*.tttable tbody tr {*/
-/*  display: inline-block;*/
-/*  width: 100%;*/
-/*}*/
 .head-row{
   display: inline-table;
   width: 100%;
 }
 
-/*----------*/
 .table {
   display: inline-grid;
 }
@@ -64,8 +58,6 @@
   padding-top: 1px;
   vertical-align: middle;
 }
-
-/*---------------*/
 
 .line_through {
   display: inline;
@@ -107,15 +99,7 @@ table.upper-table {
   width: 98%;
   margin: auto;
 }
-/*
-.ttt_truck_id, .ttt_depart, .ttt_manQty, .ttt_palQty,
-.ttt_weight, .ttt_arr, .ttt_util, .ttt_arr_real, .ttt_delay,
-.ttt_Date, .ttt_Hour, .ttt_ldm, .ttt_wg{
-  display: table;
-  box-sizing: border-box;
-  border-collapse: collapse;
-}
-*/
+
 .ttt_truck_id {
   width: 20%;
 }

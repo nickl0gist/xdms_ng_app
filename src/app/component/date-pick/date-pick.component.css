@@ -1,14 +1,3 @@
-/*@import "ej2-base.css";*/
-/*@import "ej2-buttons.css";*/
-/*@import "ej2-inputs.css";*/
-/*@import "ej2-popups.css";*/
-/*@import "ej2-lists.css";*/
-/*@import "ej2-calendars.css";*/
-
-/*:host::ng-deep #datetimepicker{*/
-/*  background: #f8f8f8;*/
-/*  width: fit-content;*/
-/*}*/
 :host::ng-deep.e-input-group:not(.e-float-icon-left):not(.e-float-input)::before{
   left: 1%;
 }
@@ -16,10 +5,10 @@
   right: 82%;
 }
 :host::ng-deep.e-input-group:not(.e-float-icon-left):not(.e-float-input)::after{
-  right: 0%;
+  right: -7%;
 }
 :host::ng-deep.e-input-group:not(.e-float-icon-right):not(.e-float-input)::after{
-  right: 81%;
+  /*right: 81%;*/
 }
 
 :host::ng-deep.e-input-group:not(.e-float-icon-left):not(.e-float-input).e-input-focus::before,
@@ -40,7 +29,7 @@
 .e-input-group.e-control-wrapper:not(.e-float-icon-right):not(.e-float-input).e-input-focus::after,
 .e-input-group.e-control-wrapper.e-float-icon-right:not(.e-float-input).e-input-focus .e-input-in-wrap::before,
 .e-input-group.e-control-wrapper.e-float-icon-right:not(.e-float-input).e-input-focus .e-input-in-wrap::after {
-  width: 18%;
+  width: 105%;
 }
 
 :host::ng-deep #datetimepicker_input, :host::ng-deep #datetimepicker, :host::ng-deep .e-input-group-icon::before{

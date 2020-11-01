@@ -57,9 +57,11 @@
   border-color: #ffffff00;
   margin-left: 5px;
 }
-
+.e-control-wrapper{
+  width: 75% !important;
+}
 .date_picker {
-  width: 98%;
+  width: 20%;
   float: left;
 }
 

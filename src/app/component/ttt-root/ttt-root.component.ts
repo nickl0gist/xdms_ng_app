@@ -8,7 +8,9 @@ import {Manifest} from "../../model/manifest/manifest";
 import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {TttEnum} from "../../model/ttt/ttt-enum";
 import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dto";
-
+import { CommonModule } from '@angular/common';
+import {TttNavService} from "../../shared/service/ttt-nav.service";
+import {LocalStorageService} from "ngx-webstorage";
 @Component({
   selector: 'app-ttt-root',
   templateUrl: './ttt-root.component.html',
@@ -20,7 +22,7 @@ export class TttRootComponent implements OnInit, OnDestroy{
   arrived: string = TttEnum.ARRIVED;
   private routeSub: Subscription;
 
-  constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute) {
+  constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, private tttNavService: TttNavService, private localStorage:LocalStorageService) {
   }
 
   ngOnInit(): void {
@@ -30,7 +32,6 @@ export class TttRootComponent implements OnInit, OnDestroy{
       this.nav.currentDate = params['date'];
     });
     this.nav.currentDateChangeObs.subscribe((theDate) => {
-        //this.getTttSetForWarehouseByDate(theDate);
       this.getTttWarehouseManifestsDtoSet(theDate);
       }
     );
@@ -38,8 +39,6 @@ export class TttRootComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    console.log('arrived ' + this.arrived);
-    console.log("OnDestroy Works in TTT Root");
   }
 
   getPlannedQtyOfPalletsForTtt(manifestSet: Manifest[]) {
@@ -106,12 +105,18 @@ export class TttRootComponent implements OnInit, OnDestroy{
   }
 
   /**
-   * Return TRUE id Truck delayed
+   * Return TRUE if Truck delayed
    * @param ttt
    */
   isDelayed(ttt: Ttt): boolean {
     let now = new Date();
     let arrival = new Date(ttt.tttArrivalDatePlan);
     return now > arrival && ttt.tttStatus.tttStatusName !== this.arrived;
+  }
+
+  getChosenTttId(tttWarehouseManifestDTO: TttWarehouseManifestDTO){
+    this.tttNavService.tttWarehouseManifestDTO = tttWarehouseManifestDTO;
+    this.localStorage.store('tttId', tttWarehouseManifestDTO.ttt.tttID);
+    this.localStorage.store('date', this.nav.currentDate);
   }
 }

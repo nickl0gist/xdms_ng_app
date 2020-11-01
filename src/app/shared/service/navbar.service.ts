@@ -9,11 +9,14 @@ export class NavbarService {
   warehouseUrlCode: string = '';
   currentDate: string='';
   currentDateChange : Subject<string> = new Subject<string>();
-  currentDateChangeObs = this.currentDateChange.asObservable()
-  ;
+  currentDateChangeObs = this.currentDateChange.asObservable();
+
+
   constructor() {
     this.visible = false;
     this.currentDateChange.subscribe((value) => {
+      if(value === undefined)
+        console.log('value === undefined');
       this.currentDate = value;
     })
   }

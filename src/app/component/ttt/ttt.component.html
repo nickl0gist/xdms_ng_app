@@ -1,1 +1,173 @@
-<p>ttt works!</p>
+<span class="badge badge-pill badge-primary ttt-info">Truck Name: {{tttWarehouseManifestDTO.ttt.truckName}}. Dispatched From: {{tttWarehouseManifestDTO.ttt.dispatchedFrom}}
+  .</span>
+<ng-container>
+  <span class="badge badge-pill badge-success arrived-info"
+        *ngIf="tttWarehouseManifestDTO.ttt.tttStatus.tttStatusName === this.arrived, else notArrived">
+    Arrived: {{tttWarehouseManifestDTO.ttt.tttArrivalDateReal.replace('T', '  ')}}
+  </span>
+  <ng-template #notArrived>
+    <span class="badge badge-pill badge-warning arrived-info not_arrived-info">
+      Planned Arrival: {{tttWarehouseManifestDTO.ttt.tttArrivalDatePlan.replace('T', '  ')}}
+    </span>
+  </ng-template>
+</ng-container>
+
+<div class="container-fluid ttt-detail">
+  <div class="tttable">
+    <table class="table table-striped">
+      <thead class="head-row">
+      <tr>
+        <th rowspan=2 class="manifest_n">Manifest №</th>
+        <th rowspan=2 class="supplier_n">Supplier</th>
+        <th rowspan=2 class="customer_n">Customer</th>
+        <th style="border-bottom: none;" class="delivery_n">Delivery</th>
+        <th colspan=2>Qty of pallets</th>
+        <th colspan=2>Weight, [t]</th>
+        <th colspan=3>KPI</th>
+        <th rowspan=2 class="is_n">IS</th>
+        <th rowspan=2 class="co_n">CO</th>
+        <th rowspan=2 class="tpa_n">TPA</th>
+      </tr>
+      <tr>
+        <th style="border-top: none;">Date</th>
+        <th class="qty_pal_plan_n">Plan</th>
+        <th class="qty_pal_n">Real</th>
+        <th class="weight_plan_n">Plan</th>
+        <th class="weight_n">Real</th>
+        <th class="kpi_n">lab</th>
+        <th class="kpi_n">doc</th>
+        <th class="kpi_n">man</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="green_row">
+        <td class="manifest_n"><a href="#" class="table_link">254667583</a></td>
+        <td class="supplier_n">Gentherm</td>
+        <td class="customer_n">Caligny</td>
+        <td class="delivery_n">04-18</td>
+        <td class="qty_pal_plan_n">3</td>
+        <td class="qty_pal_n"><a class="badge_n badge_n-primary text-wrap" style="display:inline-block;">3p 2b</a></td>
+        <td class="weight_plan_n">0,33</td>
+        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" style="display:inline-block;">0,33</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap">Y</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap">Y</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap">Y</a></td>
+        <td class="is_n"><a class="table_link"><i class="far fa-square"></i></a></td>
+        <td class="co_n"><a class="table_link"><i class="far fa-square"></i></a></td>
+        <td class="tpa_n"><a class="table_link">XD_SWE_1</a></td>
+      </tr>
+      <tr class="today">
+        <td class="manifest_n"><a href="#" class="table_link">254667583</a></td>
+        <td class="supplier_n">Gentherm</td>
+        <td class="customer_n">Caligny</td>
+        <td class="delivery_n">04-18</td>
+        <td class="qty_pal_plan_n wrong_qty">3</td>
+        <td class="qty_pal_n wrong_qty"><a class="badge_n badge_n-primary text-wrap" href=""
+                                           style="display:inline-block;width:50px;">2p</a></td>
+        <td class="weight_plan_n">0,33</td>
+        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" href=""
+                                style="display:inline-block;width:50px;">0,33</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
+        <td class="is_n"><a class="table_link i_s" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_2</a></td>
+      </tr>
+      <tr class="">
+        <td class="manifest_n"><a href="#" class="table_link">254664463</a></td>
+        <td class="supplier_n">Gentherm</td>
+        <td class="customer_n">Wlb Fr</td>
+        <td class="delivery_n">04-18</td>
+        <td class="qty_pal_plan_n">3</td>
+        <td class="qty_pal_n"><a class="badge_n badge_n-primary text-wrap" style="display:inline-block;min-width:50px;">3p</a>
+        </td>
+        <td class="weight_plan_n">0,33</td>
+        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" href=""
+                                style="display:inline-block;min-width:50px;">-</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
+        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
+      </tr>
+      <tr class="">
+        <td class="manifest_n"><a href="#" class="table_link">0254677696</a></td>
+        <td class="supplier_n">TRW Rolnicza</td>
+        <td class="customer_n">Trnava</td>
+        <td class="delivery_n">04-18</td>
+        <td class="qty_pal_plan_n worng_qty">3</td>
+        <td class="qty_pal_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
+                                           style="display:inline-block;min-width:50px;">1p</a></td>
+        <td class="weight_plan_n worng_qty">0,33</td>
+        <td class="weight_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
+                                          style="display:inline-block;min-width:50px;">0,2</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
+        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-check-square"></i></a></td>
+        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
+      </tr>
+      <tr class="">
+        <td class="manifest_n"><a href="#" class="table_link"><u>254655519</u></a></td>
+        <td class="supplier_n">AKT Plastikarska</td>
+        <td class="customer_n">Lozorno</td>
+        <td class="delivery_n">04-18</td>
+        <td class="qty_pal_plan_n">3</td>
+        <td class="qty_pal_n"><a class="badge_n badge_n-primary text-wrap" href=""
+                                 style="display:inline-block;min-width:50px;">3p 1b</a></td>
+        <td class="weight_plan_n">0,33</td>
+        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" href=""
+                                style="display:inline-block;min-width:50px;">-</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
+        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
+      </tr>
+      <tr class="">
+        <td class="manifest_n"><a href="#" class="table_link">0254677696</a></td>
+        <td class="supplier_n">TRW Rolnicza</td>
+        <td class="customer_n">Trnava</td>
+        <td class="delivery_n">04-18</td>
+        <td class="qty_pal_plan_n worng_qty">3</td>
+        <td class="qty_pal_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
+                                           style="display:inline-block;min-width:50px;">1p</a></td>
+        <td class="weight_plan_n worng_qty">0,33</td>
+        <td class="weight_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
+                                          style="display:inline-block;min-width:50px;">0,2</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
+        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
+        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-check-square"></i></a></td>
+        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
+        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
+      </tr>
+
+      </tbody>
+      <tfoot style="background: #5c5c5cf5; color: white;">
+      <tr>
+        <td colspan=5>Total:</td>
+        <td><b>12p 3b</b></td>
+        <td></td>
+        <td><b>5,55 t</b></td>
+        <td colspan=6></td>
+      </tr>
+      </tfoot>
+    </table>
+    <div style="display: table; width: auto;">
+      <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFE9A3;">manifest for today, pay
+        attention
+      </div>
+      <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FF9999;">inconsistent delivery date or
+        quantity
+      </div>
+      <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;"><u>Manifest No</u> - item was
+        manually added
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,12 +18,13 @@ import {DatePickComponent} from './component/date-pick/date-pick.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {AaDatepickerModule} from 'ngx-animating-datepicker';
-import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import {DatePickerModule} from '@syncfusion/ej2-angular-calendars';
 import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
-import { NotFoundComponent } from './component/not-found/not-found.component';
+import {NotFoundComponent} from './component/not-found/not-found.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CustomUrlMatcher} from "./custom.url.matcher";
-import { NgVarDirective } from './shared/directives/ng-var.directive';
+import {NgVarDirective} from './shared/directives/ng-var.directive';
+import {NgxWebstorageModule} from "ngx-webstorage";
 
 const appRoutes: Routes = [
   {
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
             component: TttRootComponent
           },
           {
-            matcher: CustomUrlMatcher("id", /^\d+$/),
+            matcher: CustomUrlMatcher("id", /^[0-9A-Za-z\-_]+/),
             component: TttComponent
           },
         ]
@@ -100,7 +101,8 @@ const appRoutes: Routes = [
     DatePickerModule,
     BrowserModule, BrowserAnimationsModule, DateTimePickerModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    NgxWebstorageModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
