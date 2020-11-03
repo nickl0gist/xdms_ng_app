@@ -83,10 +83,10 @@ tbody tr{
   width: 3%; /*9%*/
 }
 .delivery_n{
-  width: 7%;
+  width: 11%;
 }
 .qty_pal_n, .weight_n{
-  width: 9%; /*14*/
+  width: 7%; /*14*/
 }
 .is_n, .co_n{
   width: 3%; /*6*/
@@ -101,7 +101,7 @@ tr.green_row {
   background-color: #FFE9A3 !important;
 }
 .wrong_qty{
-  background-color: #FF9999;
+  background-color: #FF9999 !important;
 }
 .badge_n {
   font-size: 100%;
@@ -114,6 +114,7 @@ tr.green_row {
   white-space: nowrap;
   color: black;
   padding: 2px 5px;
+  cursor: pointer;
 }
 .badge_n:hover{
   color: #fff;
@@ -147,6 +148,7 @@ a.table_link {
   color: black;
   font-weight: 550;
   transition:color 0.2s;
+  cursor: pointer;
 }
 a.table_link:hover {
   text-decoration: none;
@@ -159,17 +161,41 @@ tfoot{
   width: 100%;
 }
 tfoot td:first-child{
-  width: 49%;
+  width: 53%;
   text-align: right;
   padding-right: 5px;
 }
 tfoot td:nth-child(2), tfoot td:nth-child(4){
-  width: 9%;
+  width: 7%;
   text-align: center;
 }
 tfoot td:nth-child(3){
   width: 5%;
   text-align: center;
+}
+.underlined{
+  text-decoration: underline !important;
+}
+.i_s {
+  /*-webkit-animation: BLINK-ANIMATION 1s infinite; !* Safari 4+ *!*/
+  /*-moz-animation:    BLINK-ANIMATION 1s infinite; !* Fx 5+ *!*/
+  /*-o-animation:      BLINK-ANIMATION 1s infinite; !* Opera 12+ *!*/
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: BLINK-ANIMATION;
+}
+@keyframes BLINK-ANIMATION {
+  0%   {
+    color: yellow;
+  }
+  100%  {
+    color: red;
+  }
 }
 /*********************** 1400 px *********************************/
 @media only screen and (max-width: 1400px){
@@ -181,3 +207,4 @@ tfoot td:nth-child(3){
     margin-right: 12px;
   }
 }
+

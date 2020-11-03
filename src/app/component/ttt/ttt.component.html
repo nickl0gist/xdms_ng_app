@@ -1,4 +1,4 @@
-<span class="badge badge-pill badge-primary ttt-info">Truck Name: {{tttWarehouseManifestDTO.ttt.truckName}}. Dispatched From: {{tttWarehouseManifestDTO.ttt.dispatchedFrom}}
+<span class="badge badge-pill badge-primary ttt-info">Truck Name: {{tttWarehouseManifestDTO.ttt?.truckName}}. Dispatched From: {{tttWarehouseManifestDTO.ttt?.dispatchedFrom}}
   .</span>
 <ng-container>
   <span class="badge badge-pill badge-success arrived-info"
@@ -40,120 +40,46 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="green_row">
-        <td class="manifest_n"><a href="#" class="table_link">254667583</a></td>
-        <td class="supplier_n">Gentherm</td>
-        <td class="customer_n">Caligny</td>
-        <td class="delivery_n">04-18</td>
-        <td class="qty_pal_plan_n">3</td>
-        <td class="qty_pal_n"><a class="badge_n badge_n-primary text-wrap" style="display:inline-block;">3p 2b</a></td>
-        <td class="weight_plan_n">0,33</td>
-        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" style="display:inline-block;">0,33</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap">Y</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap">Y</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap">Y</a></td>
-        <td class="is_n"><a class="table_link"><i class="far fa-square"></i></a></td>
-        <td class="co_n"><a class="table_link"><i class="far fa-square"></i></a></td>
-        <td class="tpa_n"><a class="table_link">XD_SWE_1</a></td>
-      </tr>
-      <tr class="today">
-        <td class="manifest_n"><a href="#" class="table_link">254667583</a></td>
-        <td class="supplier_n">Gentherm</td>
-        <td class="customer_n">Caligny</td>
-        <td class="delivery_n">04-18</td>
-        <td class="qty_pal_plan_n wrong_qty">3</td>
-        <td class="qty_pal_n wrong_qty"><a class="badge_n badge_n-primary text-wrap" href=""
-                                           style="display:inline-block;width:50px;">2p</a></td>
-        <td class="weight_plan_n">0,33</td>
-        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" href=""
-                                style="display:inline-block;width:50px;">0,33</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
-        <td class="is_n"><a class="table_link i_s" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_2</a></td>
-      </tr>
-      <tr class="">
-        <td class="manifest_n"><a href="#" class="table_link">254664463</a></td>
-        <td class="supplier_n">Gentherm</td>
-        <td class="customer_n">Wlb Fr</td>
-        <td class="delivery_n">04-18</td>
-        <td class="qty_pal_plan_n">3</td>
-        <td class="qty_pal_n"><a class="badge_n badge_n-primary text-wrap" style="display:inline-block;min-width:50px;">3p</a>
-        </td>
-        <td class="weight_plan_n">0,33</td>
-        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" href=""
-                                style="display:inline-block;min-width:50px;">-</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
-        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
-      </tr>
-      <tr class="">
-        <td class="manifest_n"><a href="#" class="table_link">0254677696</a></td>
-        <td class="supplier_n">TRW Rolnicza</td>
-        <td class="customer_n">Trnava</td>
-        <td class="delivery_n">04-18</td>
-        <td class="qty_pal_plan_n worng_qty">3</td>
-        <td class="qty_pal_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
-                                           style="display:inline-block;min-width:50px;">1p</a></td>
-        <td class="weight_plan_n worng_qty">0,33</td>
-        <td class="weight_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
-                                          style="display:inline-block;min-width:50px;">0,2</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
-        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-check-square"></i></a></td>
-        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
-      </tr>
-      <tr class="">
-        <td class="manifest_n"><a href="#" class="table_link"><u>254655519</u></a></td>
-        <td class="supplier_n">AKT Plastikarska</td>
-        <td class="customer_n">Lozorno</td>
-        <td class="delivery_n">04-18</td>
-        <td class="qty_pal_plan_n">3</td>
-        <td class="qty_pal_n"><a class="badge_n badge_n-primary text-wrap" href=""
-                                 style="display:inline-block;min-width:50px;">3p 1b</a></td>
-        <td class="weight_plan_n">0,33</td>
-        <td class="weight_n"><a class="badge_n badge_n-primary text-wrap" href=""
-                                style="display:inline-block;min-width:50px;">-</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">-</a></td>
-        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
-      </tr>
-      <tr class="">
-        <td class="manifest_n"><a href="#" class="table_link">0254677696</a></td>
-        <td class="supplier_n">TRW Rolnicza</td>
-        <td class="customer_n">Trnava</td>
-        <td class="delivery_n">04-18</td>
-        <td class="qty_pal_plan_n worng_qty">3</td>
-        <td class="qty_pal_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
-                                           style="display:inline-block;min-width:50px;">1p</a></td>
-        <td class="weight_plan_n worng_qty">0,33</td>
-        <td class="weight_n worng_qty"><a class="badge_n badge_n-primary text-wrap"
-                                          style="display:inline-block;min-width:50px;">0,2</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">N</a></td>
-        <td class="kpi_n"><a class="badge_n badge_n-primary text-wrap " href="" style="">Y</a></td>
-        <td class="is_n"><a class="table_link" href="" style=""><i class="far fa-check-square"></i></a></td>
-        <td class="co_n"><a class="table_link" href="" style=""><i class="far fa-square"></i></a></td>
-        <td class="tpa_n"><a class="table_link" href="" style="">XD_SWE_3</a></td>
-      </tr>
-
+      <ng-container
+        *ngFor="let warehouseManifest of this.tttWarehouseManifestDTO.warehouseManifestList; let index = index;">
+        <tr [ngClass]="getClassForRow(warehouseManifest)">
+          <td class="manifest_n"><a [ngClass]="warehouseManifest.manifest.manifestCode.includes('manual') ? 'underlined' : ''" class="table_link "
+                                    href="#">{{warehouseManifest.manifest.manifestCode.split('manual')[0]}}</a></td>
+          <td class="supplier_n">{{warehouseManifest.manifest.supplier.name}}</td>
+          <td class="customer_n">{{warehouseManifest.manifest.customer.name}}</td>
+          <td class="delivery_n">{{getDeliveryDate(warehouseManifest)}}</td>
+          <td class="qty_pal_plan_n"
+              [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, false)">{{warehouseManifest.manifest.palletQtyPlanned}}</td>
+          <td class="qty_pal_n" [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, false)"
+              *ngVar="warehouseManifest.palletQty > 0 ? warehouseManifest.palletQty + 'p' : ' — ' as pallets"><a
+            class="badge_n text-wrap" style="display:inline-block;"
+            *ngVar="warehouseManifest.boxQtyReal > 0 ? warehouseManifest.boxQtyReal + 'b' : '' as boxes;">
+            {{pallets}} {{boxes}}</a>
+          </td>
+          <td class="weight_plan_n"
+              [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)">{{warehouseManifest.manifest.totalWeightPlanned}}</td>
+          <td class="weight_n" [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)"><a
+            class="badge_n text-wrap" style="display:inline-block;"
+            *ngVar="warehouseManifest.grossWeight > 0 ? warehouseManifest.grossWeight : ' — ' as weight">{{weight}}</a>
+          </td>
+          <td class="kpi_n" *ngVar="warehouseManifest.kpiLabel ? 'Y' : 'N' as  condition"><a
+            class="badge_n text-wrap">{{condition}}</a></td>
+          <td class="kpi_n" *ngVar="warehouseManifest.kpiDocument ? 'Y' : 'N' as  condition"><a
+            class="badge_n text-wrap">{{condition}}</a></td>
+          <td class="kpi_n" *ngVar="warehouseManifest.kpiManifest ? 'Y' : 'N' as  condition"><a
+            class="badge_n text-wrap">{{condition}}</a></td>
+          <td class="is_n"><a class="table_link" ><i class="far fa-square" [ngClass]="getClassForRow(warehouseManifest) !== '' ? 'i_s' : ''"></i></a></td>
+          <td class="co_n"><a class="table_link" ><i class="far fa-square" [ngClass]="getClassForRow(warehouseManifest) !== '' ? 'i_s' : ''"></i></a></td>
+          <td class="tpa_n"><a class="table_link">{{warehouseManifest.tpa?.name}}</a></td>
+        </tr>
+      </ng-container>
       </tbody>
       <tfoot style="background: #5c5c5cf5; color: white;">
       <tr>
         <td colspan=5>Total:</td>
-        <td><b>12p 3b</b></td>
+        <td><b>{{getTotalAmountOfPalletsAndBoxes()}}</b></td>
         <td></td>
-        <td><b>5,55 t</b></td>
+        <td><b>{{getTotalWeight()}}</b></td>
         <td colspan=6></td>
       </tr>
       </tfoot>

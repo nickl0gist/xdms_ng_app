@@ -19,7 +19,7 @@
 
 .tttable tbody {
   overflow-y: auto;
-  height: 30rem;
+  max-height: 30rem;
 }
 
 .clear-table{
