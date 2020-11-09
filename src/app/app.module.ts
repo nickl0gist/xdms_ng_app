@@ -25,6 +25,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CustomUrlMatcher} from "./custom.url.matcher";
 import {NgVarDirective} from './shared/directives/ng-var.directive';
 import {NgxWebstorageModule} from "ngx-webstorage";
+import {ManifestComponent} from './component/manifest/manifest.component';
 
 const appRoutes: Routes = [
   {
@@ -48,7 +49,17 @@ const appRoutes: Routes = [
           },
           {
             matcher: CustomUrlMatcher("id", /^[0-9A-Za-z\-_]+/),
-            component: TttComponent
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                component: TttComponent,
+              },
+              {
+                path:'manifest/:code',
+                component: ManifestComponent
+              }
+            ]
           },
         ]
       },
@@ -85,7 +96,8 @@ const appRoutes: Routes = [
     TpaComponent,
     DatePickComponent,
     NotFoundComponent,
-    NgVarDirective
+    NgVarDirective,
+    ManifestComponent
   ],
   imports: [
     BrowserModule,

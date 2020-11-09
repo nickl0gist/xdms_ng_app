@@ -4,7 +4,7 @@ import {StorageLocation} from "../storage-location/storage-location";
 
 export interface Reference {
   referenceID: number;
-  ref_number: string;
+  number: string;
   name: string;
   hsCode: string;
   weight: number;

@@ -67,7 +67,6 @@ export class WarehouseComponent implements OnInit {
   getTpaSetForWarehouseDelayed() {
     this.apiService.getTpaListWithStatusDelayed(this.nav.warehouseUrlCode).subscribe(
       res => {
-        let resp = res;
         this.tpaListDelayed = res;
       },
       err => {

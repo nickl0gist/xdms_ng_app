@@ -43,8 +43,12 @@
       <ng-container
         *ngFor="let warehouseManifest of this.tttWarehouseManifestDTO.warehouseManifestList; let index = index;">
         <tr [ngClass]="getClassForRow(warehouseManifest)">
-          <td class="manifest_n"><a [ngClass]="warehouseManifest.manifest.manifestCode.includes('manual') ? 'underlined' : ''" class="table_link "
-                                    href="#">{{warehouseManifest.manifest.manifestCode.split('manual')[0]}}</a></td>
+          <td class="manifest_n"><a
+            [ngClass]="warehouseManifest.manifest.manifestCode.includes(manually_added_postfix) ? 'underlined' : ''"
+            (click)="getChosenWarehouseManifestId(warehouseManifest)"
+            class="table_link "
+            [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO.ttt.truckName, 'manifest', warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]]">{{warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]}}</a>
+          </td>
           <td class="supplier_n">{{warehouseManifest.manifest.supplier.name}}</td>
           <td class="customer_n">{{warehouseManifest.manifest.customer.name}}</td>
           <td class="delivery_n">{{getDeliveryDate(warehouseManifest)}}</td>
@@ -68,8 +72,12 @@
             class="badge_n text-wrap">{{condition}}</a></td>
           <td class="kpi_n" *ngVar="warehouseManifest.kpiManifest ? 'Y' : 'N' as  condition"><a
             class="badge_n text-wrap">{{condition}}</a></td>
-          <td class="is_n"><a class="table_link" ><i class="far fa-square" [ngClass]="getClassForRow(warehouseManifest) !== '' ? 'i_s' : ''"></i></a></td>
-          <td class="co_n"><a class="table_link" ><i class="far fa-square" [ngClass]="getClassForRow(warehouseManifest) !== '' ? 'i_s' : ''"></i></a></td>
+          <td class="is_n"><a class="table_link"><i class="far fa-square"
+                                                    [ngClass]="getClassForRow(warehouseManifest) !== '' ? 'i_s' : ''"></i></a>
+          </td>
+          <td class="co_n"><a class="table_link"><i class="far fa-square"
+                                                    [ngClass]="getClassForRow(warehouseManifest) !== '' ? 'i_s' : ''"></i></a>
+          </td>
           <td class="tpa_n"><a class="table_link">{{warehouseManifest.tpa?.name}}</a></td>
         </tr>
       </ng-container>
@@ -84,16 +92,21 @@
       </tr>
       </tfoot>
     </table>
-    <div style="display: table; width: auto;">
-      <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFE9A3;">manifest for today, pay
-        attention
-      </div>
-      <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FF9999;">inconsistent delivery date or
-        quantity
-      </div>
-      <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;"><u>Manifest No</u> - item was
-        manually added
+    <div class="legend">
+      <div style="display: table; width: auto;">
+        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFE9A3;">manifest for today, pay
+          attention
+        </div>
+        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FF9999;">inconsistent delivery date or
+          quantity
+        </div>
+        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;"><u>Manifest No</u> - item was
+          manually added
+        </div>
       </div>
     </div>
+      <a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', localStorage.retrieve('date')]"  class="btn btn-primary back_to_ttt" style="width: 7rem;">TTT</a>
+      <div class="btn btn-primary add_manifest">ADD MANIFEST</div>
+
   </div>
 </div>

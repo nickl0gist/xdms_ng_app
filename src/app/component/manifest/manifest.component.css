@@ -1,0 +1,412 @@
+.truck-table {
+  display: contents;
+}
+
+.tttable table thead {
+  display: inline-table;
+}
+
+.tttable tbody {
+  overflow-y: auto;
+  max-height: 40rem;
+  display: grid;
+}
+
+.table td {
+  text-align: center;
+  padding-bottom: 1px;
+  padding-top: 1px;
+  vertical-align: middle;
+}
+
+.tttable {
+  width: 98%;
+  display: block;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.ttt-detail {
+  display: contents;
+  margin-top: .5rem;
+}
+
+table.table_kpi {
+  text-align: right;
+  display: inline-block;
+  margin-left: 4rem;
+}
+
+table.table_kpi tbody tr{
+  text-align: center;
+}
+
+.table_kpi thead tr {
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
+.table_kpi thead tr th {
+  border: 1px solid #474747;
+}
+
+.ttt-info-yellow, .ttt-info-green {
+  font-size: large;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  border-radius: 1rem 1rem 0 0;
+  background-color: #fff200;
+  margin-top: .6rem;
+  caption-side: top;
+  border-top: 1px solid #474747;
+  border-left: 1px solid #474747;
+  border-right: 1px solid #474747;
+  color: black;
+}
+
+.ttt-info-green {
+  background-color: #46dc68;
+}
+.table tbody tr:first-child td{
+  border-top: 1px solid black !important;
+}
+
+tbody td {
+  border-top: none !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1px 0 1px 0;
+  border-bottom: 1px solid black;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: rgba(230, 230, 230, 1);
+  padding: 1px 0 1px 0;
+  border-bottom: 1px solid black;
+}
+
+.table-striped tbody tr:nth-of-type(odd) .t_input_r {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.table-striped tbody tr:nth-of-type(even) .t_input_r {
+  background-color: rgba(230, 230, 230, 1);
+}
+
+.tttable table tbody tr {
+  display: inline-table;
+  width: 100%;
+}
+
+.head-row {
+  display: inline-table;
+  width: 100%;
+}
+
+.table thead th {
+  border: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
+  background: dimgrey;
+  color: aliceblue;
+  padding: 1px 0 1px 0;
+}
+
+.btn-edit {
+  position: absolute;
+  top: 7rem;
+  left: 5rem;
+}
+
+a.table_link {
+  text-decoration: none;
+  color: black;
+  font-weight: 550;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+a.table_link:hover {
+  text-decoration: none;
+  color: #f6055c;
+}
+
+.badge_n {
+  font-size: 100%;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: .15rem;
+  border: 2px solid rgba(38, 156, 8, 0.58);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: black;
+  padding: 2px 5px;
+  cursor: pointer;
+  background-color: floralwhite;
+  width: 2rem;
+}
+
+.badge_n:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #0062cc;
+}
+
+.supplier_n {
+  width: 15rem;
+}
+
+.kpi_n {
+  width: 15rem;
+}
+
+.is_n {
+  width: 5rem;
+}
+
+.kpi_tpa_n {
+  width: 8rem;
+}
+
+.table_kpi tbody .t_input {
+  width: 8rem;
+}
+
+.customer_n {
+  width: 10rem;
+}
+
+.table_kpi tbody tr {
+  background-color: #e6e6e6;
+  border: 1px solid #474747;
+  font-weight: 600;
+  width: 100%;
+}
+
+.table_kpi tbody tr td {
+  border-right: 1px solid #474747;
+  padding: 0;
+}
+
+.t_input {
+  padding: 0;
+  margin: 0 5px 0 5px;
+  color: #333333 !important;
+  line-height: 1rem;
+  text-align: center;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(222, 222, 222, 0.88);
+  font-weight: bold;
+  width: 10rem;
+}
+
+.t_input_r {
+  padding: 0;
+  margin: 0 5px 0 5px;
+  color: #333333 !important;
+  line-height: 1rem;
+  text-align: center;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(239, 239, 239, 0.88);
+  font-weight: bold;
+}
+
+.dnote_n .t_input_r, .sap_n .t_input_r {
+  width: 8rem;
+}
+
+.qty_real .t_input_r, .tpa_n .t_input_r {
+  width: 4rem;
+}
+
+.pal_id_n .t_input_r {
+  width: 2.5rem;
+}
+
+.fa-square {
+  content: "\f0c8";
+  font-size: 2rem;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.fa-check-square {
+  content: "\f0c8";
+  font-size: 1.8rem;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.head-row {
+  display: inline-table;
+  width: 100%;
+}
+
+/*ref table*/
+tr .ref_num_n, tr .dnote_n, tr .sap_n, tr d .qty_plan, tr .qty_real, tr .qty_plan, tr .qty_real,
+tr .pal_id_n, tr .lwh_n, tr .lwh_n, tr .lwh_n, tr .weight_n, tr .tpa_n {
+  border-right: 1px solid black;
+  padding: 1px 0 1px 0;
+  text-align: center;
+}
+
+.ref_num_n {
+  width: 13%;
+}
+
+.dnote_n {
+  width: 13%;
+}
+
+.sap_n {
+  width: 11%;
+}
+
+.pcs_qty_n {
+  width: 11%;
+}
+
+.pal_qty_n {
+  width: 11%;
+}
+
+.box_qty_n {
+  width: 11%;
+}
+
+.pal_id_n {
+  width: 4%;
+}
+
+.pla_size_n {
+  width: 9%;
+}
+
+.gross_n {
+  width: 7%;
+  border-bottom: none !important;
+}
+
+.tpa_n {
+  width: 7%;
+}
+
+.qty_plan {
+  width: 5%;
+}
+
+.qty_real {
+  width: 6%;
+}
+
+.lwh_n {
+  width: 4%;
+}
+
+.weight_n {
+  width: 7%;
+  border-top: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+tr.red_row a.table_link:hover {
+  text-decoration: none;
+  color: #000dff;
+}
+
+tr.red_row, tr.red_row .t_input_r {
+  background-color: #f68585 !important;
+}
+
+tr.green_row, tr.green_row .t_input_r {
+  background-color: #a2ff8c !important;
+}
+
+tr.yellow_row, tr.yellow_row .t_input_r{
+  background-color: #ffe9a3 !important;
+}
+
+tfoot {
+  background: #5c5c5cf5;
+  color: white;
+  display: inline-table;
+  width: 100%;
+}
+
+tfoot td {
+  padding: 0;
+  border: 1px solid #595959;
+  border-bottom: none;
+}
+
+tfoot td:first-child {
+  width: 53.2%;
+  text-align: right;
+  padding-right: 5px;
+}
+
+tfoot td:nth-child(2), tfoot td:nth-child(4) {
+  width: 6%;
+  text-align: center;
+}
+
+tfoot td:nth-child(3) {
+  width: 5%;
+  text-align: center;
+}
+
+tfoot td:nth-child(5) {
+  width: 16%;
+  text-align: center;
+}
+
+tfoot td:nth-child(6) {
+  width: 7%;
+  text-align: center;
+}
+
+tfoot td:last-child {
+  width: 7%;
+  text-align: center;
+}
+
+.back_to_ttt:hover, .add_manifest:hover {
+  background-color: #f6055c;
+  color: gold;
+}
+
+.back_to_ttt {
+  margin-left: 8rem;
+  transition: color .5s, background-color .3s;
+  font-weight: bold;
+
+}
+
+.add_manifest {
+  margin-left: 4rem;
+  margin-right: 3rem;
+  float: right;
+  transition: color .5s, background-color .3s;
+  font-weight: bold;
+}
+
+.legend {
+  display: inline;
+  margin-bottom: auto;
+  float: left;
+}
+
+/*********************** 1400 px *********************************/
+@media only screen and (max-width: 1400px) {
+  .tttable tbody {
+    overflow-y: auto;
+    max-height: 20rem;
+  }
+}

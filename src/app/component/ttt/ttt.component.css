@@ -173,8 +173,30 @@ tfoot td:nth-child(3){
   width: 5%;
   text-align: center;
 }
+.legend {
+  display: inline;
+  margin-bottom: auto;
+  float: left;
+}
 .underlined{
   text-decoration: underline !important;
+}
+.back_to_ttt:hover, .add_manifest:hover{
+  background-color: #f6055c;
+  color: gold;
+}
+.back_to_ttt{
+  margin-left: 8rem;
+  transition: color .5s, background-color .3s;
+  font-weight: bold;
+
+}
+.add_manifest{
+  margin-left: 4rem;
+  margin-right: 3rem;
+  float: right;
+  transition: color .5s, background-color .3s;
+  font-weight: bold;
 }
 .i_s {
   /*-webkit-animation: BLINK-ANIMATION 1s infinite; !* Safari 4+ *!*/

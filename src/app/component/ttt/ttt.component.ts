@@ -11,6 +11,7 @@ import {TttEnum} from "../../model/ttt/ttt-enum";
 import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {NgVarDirective} from "../../shared/directives/ng-var.directive";
 import {Ttt} from "../../model/ttt/ttt";
+import * as myGlobals from "../../global";
 
 @Component({
   selector: 'app-ttt',
@@ -22,9 +23,9 @@ export class TttComponent implements OnInit {
   tttWarehouseManifestDTO: TttWarehouseManifestDTO;
   private routeSub: Subscription;
   arrived: string = TttEnum.ARRIVED;
-  condition: boolean = false;
+  manually_added_postfix = myGlobals.MANUALLY_ADDED_POSTFIX;
 
-  constructor(private tttNavService: TttNavService, private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, private localStorage: LocalStorageService) {
+  constructor(private tttNavService: TttNavService, private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, public localStorage: LocalStorageService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +39,6 @@ export class TttComponent implements OnInit {
       this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.localStorage.retrieve('tttId'));
     }
     this.nav.currentDateChangeObs.subscribe((theDate) => {
-
       }
     );
   }
@@ -110,5 +110,11 @@ export class TttComponent implements OnInit {
       totalWeightPlan += warehouseManifest.manifest.totalWeightPlanned;
     });
     return totalWeightReal > 0 ? totalWeightReal + ' t' : totalWeightPlan + ' t';
+  }
+
+  getChosenWarehouseManifestId(warehouseManifest: WarehouseManifest) {
+    this.tttNavService.warehouseManifest = warehouseManifest;
+    this.localStorage.store('manifestId', warehouseManifest.manifest.manifestID);
+    this.localStorage.store('customerId', warehouseManifest.manifest.customer.customerID);
   }
 }
