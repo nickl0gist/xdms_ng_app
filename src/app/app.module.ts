@@ -26,6 +26,7 @@ import {CustomUrlMatcher} from "./custom.url.matcher";
 import {NgVarDirective} from './shared/directives/ng-var.directive';
 import {NgxWebstorageModule} from "ngx-webstorage";
 import {ManifestComponent} from './component/manifest/manifest.component';
+import { NumberFormatPipe } from './shared/pipe/number-format.pipe';
 
 const appRoutes: Routes = [
   {
@@ -97,7 +98,8 @@ const appRoutes: Routes = [
     DatePickComponent,
     NotFoundComponent,
     NgVarDirective,
-    ManifestComponent
+    ManifestComponent,
+    NumberFormatPipe
   ],
   imports: [
     BrowserModule,

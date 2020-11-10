@@ -14,11 +14,14 @@ import {TttEnum} from "../../model/ttt/ttt-enum";
 import {ManifestReference} from "../../model/manifest/manifest-reference";
 import {Ttt} from "../../model/ttt/ttt";
 import {Tpa} from "../../model/tpa/tpa";
+import { BrowserModule } from '@angular/platform-browser';
+import {NumberFormatPipe} from "../../shared/pipe/number-format.pipe";
 
 @Component({
   selector: 'app-manifest',
   templateUrl: './manifest.component.html',
-  styleUrls: ['./manifest.component.css']
+  styleUrls: ['./manifest.component.css'],
+  providers: [NumberFormatPipe]
 })
 export class ManifestComponent implements OnInit {
   arrived: string = TttEnum.ARRIVED;
@@ -26,8 +29,10 @@ export class ManifestComponent implements OnInit {
   private routeSub: Subscription;
   manually_added_postfix = myGlobals.MANUALLY_ADDED_POSTFIX;
   tpaListNotClosedForCustomer: Tpa[];
+  isEditMode = false;
 
-  constructor(public nav: NavbarService, private apiService: ApiService, private route: ActivatedRoute, public localStorage: LocalStorageService, private tttNavService: TttNavService,) {
+  constructor(public nav: NavbarService, private apiService: ApiService, private route: ActivatedRoute,
+              public localStorage: LocalStorageService, private tttNavService: TttNavService, private formatPipe: NumberFormatPipe) {
   }
 
   ngOnInit(): void {
@@ -81,5 +86,29 @@ export class ManifestComponent implements OnInit {
          console.log('The error occurred while receiving Not Closed Tpa for Customer ' + customerID);
        }
     )
+  }
+
+  editModeActivation() {
+    this.isEditMode = !this.isEditMode;
+  }
+
+  getGross() {
+    let gross = 0;
+    this.warehouseManifest.manifest.manifestsReferenceSet.forEach( manifestReference => {
+      gross += manifestReference.grossWeightPlanned;
+    });
+    return gross;
+  }
+
+  changeKpiLabel() {
+    this.warehouseManifest.kpiLabel = !this.warehouseManifest.kpiLabel;
+  }
+
+  changeKpiDocument() {
+    this.warehouseManifest.kpiDocument = !this.warehouseManifest.kpiDocument;
+  }
+
+  changeKpiManifest() {
+    this.warehouseManifest.kpiManifest = !this.warehouseManifest.kpiManifest;
   }
 }

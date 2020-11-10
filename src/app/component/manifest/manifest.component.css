@@ -119,6 +119,7 @@ tbody td {
   position: absolute;
   top: 7rem;
   left: 5rem;
+  font-weight: bold;
 }
 
 a.table_link {
@@ -200,14 +201,15 @@ a.table_link:hover {
   text-align: center;
   border: 0;
   border-radius: 5px;
-  background: rgba(222, 222, 222, 0.88);
+  background: rgb(255, 255, 255);
   font-weight: bold;
   width: 10rem;
 }
-
+.t_input:disabled{
+  background-color: #DEDEDE;
+}
 .t_input_r {
   padding: 0;
-  margin: 0 5px 0 5px;
   color: #333333 !important;
   line-height: 1rem;
   text-align: center;
@@ -217,16 +219,26 @@ a.table_link:hover {
   font-weight: bold;
 }
 
-.dnote_n .t_input_r, .sap_n .t_input_r {
+.dnote_n .t_input_r {
   width: 8rem;
 }
-
+.sap_n .t_input_r{
+  width: 7rem;
+}
 .qty_real .t_input_r, .tpa_n .t_input_r {
   width: 4rem;
 }
 
 .pal_id_n .t_input_r {
   width: 2.5rem;
+}
+
+.lwh_n .t_input_r{
+width: 3rem;
+}
+
+.weight_n .t_input_r{
+  width: 5.5rem;
 }
 
 .fa-square {
@@ -248,7 +260,7 @@ a.table_link:hover {
 
 /*ref table*/
 tr .ref_num_n, tr .dnote_n, tr .sap_n, tr d .qty_plan, tr .qty_real, tr .qty_plan, tr .qty_real,
-tr .pal_id_n, tr .lwh_n, tr .lwh_n, tr .lwh_n, tr .weight_n, tr .tpa_n {
+tr .pal_id_n, tr .lwh_n, tr .lwh_n, tr .lwh_n, tr .weight_n, tr .tpa_n, tr .qty_real_pcs {
   border-right: 1px solid black;
   padding: 1px 0 1px 0;
   text-align: center;
@@ -259,11 +271,11 @@ tr .pal_id_n, tr .lwh_n, tr .lwh_n, tr .lwh_n, tr .weight_n, tr .tpa_n {
 }
 
 .dnote_n {
-  width: 13%;
+  width: 10%;
 }
 
 .sap_n {
-  width: 11%;
+  width: 9%;
 }
 
 .pcs_qty_n {
@@ -283,7 +295,7 @@ tr .pal_id_n, tr .lwh_n, tr .lwh_n, tr .lwh_n, tr .weight_n, tr .tpa_n {
 }
 
 .pla_size_n {
-  width: 9%;
+  width: 8%;
 }
 
 .gross_n {
@@ -299,8 +311,15 @@ tr .pal_id_n, tr .lwh_n, tr .lwh_n, tr .lwh_n, tr .weight_n, tr .tpa_n {
   width: 5%;
 }
 
+.qty_real_pcs{
+  width: 10%;
+}
+.qty_real_pcs .t_input_r{
+  width: 99%;
+}
+
 .qty_real {
-  width: 6%;
+  width: 5%;
 }
 
 .lwh_n {
@@ -321,16 +340,28 @@ tr.red_row a.table_link:hover {
   color: #000dff;
 }
 
-tr.red_row, tr.red_row .t_input_r {
+tr.red_row, tr.red_row .t_input_r:disabled {
   background-color: #f68585 !important;
 }
 
-tr.green_row, tr.green_row .t_input_r {
+tr.green_row, tr.green_row .t_input_r:disabled {
   background-color: #a2ff8c !important;
 }
 
-tr.yellow_row, tr.yellow_row .t_input_r{
+tr.yellow_row, tr.yellow_row .t_input_r:disabled {
   background-color: #ffe9a3 !important;
+}
+
+tr.red_row .t_input_r {
+  background-color: #ffc1bc !important;
+}
+
+tr.green_row .t_input_r {
+  background-color: #ceffbf !important;
+}
+
+tr.yellow_row .t_input_r {
+  background-color: #fffed4 !important;
 }
 
 tfoot {
@@ -347,13 +378,13 @@ tfoot td {
 }
 
 tfoot td:first-child {
-  width: 53.2%;
+  width: 51.2%;
   text-align: right;
   padding-right: 5px;
 }
 
 tfoot td:nth-child(2), tfoot td:nth-child(4) {
-  width: 6%;
+  width: 5%;
   text-align: center;
 }
 
@@ -377,9 +408,16 @@ tfoot td:last-child {
   text-align: center;
 }
 
-.back_to_ttt:hover, .add_manifest:hover {
+.back_to_ttt:hover, .add_manifest:hover, .btn-edit:hover {
   background-color: #f6055c;
   color: gold;
+}
+
+.btn-edit:disabled:hover,
+.back_to_ttt:disabled:hover,
+.add_manifest:disabled:hover{
+  color: #fff;;
+  background-color: #0062cc;
 }
 
 .back_to_ttt {
@@ -403,6 +441,40 @@ tfoot td:last-child {
   float: left;
 }
 
+.save_btn{
+  padding: 2px 5px 1px 5px;
+  margin-left: 4rem;
+  color: #00ff3a;
+  background-color: #b10000;
+  font-size: 1.3rem;
+  font-weight: bold;
+  transition: 0.3s color, 0.3s background-color;
+}
+
+.save_btn:hover{
+  color: #f9fffd;
+  background-color: #0c1bb1;
+}
+
+.fa-save:before{
+  content: "\f0c7";
+  font-size: 2rem;
+}
+
+select:disabled{
+  color: black;
+  opacity: 1;
+}
+.pretty.p-switch .state:before {
+  border: 1px solid #fb021e;
+}
+.pretty.p-switch.p-fill input:checked~.state label:after {
+  background-color: #fff!important;
+  left: 1em;
+}
+.pretty.p-switch .state label:after {
+  background-color: #ff1759!important;
+}
 /*********************** 1400 px *********************************/
 @media only screen and (max-width: 1400px) {
   .tttable tbody {

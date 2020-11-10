@@ -12,7 +12,7 @@ import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {NgVarDirective} from "../../shared/directives/ng-var.directive";
 import {Ttt} from "../../model/ttt/ttt";
 import * as myGlobals from "../../global";
-
+import { BrowserModule } from '@angular/platform-browser';
 @Component({
   selector: 'app-ttt',
   templateUrl: './ttt.component.html',
