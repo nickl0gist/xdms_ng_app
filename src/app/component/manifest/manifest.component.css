@@ -88,12 +88,14 @@ tbody td {
   border-bottom: 1px solid black;
 }
 
-.table-striped tbody tr:nth-of-type(odd) .t_input_r {
+.table-striped tbody tr:nth-of-type(odd) .t_input_r:disabled {
   background-color: rgba(255, 255, 255, 1);
+  border:0;
 }
 
-.table-striped tbody tr:nth-of-type(even) .t_input_r {
+.table-striped tbody tr:nth-of-type(even) .t_input_r:disabled {
   background-color: rgba(230, 230, 230, 1);
+  border:0;
 }
 
 .tttable table tbody tr {
@@ -213,7 +215,7 @@ a.table_link:hover {
   color: #333333 !important;
   line-height: 1rem;
   text-align: center;
-  border: 0;
+  border: 1px solid #bbbbbb;
   border-radius: 5px;
   background: rgba(239, 239, 239, 0.88);
   font-weight: bold;
@@ -268,6 +270,7 @@ tr .pal_id_n, tr .lwh_n, tr .lwh_n, tr .lwh_n, tr .weight_n, tr .tpa_n, tr .qty_
 
 .ref_num_n {
   width: 13%;
+  font-weight: bold;
 }
 
 .dnote_n {

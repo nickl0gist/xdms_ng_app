@@ -1,8 +1,12 @@
 <div class="container-fluid truck-table">
-  <button type="button" class="btn btn btn-primary btn-edit" id="backToTruck" (click)="editModeActivation()" [attr.disabled]="this.isEditMode ? true : null">EDIT MODE</button>
+  <button type="button" class="btn btn btn-primary btn-edit" id="backToTruck" (click)="editModeActivation()"
+          [attr.disabled]="this.isEditMode ? true : null">EDIT MODE
+  </button>
   <div class="kpi_tab">
     <table class="table_kpi" id="tblInfoKPI">
-      <caption class="badge badge-pill badge-primary ttt-info-green" *ngIf="warehouseManifest.ttt.tttStatus.tttStatusName === this.arrived, else notArrived">Truck: {{warehouseManifest.ttt.truckName}} |
+      <caption class="badge badge-pill badge-primary ttt-info-green"
+               *ngIf="warehouseManifest.ttt.tttStatus.tttStatusName === this.arrived, else notArrived">
+        Truck: {{warehouseManifest.ttt.truckName}} |
         Manifest: {{warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]}} |
         Arrived: {{warehouseManifest.ttt.tttArrivalDateReal.replace('T', '  ')}}
       </caption>
@@ -25,14 +29,39 @@
       <tbody>
       <tr>
         <td>{{warehouseManifest?.manifest?.supplier?.name}}</td>
-        <td *ngVar="warehouseManifest.kpiLabel ? 'Y' : 'N' as  condition">Lab: <span [hidden]="this.isEditMode ? true : null" class="badge badge-primary badge_n text-wrap" [style]="warehouseManifest.kpiLabel ? '' : 'border-color: rgba(241, 0, 38, 0.46);'">{{condition}}</span><div class="pretty p-switch p-fill" [hidden]="!this.isEditMode ? true : null"><input type="checkbox" (change)="changeKpiLabel()" [checked]="warehouseManifest.kpiLabel" /><div class="state p-success"><label></label></div></div></td>
-        <td *ngVar="warehouseManifest.kpiDocument ? 'Y' : 'N' as  condition">Doc: <span [hidden]="this.isEditMode ? true : null" class="badge badge-primary badge_n text-wrap" [style]="warehouseManifest.kpiDocument ? '' : 'border-color: rgba(241, 0, 38, 0.46);'">{{condition}}</span><div class="pretty p-switch p-fill" [hidden]="!this.isEditMode ? true : null"><input type="checkbox" (change)="changeKpiDocument()" [checked]="warehouseManifest.kpiDocument" /><div class="state p-success"><label></label></div></div></td>
-        <td *ngVar="warehouseManifest.kpiManifest ? 'Y' : 'N' as  condition">Man: <span [hidden]="this.isEditMode ? true : null" class="badge badge-primary badge_n text-wrap" [style]="warehouseManifest.kpiManifest ? '' : 'border-color: rgba(241, 0, 38, 0.46);'">{{condition}}</span><div class="pretty p-switch p-fill" [hidden]="!this.isEditMode ? true : null"><input type="checkbox" (change)="changeKpiManifest()" [checked]="warehouseManifest.kpiManifest" /><div class="state p-success"><label></label></div></div></td>
+        <td *ngVar="warehouseManifest.kpiLabel ? 'Y' : 'N' as  condition">Lab: <span
+          [hidden]="this.isEditMode ? true : null" class="badge badge-primary badge_n text-wrap"
+          [style]="warehouseManifest.kpiLabel ? '' : 'border-color: rgba(241, 0, 38, 0.46);'">{{condition}}</span>
+          <div class="pretty p-switch p-fill" [hidden]="!this.isEditMode ? true : null"><input type="checkbox"
+                                                                                               (change)="changeKpiLabel()"
+                                                                                               [checked]="warehouseManifest.kpiLabel"/>
+            <div class="state p-success"><label></label></div>
+          </div>
+        </td>
+        <td *ngVar="warehouseManifest.kpiDocument ? 'Y' : 'N' as  condition">Doc: <span
+          [hidden]="this.isEditMode ? true : null" class="badge badge-primary badge_n text-wrap"
+          [style]="warehouseManifest.kpiDocument ? '' : 'border-color: rgba(241, 0, 38, 0.46);'">{{condition}}</span>
+          <div class="pretty p-switch p-fill" [hidden]="!this.isEditMode ? true : null"><input type="checkbox"
+                                                                                               (change)="changeKpiDocument()"
+                                                                                               [checked]="warehouseManifest.kpiDocument"/>
+            <div class="state p-success"><label></label></div>
+          </div>
+        </td>
+        <td *ngVar="warehouseManifest.kpiManifest ? 'Y' : 'N' as  condition">Man: <span
+          [hidden]="this.isEditMode ? true : null" class="badge badge-primary badge_n text-wrap"
+          [style]="warehouseManifest.kpiManifest ? '' : 'border-color: rgba(241, 0, 38, 0.46);'">{{condition}}</span>
+          <div class="pretty p-switch p-fill" [hidden]="!this.isEditMode ? true : null"><input type="checkbox"
+                                                                                               (change)="changeKpiManifest()"
+                                                                                               [checked]="warehouseManifest.kpiManifest"/>
+            <div class="state p-success"><label></label></div>
+          </div>
+        </td>
         <td>
           <a id="" class="table_link i_s" href=""><i class="far fa-square"></i></a>
         </td>
         <td>
-          <input name="" type="text" [value]="warehouseManifest?.tpa?.name" maxlength="15" class="t_input" [attr.disabled]="!this.isEditMode ? true : null"/>
+          <input name="" type="text" [value]="warehouseManifest?.tpa?.name" maxlength="15" class="t_input"
+                 [attr.disabled]="!this.isEditMode ? true : null"/>
         </td>
         <td>{{warehouseManifest?.manifest?.customer?.name}}</td>
       </tr>
@@ -40,7 +69,7 @@
     </table>
   </div>
 </div>
-<!------------------ Manifest Table ------------------>
+<!----------------------------------------------- Manifest Table ------------------------------------------------------>
 <div class="container-fluid ttt-detail">
   <div class="tttable">
     <table class="table table-striped">
@@ -71,29 +100,47 @@
       </tr>
       </thead>
       <tbody>
-      <ng-container *ngFor="let manifestReference of warehouseManifest.manifest.manifestsReferenceSet; let index = index;">
+      <ng-container
+        *ngFor="let manifestReference of warehouseManifest.manifest.manifestsReferenceSet; let index = index;">
         <tr [ngClass]="getClassForRow(manifestReference, warehouseManifest?.ttt)">
           <td class="ref_num_n">{{manifestReference.reference.number}}</td>
-          <td class="dnote_n"><input class="t_input_r" type="text" maxlength="13" [value]="manifestReference.deliveryNumber"/></td>
-          <td class="sap_n"><input class="t_input_r" type="text" maxlength="11" [value]="manifestReference.receptionNumber"/></td>
+          <td class="dnote_n"><input class="t_input_r" type="text" maxlength="13"
+                                     [value]="manifestReference.deliveryNumber"/></td>
+          <td class="sap_n"><input class="t_input_r" type="text" maxlength="11"
+                                   [value]="manifestReference.receptionNumber"/></td>
           <!-- PCS QTY -->
           <td class="qty_plan">{{manifestReference.qtyPlanned | numberFormat}}</td>
-          <td class="qty_real_pcs"><input class="t_input_r" type="text" maxlength="13" value="{{manifestReference.qtyReal | numberFormat}}" [attr.disabled]="!this.isEditMode ? true : null"/></td>
+          <td class="qty_real_pcs"><input class="t_input_r" type="text" maxlength="13"
+                                          value="{{manifestReference.qtyReal | numberFormat}}"
+                                          [attr.disabled]="!this.isEditMode ? true : null"/></td>
           <!-- BOX QTY -->
           <td class="qty_plan">{{manifestReference.boxQtyPlanned | numberFormat}}</td>
-          <td class="qty_real"><input class="t_input_r" type="text" maxlength="5" value="{{manifestReference.boxQtyReal | numberFormat}}" [attr.disabled]="!this.isEditMode ? true : null"/></td>
+          <td class="qty_real"><input class="t_input_r" type="text" maxlength="5"
+                                      value="{{manifestReference.boxQtyReal | numberFormat}}"
+                                      [attr.disabled]="!this.isEditMode ? true : null"/></td>
           <!-- PAL QTY -->
           <td class="qty_plan">{{manifestReference.palletQtyPlanned | numberFormat}}</td>
-          <td class="qty_real"><input class="t_input_r" type="text" maxlength="5"  value="{{manifestReference.palletQtyReal | numberFormat}}" [attr.disabled]="!this.isEditMode ? true : null"/></td>
+          <td class="qty_real"><input class="t_input_r" type="text" maxlength="5"
+                                      value="{{manifestReference.palletQtyReal | numberFormat}}"
+                                      [attr.disabled]="!this.isEditMode ? true : null"/></td>
 
-          <td class="pal_id_n"><input class="t_input_r" type="text" maxlength="3"  value="{{manifestReference.palletId}}"/></td>
-          <td class="lwh_n"><input class="t_input_r" type="text" maxlength="4"  value="{{manifestReference.palletLength}}" [attr.disabled]="!this.isEditMode ? true : null"/></td>
-          <td class="lwh_n"><input class="t_input_r" type="text" maxlength="4"  value="{{manifestReference.palletWidth}}" [attr.disabled]="!this.isEditMode ? true : null"/></td>
-          <td class="lwh_n"><input class="t_input_r" type="text" maxlength="4"  value="{{manifestReference.palletHeight}}" [attr.disabled]="!this.isEditMode ? true : null"/></td>
-          <td class="weight_n"><input class="t_input_r" type="text" maxlength="9"  value="{{manifestReference.grossWeightPlanned | numberFormat}}" [attr.disabled]="!this.isEditMode ? true : null"/></td>
+          <td class="pal_id_n"><input class="t_input_r" type="text" maxlength="3"
+                                      value="{{manifestReference.palletId}}"/></td>
+          <td class="lwh_n"><input class="t_input_r" type="text" maxlength="4"
+                                   value="{{manifestReference.palletLength}}"
+                                   [attr.disabled]="!this.isEditMode ? true : null"/></td>
+          <td class="lwh_n"><input class="t_input_r" type="text" maxlength="4" value="{{manifestReference.palletWidth}}"
+                                   [attr.disabled]="!this.isEditMode ? true : null"/></td>
+          <td class="lwh_n"><input class="t_input_r" type="text" maxlength="4"
+                                   value="{{manifestReference.palletHeight}}"
+                                   [attr.disabled]="!this.isEditMode ? true : null"/></td>
+          <td class="weight_n"><input class="t_input_r" type="text" maxlength="9"
+                                      value="{{manifestReference.grossWeightPlanned | numberFormat}}"
+                                      [attr.disabled]="!this.isEditMode ? true : null"/></td>
           <td class="tpa_n"><select name="chosenTpa" id="chosenTpa" [attr.disabled]="!this.isEditMode ? true : null">
             <option selected="selected" [value]="manifestReference?.tpa?.name">{{manifestReference?.tpa?.name}}</option>
-            <option *ngFor="let tpa of tpaListNotClosedForCustomer;" [value]="tpa.name" [id]="tpa.tpaID">{{tpa?.name}}</option>
+            <option *ngFor="let tpa of tpaListNotClosedForCustomer;" [value]="tpa.name"
+                    [id]="tpa.tpaID">{{tpa?.name}}</option>
           </select></td>
         </tr>
       </ng-container>
@@ -105,20 +152,29 @@
         <td></td>
         <td>{{warehouseManifest.palletQty}}</td>
         <td colspan="4"></td>
-        <td >{{getGross() | numberFormat}}</td>
+        <td>{{getGross() | numberFormat}}</td>
         <td></td>
       </tr>
       </tfoot>
     </table>
     <div class="legend">
       <div style="display: table; width: auto;">
-        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFE9A3;">real quantity > plan quantity </div>
-        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FF9999;">real quantity < plan quantity </div>
-        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;">real quantity = plan quantity </div>
+        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFE9A3;">real quantity > plan
+          quantity
+        </div>
+        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FF9999;">real quantity < plan
+          quantity
+        </div>
+        <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;">real quantity = plan
+          quantity
+        </div>
       </div>
     </div>
-    <a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', warehouseManifest.ttt.truckName]"  class="btn btn-primary back_to_ttt" [style]="this.isEditMode ? 'pointer-events:none; opacity:.65;' : null">BACK TO TRUCK</a>
-    <div (click)="editModeActivation()" class="btn btn-primary save_btn" [attr.hidden]="!this.isEditMode ? true : null" >SAVE <i class="fas fa-save"></i></div>
+    <a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', warehouseManifest.ttt.truckName]"
+       class="btn btn-primary back_to_ttt" [style]="this.isEditMode ? 'pointer-events:none; opacity:.65;' : null">BACK
+      TO TRUCK</a>
+    <div (click)="editModeActivation()" class="btn btn-primary save_btn" [attr.hidden]="!this.isEditMode ? true : null">
+      SAVE <i class="fas fa-save"></i></div>
     <button [attr.disabled]="this.isEditMode ? true : null" class="btn btn-primary add_manifest">ADD REFERENCE</button>
   </div>
 </div>
