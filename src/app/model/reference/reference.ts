@@ -12,17 +12,18 @@ export interface Reference {
   stackability: number;
   pcsPerPU: number;
   puPerHU: number;
-  palletWeight:number;
-  palletHeight:number;
-  palletLength:number;
-  palletWidth:number;
+  palletWeight: number;
+  palletHeight: number;
+  palletLength: number;
+  palletWidth: number;
   isActive: boolean;
   designationEN: string;
   designationDE: string;
-  designationRU:string;
+  designationRU: string;
   supplierAgreement: string;
   customerAgreement: string;
   customer: Customer;
   supplier: Supplier;
   storageLocation: StorageLocation;
+
 }

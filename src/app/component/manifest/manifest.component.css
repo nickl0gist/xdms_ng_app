@@ -447,8 +447,8 @@ tfoot td:last-child {
 .save_btn{
   padding: 2px 5px 1px 5px;
   margin-left: 4rem;
-  color: #00ff3a;
-  background-color: #b10000;
+  color: #c7d6ff;
+  background-color: #074fff;
   font-size: 1.3rem;
   font-weight: bold;
   transition: 0.3s color, 0.3s background-color;
@@ -456,7 +456,7 @@ tfoot td:last-child {
 
 .save_btn:hover{
   color: #f9fffd;
-  background-color: #0c1bb1;
+  background-color: #073dac;
 }
 
 .fa-save:before{
@@ -478,6 +478,12 @@ select:disabled{
 .pretty.p-switch .state label:after {
   background-color: #ff1759!important;
 }
+
+:host::ng-deep.modal-content{
+  width: 30rem;
+}
+
+
 /*********************** 1400 px *********************************/
 @media only screen and (max-width: 1400px) {
   .tttable tbody {

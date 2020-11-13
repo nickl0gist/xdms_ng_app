@@ -7,6 +7,9 @@ import {Ttt} from "../../model/ttt/ttt";
 import {Tpa} from "../../model/tpa/tpa";
 import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dto";
+import {Reference} from "../../model/reference/reference";
+import {ManifestReference} from "../../model/manifest/manifest-reference";
+import {Manifest} from "../../model/manifest/manifest";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,7 @@ import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dt
 export class ApiService {
 
   private ACTIVE_WAREHOUSES_URL = myGlobals.domain + '/warehouse';
+  private COORDINATOR_REFERENCE_URL = myGlobals.domain + '/coordinator/references';
   private httpWithoutInterceptor: HttpClient;
 
   constructor(private httpClient: HttpClient, private httpBackend: HttpBackend) {
@@ -29,7 +33,7 @@ export class ApiService {
   }
 
   getTpaListByWarehouseAndDate(urlCode: string, date: string): Observable<Tpa[]> {
-    return this.httpClient.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/tpa/' + date, );
+    return this.httpClient.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/tpa/' + date,);
   }
 
   getTpaListWithStatusDelayed(urlCode: string): Observable<Tpa[]> {
@@ -44,11 +48,19 @@ export class ApiService {
     return this.httpWithoutInterceptor.get<TttWarehouseManifestDTO>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId);
   }
 
-  getWarehouseManifestByWarehouseUrlAndTttIdAndManifestId(urlCode: any, tttId: number, manifestId: number, headers: any) {
-    return this.httpClient.get<WarehouseManifest>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId, {headers:{'truck':'ttt'}});
+  getWarehouseManifestByWarehouseUrlAndTttIdAndManifestId(urlCode: any, tttId: number, manifestId: number) {
+    return this.httpClient.get<WarehouseManifest>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId, {headers: {'truck': 'ttt'}});
   }
 
   getListOfTpaNotClosedForCustomer(urlCode: string, customerID: number) {
     return this.httpWithoutInterceptor.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/tpa/customer/' + customerID);
+  }
+
+  getReferenceListByCustomerAndSupplier(supplierId: number, customerId: number) {
+    return this.httpWithoutInterceptor.get<Reference[]>(this.COORDINATOR_REFERENCE_URL + '/supplier/' + supplierId +'/customer/' + customerId);
+  }
+
+  putAdditionalReferenceToManifest(urlCode: string, tttId: number, manifestId: number, manifestReference: ManifestReference){
+    return this.httpWithoutInterceptor.put<Manifest>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId + '/addReference', manifestReference);
   }
 }

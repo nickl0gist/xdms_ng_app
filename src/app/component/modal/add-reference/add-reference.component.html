@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <p class="modal-title">Add Reference</p>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="referenceSelectionForm">
+  <div class="modal-body">
+    <table>
+      <thead class="pick_ref_table">
+      <tr>
+        <th>Reference</th>
+        <th>Supplier SA</th>
+        <th>Pallet Qty</th>
+        <th>Box Qty</th>
+        <th>Pcs Qty</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <select formControlName="reference" [(ngModel)]="referenceToAdd" (ngModelChange)="setPickedRef($event)">
+            <option *ngFor="let reference of this.referenceList; let index = index;"
+                    [ngValue]="reference">{{reference.number}}</option>
+          </select>
+        </td>
+        <td>{{referenceToAdd?.supplierAgreement}}</td>
+        <td><input formControlName="palletQty" class="t_input_r" type="text" maxlength="3" value=""/></td>
+        <td><input formControlName="boxQty" class="t_input_r" type="text" maxlength="4" value=""/></td>
+        <td><input formControlName="pcsQty" class="t_input_r" type="text" maxlength="10" value=""/></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="alert-danger">
+      <span
+        *ngIf="referenceSelectionForm.controls['palletQty'].invalid && (referenceSelectionForm.controls['palletQty'].dirty || referenceSelectionForm.controls['palletQty'].touched)">
+            <div *ngIf="referenceSelectionForm.controls['palletQty'].hasError('pattern')">* Provide <strong>Pallet Qty</strong> using numbers.</div>
+      </span>
+      <span
+        *ngIf="referenceSelectionForm.controls['boxQty'].invalid && (referenceSelectionForm.controls['boxQty'].dirty || referenceSelectionForm.controls['boxQty'].touched)">
+            <div
+              *ngIf="referenceSelectionForm.controls['boxQty'].hasError('pattern') || referenceSelectionForm.controls['boxQty'].errors.required">** Provide <strong>Box Qty</strong> using numbers. Box Qty is mandatory.</div>
+      </span>
+      <span
+        *ngIf="referenceSelectionForm.controls['pcsQty'].invalid && (referenceSelectionForm.controls['pcsQty'].dirty || referenceSelectionForm.controls['pcsQty'].touched)">
+            <div
+              *ngIf="referenceSelectionForm.controls['pcsQty'].hasError('pattern') || referenceSelectionForm.controls['pcsQty'].errors.required">*** Provide <strong>Pcs Qty</strong> using numbers. Pcs Qty is mandatory.</div>
+      </span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelButtonAction()">Cancel</button>
+    <button type="submit" ngbAutofocus class="btn btn-danger"
+            [disabled]="referenceSelectionForm.pristine || referenceSelectionForm.invalid"
+            (click)="okButtonAction()">Ok
+    </button>
+  </div>
+</form>

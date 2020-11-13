@@ -175,6 +175,6 @@
       TO TRUCK</a>
     <div (click)="editModeActivation()" class="btn btn-primary save_btn" [attr.hidden]="!this.isEditMode ? true : null">
       SAVE <i class="fas fa-save"></i></div>
-    <button [attr.disabled]="this.isEditMode ? true : null" class="btn btn-primary add_manifest">ADD REFERENCE</button>
+    <button [attr.disabled]="this.isEditMode ? true : null" class="btn btn-primary add_manifest" (click)="onAddReferenceClick()" >ADD REFERENCE</button>
   </div>
 </div>

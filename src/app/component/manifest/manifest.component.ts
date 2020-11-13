@@ -16,6 +16,10 @@ import {Ttt} from "../../model/ttt/ttt";
 import {Tpa} from "../../model/tpa/tpa";
 import { BrowserModule } from '@angular/platform-browser';
 import {NumberFormatPipe} from "../../shared/pipe/number-format.pipe";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddReferenceComponent} from "../modal/add-reference/add-reference.component";
+import {Manifest} from "../../model/manifest/manifest";
+import {Reference} from "../../model/reference/reference";
 
 @Component({
   selector: 'app-manifest',
@@ -32,7 +36,8 @@ export class ManifestComponent implements OnInit {
   isEditMode = false;
 
   constructor(public nav: NavbarService, private apiService: ApiService, private route: ActivatedRoute,
-              public localStorage: LocalStorageService, private tttNavService: TttNavService, private formatPipe: NumberFormatPipe) {
+              public localStorage: LocalStorageService, private tttNavService: TttNavService,
+              private modal: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -51,11 +56,10 @@ export class ManifestComponent implements OnInit {
   }
 
   private getWarehouseManifestByWarehouseUrlAndTttIdAndManifestId(warehouseUrlCode: string, tttId: number, manifestId: number) {
-    let headers = new HttpHeaders().set('truck', 'ttt');
-
-    this.apiService.getWarehouseManifestByWarehouseUrlAndTttIdAndManifestId(warehouseUrlCode, tttId, manifestId, headers).subscribe(
+    this.apiService.getWarehouseManifestByWarehouseUrlAndTttIdAndManifestId(warehouseUrlCode, tttId, manifestId).subscribe(
       res => {
         this.warehouseManifest = res;
+        this.tttNavService.warehouseManifest = res;
       },
       err => {
         console.log('The error occurred while receiving WarehouseManifest');
@@ -88,6 +92,33 @@ export class ManifestComponent implements OnInit {
     )
   }
 
+  onAddReferenceClick() {
+    const modalRef = this.modal.open(AddReferenceComponent,
+      {
+        windowClass: 'myCustomModalClass',
+      });
+
+    modalRef.componentInstance.fromParent = {
+      supplierId: this.warehouseManifest.manifest.supplier.supplierID,
+      customerId: this.warehouseManifest.manifest.customer.customerID
+    };
+    modalRef.result.then((result) => {
+        let manifestReferenceToAdd = this.getManifestReferenceToAdd(result);
+        this.apiService.putAdditionalReferenceToManifest(this.nav.warehouseUrlCode, this.warehouseManifest.ttt.tttID, this.warehouseManifest.manifest.manifestID, manifestReferenceToAdd).subscribe(
+          res => {
+            this.warehouseManifest.manifest = res;
+            this.tttNavService.warehouseManifest.manifest = res;
+          },
+          error => {
+            console.log(`Error occurred while adding new ManifestReference to ttt ${this.warehouseManifest.ttt.tttID} in Warehouse ${this.warehouseManifest.warehouse.name}. Error: ${error}`);
+          }
+        );
+        console.log(result);
+      }, (reason) => {
+      }
+    );
+  }
+
   editModeActivation() {
     this.isEditMode = !this.isEditMode;
   }
@@ -97,7 +128,8 @@ export class ManifestComponent implements OnInit {
     this.warehouseManifest.manifest.manifestsReferenceSet.forEach( manifestReference => {
       gross += manifestReference.grossWeightPlanned;
     });
-    return gross;
+    gross = Math.floor(gross * 100) / 100;
+    return gross.toFixed(2);
   }
 
   changeKpiLabel() {
@@ -111,4 +143,29 @@ export class ManifestComponent implements OnInit {
   changeKpiManifest() {
     this.warehouseManifest.kpiManifest = !this.warehouseManifest.kpiManifest;
   }
+
+  private getManifestReferenceToAdd (result: any) {
+    let reference : Reference = result[0];
+    let palletQty = result[1];
+    let boxQty = result[2];
+    let pcsQty = result[3];
+
+    let manifestReference = {} as ManifestReference;
+    manifestReference.manifest = this.warehouseManifest.manifest;
+    manifestReference.reference = reference;
+    manifestReference.palletQtyPlanned = palletQty;
+    manifestReference.boxQtyPlanned = boxQty;
+    manifestReference.qtyPlanned = pcsQty;
+    manifestReference.tpa = this.warehouseManifest.tpa;
+    manifestReference.grossWeightPlanned = reference.weight * pcsQty + reference.palletWeight * palletQty + reference.weightOfPackaging * boxQty;
+    manifestReference.palletHeight = reference.palletHeight;
+    manifestReference.palletLength = reference.palletLength;
+    manifestReference.palletWidth = reference.palletWidth ;
+    manifestReference.palletWeight = reference.palletWeight;
+    manifestReference.netWeight = reference.weight * pcsQty;
+    manifestReference.palletId = null;
+    manifestReference.stackability = reference.stackability;
+    return manifestReference;
+  }
+
 }

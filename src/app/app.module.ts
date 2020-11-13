@@ -27,6 +27,8 @@ import {NgVarDirective} from './shared/directives/ng-var.directive';
 import {NgxWebstorageModule} from "ngx-webstorage";
 import {ManifestComponent} from './component/manifest/manifest.component';
 import { NumberFormatPipe } from './shared/pipe/number-format.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddReferenceComponent } from './component/modal/add-reference/add-reference.component';
 
 const appRoutes: Routes = [
   {
@@ -99,7 +101,8 @@ const appRoutes: Routes = [
     NotFoundComponent,
     NgVarDirective,
     ManifestComponent,
-    NumberFormatPipe
+    NumberFormatPipe,
+    AddReferenceComponent
   ],
   imports: [
     BrowserModule,
@@ -117,9 +120,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
+    NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddReferenceComponent]
 })
 export class AppModule {
 
