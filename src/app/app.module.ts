@@ -29,6 +29,7 @@ import {ManifestComponent} from './component/manifest/manifest.component';
 import { NumberFormatPipe } from './shared/pipe/number-format.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddReferenceComponent } from './component/modal/add-reference/add-reference.component';
+import {MatSelectModule} from "@angular/material/select";
 
 const appRoutes: Routes = [
   {
@@ -104,24 +105,24 @@ const appRoutes: Routes = [
     NumberFormatPipe,
     AddReferenceComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatNativeDateModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    NoopAnimationsModule,
-    AaDatepickerModule,
-    DatePickerModule,
-    BrowserModule, BrowserAnimationsModule, DateTimePickerModule,
-    RouterModule.forRoot(appRoutes),
-    HttpClientModule,
-    NgxWebstorageModule.forRoot(),
-    NgbModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatNativeDateModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule,
+        AaDatepickerModule,
+        DatePickerModule,
+        BrowserModule, BrowserAnimationsModule, DateTimePickerModule,
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule,
+        NgxWebstorageModule.forRoot(),
+        NgbModule, MatSelectModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [AddReferenceComponent]

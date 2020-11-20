@@ -1,4 +1,4 @@
-<span class="badge badge-pill badge-primary ttt-info">Truck Name: {{tttWarehouseManifestDTO.ttt?.truckName}}. Dispatched From: {{tttWarehouseManifestDTO.ttt?.dispatchedFrom}}
+<span class="badge badge-pill badge-primary ttt-info">Truck Name: {{tttWarehouseManifestDTO.ttt.truckName}}. Dispatched From: {{tttWarehouseManifestDTO.ttt.dispatchedFrom}}
   .</span>
 <ng-container>
   <span class="badge badge-pill badge-success arrived-info"
@@ -17,16 +17,16 @@
     <table class="table table-striped">
       <thead class="head-row">
       <tr>
-        <th rowspan=2 class="manifest_n">Manifest №</th>
-        <th rowspan=2 class="supplier_n">Supplier</th>
-        <th rowspan=2 class="customer_n">Customer</th>
-        <th style="border-bottom: none;" class="delivery_n">Delivery</th>
-        <th colspan=2>Qty of pallets</th>
-        <th colspan=2>Weight, [t]</th>
-        <th colspan=3>KPI</th>
-        <th rowspan=2 class="is_n">IS</th>
-        <th rowspan=2 class="co_n">CO</th>
-        <th rowspan=2 class="tpa_n">TPA</th>
+        <th scope="col" rowspan=2 class="manifest_n">Manifest №</th>
+        <th scope="col" rowspan=2 class="supplier_n">Supplier</th>
+        <th scope="col" rowspan=2 class="customer_n">Customer</th>
+        <th scope="col" style="border-bottom: none;" class="delivery_n">Delivery</th>
+        <th scope="col" colspan=2>Qty of pallets</th>
+        <th scope="col" colspan=2>Weight, [t]</th>
+        <th scope="col" colspan=3>KPI</th>
+        <th scope="col" rowspan=2 class="is_n">IS</th>
+        <th scope="col" rowspan=2 class="co_n">CO</th>
+        <th scope="col" rowspan=2 class="tpa_n">TPA</th>
       </tr>
       <tr>
         <th style="border-top: none;">Date</th>
@@ -47,7 +47,7 @@
             [ngClass]="warehouseManifest.manifest.manifestCode.includes(manually_added_postfix) ? 'underlined' : ''"
             (click)="getChosenWarehouseManifestId(warehouseManifest)"
             class="table_link "
-            [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO.ttt.truckName, 'manifest', warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]]">{{warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]}}</a>
+            [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO?.ttt.truckName, 'manifest', warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]]">{{warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]}}</a>
           </td>
           <td class="supplier_n">{{warehouseManifest.manifest.supplier.name}}</td>
           <td class="customer_n">{{warehouseManifest.manifest.customer.name}}</td>

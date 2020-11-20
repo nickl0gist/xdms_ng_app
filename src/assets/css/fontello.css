@@ -166,3 +166,6 @@ font-size:x-large;} /* '' */
 content: '\e81d';
 color:#f8f8f8;
 font-size:x-large;} /* '' */
+.icon-attention:before { content: '\26a0'; } /* '⚠' */
+.icon-ok:before { content: '\2713'; } /* '✓' */
+.icon-cancel:before { content: '\2715'; } /* '✕' */

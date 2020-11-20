@@ -16,7 +16,7 @@ import {Manifest} from "../../model/manifest/manifest";
 })
 export class ApiService {
 
-  private ACTIVE_WAREHOUSES_URL = myGlobals.domain + '/warehouse';
+  private ACTIVE_WAREHOUSES_URL = myGlobals.domain + '/warehouse/';
   private COORDINATOR_REFERENCE_URL = myGlobals.domain + '/coordinator/references';
   private httpWithoutInterceptor: HttpClient;
 
@@ -29,31 +29,31 @@ export class ApiService {
   }
 
   getTttListByWarehouseAndDate(urlCode: string, date: string): Observable<Ttt[]> {
-    return this.httpClient.get<Ttt[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + date);
+    return this.httpClient.get<Ttt[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/ttt/' + date);
   }
 
   getTpaListByWarehouseAndDate(urlCode: string, date: string): Observable<Tpa[]> {
-    return this.httpClient.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/tpa/' + date,);
+    return this.httpClient.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/tpa/' + date,);
   }
 
   getTpaListWithStatusDelayed(urlCode: string): Observable<Tpa[]> {
-    return this.httpClient.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/tpa/delayed');
+    return this.httpClient.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/tpa/delayed');
   }
 
   getListWarehouseManifestForCertainWarehouseAndTtt(urlCode: string, date: string): Observable<TttWarehouseManifestDTO[]> {
-    return this.httpWithoutInterceptor.get<TttWarehouseManifestDTO[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/full/' + date);
+    return this.httpWithoutInterceptor.get<TttWarehouseManifestDTO[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/ttt/full/' + date);
   }
 
   getTttWarehouseManifestDtoByWarehouseAndTtt(urlCode: string, tttId: number): Observable<TttWarehouseManifestDTO> {
-    return this.httpWithoutInterceptor.get<TttWarehouseManifestDTO>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId);
+    return this.httpWithoutInterceptor.get<TttWarehouseManifestDTO>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/ttt/' + tttId);
   }
 
   getWarehouseManifestByWarehouseUrlAndTttIdAndManifestId(urlCode: any, tttId: number, manifestId: number) {
-    return this.httpClient.get<WarehouseManifest>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId, {headers: {'truck': 'ttt'}});
+    return this.httpClient.get<WarehouseManifest>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId, {headers: {'truck': 'ttt'}});
   }
 
   getListOfTpaNotClosedForCustomer(urlCode: string, customerID: number) {
-    return this.httpWithoutInterceptor.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/tpa/customer/' + customerID);
+    return this.httpWithoutInterceptor.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/tpa/customer/' + customerID);
   }
 
   getReferenceListByCustomerAndSupplier(supplierId: number, customerId: number) {
@@ -61,6 +61,10 @@ export class ApiService {
   }
 
   putAdditionalReferenceToManifest(urlCode: string, tttId: number, manifestId: number, manifestReference: ManifestReference){
-    return this.httpWithoutInterceptor.put<Manifest>(this.ACTIVE_WAREHOUSES_URL + '/' + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId + '/addReference', manifestReference);
+    return this.httpWithoutInterceptor.put<Manifest>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId + '/addReference', manifestReference);
+  }
+
+  putManifestReferenceListAfterReception(urlCode: string, manifestReferenceList: ManifestReference[]){
+    return this.httpWithoutInterceptor.put<ManifestReference[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/man_ref/reception', manifestReferenceList);
   }
 }

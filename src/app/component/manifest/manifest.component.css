@@ -483,7 +483,91 @@ select:disabled{
   width: 30rem;
 }
 
+:host::ng-deep.tooltip-inner{
+  max-width: 40rem;
+  background-color: #fffe00;
+  color: darkred;
+  font-weight: 700;
+  text-align: left;
+}
 
+:host::ng-deep.tooltip-inner p{
+  margin: 0;
+}
+
+:host::ng-deep.arrow::before {
+  border-top-color: darkgreen;
+}
+:host::ng-deep.tooltip.show {
+  opacity: 1;
+}
+:host::ng-deep.arrow,  :host::ng-deep.arrow {
+  left: 0.2em !important;
+}
+.icon-ok, .icon-cancel{
+  margin: 0 0 0 10rem;
+  border: 3px solid #ff000000;
+  border-radius: 50rem;
+}
+.icon-ok:before, .icon-cancel:before{
+  font-size: 3rem;
+  margin: 0;
+  background-color: #4f93ff63;;
+  border-radius: 31px;
+}
+.icon-ok:hover{
+  border: 3px solid greenyellow;
+  border-radius: 31px;
+}
+.icon-ok:disabled{
+  color: #56731d;
+}
+.icon-ok:disabled:hover{
+  color: #56731d;
+  background-color: #4f93ff63 !important;
+  border: 3px solid #56731d !important;
+}
+.icon-ok{
+  color: greenyellow;
+}
+.icon-cancel{
+  color: orangered;
+}
+button.fas.icon-ok:hover,
+button.fas.icon-cancel:hover{
+  background-color: #0c09ed;
+}
+.icon-cancel:hover{
+  border: 3px solid orangered;
+  border-radius: 31px;
+}
+button.fas.icon-ok,
+button.fas.icon-cancel{
+  background: none;
+  margin: 0 0 0 10rem;
+  padding: 0;
+}
+.fa-exclamation-triangle {
+  /*-webkit-animation: BLINK-ANIMATION 1s infinite; !* Safari 4+ *!*/
+  /*-moz-animation:    BLINK-ANIMATION 1s infinite; !* Fx 5+ *!*/
+  /*-o-animation:      BLINK-ANIMATION 1s infinite; !* Opera 12+ *!*/
+  animation-duration: 1.5s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: BLINK-ANIMATION;
+}
+@keyframes BLINK-ANIMATION {
+  10%, 50% {
+    color: yellow;
+  }
+  0%, 100% {
+    color: red;
+  }
+}
 /*********************** 1400 px *********************************/
 @media only screen and (max-width: 1400px) {
   .tttable tbody {
