@@ -161,17 +161,72 @@ tfoot{
   width: 100%;
 }
 tfoot td:first-child{
-  width: 53%;
+  width: 40%;
+  text-align: left;
+  padding: 0 0 0 2rem;
+}
+tfoot td:nth-child(2){
+  width: 13%;
   text-align: right;
   padding-right: 5px;
 }
-tfoot td:nth-child(2), tfoot td:nth-child(4){
+tfoot td:nth-child(3), tfoot td:nth-child(5){
   width: 7%;
   text-align: center;
 }
-tfoot td:nth-child(3){
+tfoot td:nth-child(4){
   width: 5%;
   text-align: center;
+}
+:host::ng-deep.tooltip-inner {
+  max-width: 250px !important;
+}
+.upload_form label {
+  background-color: #383838;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline-block;
+  margin-bottom: 0;
+  transition: background-color 0.3s;
+  margin-right: 2rem;
+}
+.upload_form label:hover{
+  background-color: #111111;
+}
+.form-group.upload_form{
+  margin-bottom: 0;
+  text-align: right;
+}
+.fa-cloud-upload-alt{
+  color: deepskyblue;
+}
+
+.green{
+  color: greenyellow !important;
+}
+.red{
+  color: orangered !important;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: -26px;
+  border-radius: 50%;
+  border-top: 2px solid #c6d9e8;
+  border-right: 2px solid transparent;
+  animation: spinner .6s linear infinite;
 }
 .legend {
   display: inline;
@@ -198,6 +253,11 @@ tfoot td:nth-child(3){
   transition: color .5s, background-color .3s;
   font-weight: bold;
 }
+em.far.fa-file-excel {
+  color: #00ef00;
+  font-size: 1.7rem;
+}
+
 .i_s {
   /*-webkit-animation: BLINK-ANIMATION 1s infinite; !* Safari 4+ *!*/
   /*-moz-animation:    BLINK-ANIMATION 1s infinite; !* Fx 5+ *!*/

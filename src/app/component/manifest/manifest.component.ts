@@ -5,7 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {LocalStorageService} from "ngx-webstorage";
 import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {TttNavService} from "../../shared/service/ttt-nav.service";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {HttpHeaders} from "@angular/common/http";
 import * as myGlobals from "../../global";
 import {NgVarDirective} from "../../shared/directives/ng-var.directive";
@@ -179,8 +179,12 @@ export class ManifestComponent implements OnInit {
       mRs.palletLength = parseInt(this.receptionForm.get(['manifestReferenceListForm', index]).get('palletLength').value);
       mRs.palletWidth = parseInt(this.receptionForm.get(['manifestReferenceListForm', index]).get('palletWidth').value);
       mRs.palletId = this.receptionForm.get(['manifestReferenceListForm', index]).get('palletId').value;
-      mRs.receptionNumber = this.receptionForm.get(['manifestReferenceListForm', index]).get('receptionNumber').value;
-      mRs.deliveryNumber = this.receptionForm.get(['manifestReferenceListForm', index]).get('deliveryNumber').value;
+      let reception = '';
+      reception = this.receptionForm.get(['manifestReferenceListForm', index]).get('receptionNumber').value == null ? '' : this.receptionForm.get(['manifestReferenceListForm', index]).get('receptionNumber').value;
+      mRs.receptionNumber = reception.length == 0 ? null: reception;
+      let dn = '';
+      dn = this.receptionForm.get(['manifestReferenceListForm', index]).get('deliveryNumber').value == null ? '' : this.receptionForm.get(['manifestReferenceListForm', index]).get('deliveryNumber').value;
+      mRs.deliveryNumber = dn.length == 0 ? null: dn;
       console.log(this.receptionForm.get(['manifestReferenceListForm', index]).get('tpaIdForm').value);
       let tpaToPlace = this.getTpaToPlace(index);
       mRs.tpa = tpaToPlace === undefined ? this.warehouseManifest.tpa : tpaToPlace;
@@ -196,13 +200,21 @@ export class ManifestComponent implements OnInit {
     });
     this.warehouseManifest.palletQty = palletQtyReal;
     this.warehouseManifest.boxQtyReal = boxQtyReal;
-    console.log(this.warehouseManifest);
+
     this.apiService.putManifestReferenceListAfterReception(this.nav.warehouseUrlCode, this.warehouseManifest.manifest.manifestsReferenceSet).subscribe(
       res => {
         this.warehouseManifest.manifest.manifestsReferenceSet = res;
+        this.apiService.putWarehouseManifestUpdate(this.nav.warehouseUrlCode, this.tttNavService.tttId, this.warehouseManifest).subscribe(
+          res => {
+            this.warehouseManifest = res;
+          },
+          error => {
+            console.log(`Error occurred while sending WarehouseManifest ${error.toString()}`);
+          }
+        )
       },
       error => {
-        console.log(`Error occurred while attempt of sending reception information to server: ${error}`);
+        console.log(`Error occurred while attempt of sending reception information to server: ${error.toString()}`);
       }
     );
     this.editModeActivation();

@@ -30,6 +30,7 @@ import { NumberFormatPipe } from './shared/pipe/number-format.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddReferenceComponent } from './component/modal/add-reference/add-reference.component';
 import {MatSelectModule} from "@angular/material/select";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const appRoutes: Routes = [
   {
@@ -121,7 +122,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         HttpClientModule,
         NgxWebstorageModule.forRoot(),
-        NgbModule, MatSelectModule,
+        NgbModule, MatSelectModule, MatProgressSpinnerModule,
     ],
   providers: [],
   bootstrap: [AppComponent],

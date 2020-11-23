@@ -44,10 +44,10 @@
         *ngFor="let warehouseManifest of this.tttWarehouseManifestDTO.warehouseManifestList; let index = index;">
         <tr [ngClass]="getClassForRow(warehouseManifest)">
           <td class="manifest_n"><a
-            [ngClass]="warehouseManifest.manifest.manifestCode.includes(manually_added_postfix) ? 'underlined' : ''"
+            [ngClass]="warehouseManifest.manifest.manifestCode.includes(MANUALLY_ADDED_POSTFIX) ? 'underlined' : ''"
             (click)="getChosenWarehouseManifestId(warehouseManifest)"
             class="table_link "
-            [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO?.ttt.truckName, 'manifest', warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]]">{{warehouseManifest.manifest.manifestCode.split(manually_added_postfix)[0]}}</a>
+            [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO?.ttt.truckName, 'manifest', warehouseManifest.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]]">{{warehouseManifest.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]}}</a>
           </td>
           <td class="supplier_n">{{warehouseManifest.manifest.supplier.name}}</td>
           <td class="customer_n">{{warehouseManifest.manifest.customer.name}}</td>
@@ -55,16 +55,17 @@
           <td class="qty_pal_plan_n"
               [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, false)">{{warehouseManifest.manifest.palletQtyPlanned}}</td>
           <td class="qty_pal_n" [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, false)"
-              *ngVar="warehouseManifest.palletQty > 0 ? warehouseManifest.palletQty + 'p' : ' — ' as pallets"><a
-            class="badge_n text-wrap" style="display:inline-block;"
-            *ngVar="warehouseManifest.boxQtyReal > 0 ? warehouseManifest.boxQtyReal + 'b' : '' as boxes;">
-            {{pallets}} {{boxes}}</a>
+              *ngVar="warehouseManifest.palletQty > 0 ? warehouseManifest.palletQty + 'p' : this.SYMBOL_NOT_ARRIVED as pallets">
+            <a
+              class="badge_n text-wrap" style="display:inline-block;"
+              *ngVar="warehouseManifest.boxQtyReal > 0 ? warehouseManifest.boxQtyReal + 'b' : '' as boxes;">
+              {{pallets}} {{boxes}}</a>
           </td>
           <td class="weight_plan_n"
               [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)">{{warehouseManifest.manifest.totalWeightPlanned}}</td>
           <td class="weight_n" [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)"><a
             class="badge_n text-wrap" style="display:inline-block;"
-            *ngVar="warehouseManifest.grossWeight > 0 ? warehouseManifest.grossWeight : ' — ' as weight">{{weight}}</a>
+            *ngVar="warehouseManifest.grossWeight > 0 ? warehouseManifest.grossWeight : this.SYMBOL_NOT_ARRIVED as weight">{{weight}}</a>
           </td>
           <td class="kpi_n" *ngVar="warehouseManifest.kpiLabel ? 'Y' : 'N' as  condition"><a
             class="badge_n text-wrap">{{condition}}</a></td>
@@ -84,11 +85,38 @@
       </tbody>
       <tfoot style="background: #5c5c5cf5; color: white;">
       <tr>
+        <td colspan="4"><em class="far fa-file-excel" (click)="this.getExcelReceptionFile()"
+                            ngbTooltip="Get Reception file"></em></td>
         <td colspan=5>Total:</td>
         <td><b>{{getTotalAmountOfPalletsAndBoxes()}}</b></td>
         <td></td>
         <td><b>{{getTotalWeight()}}</b></td>
-        <td colspan=6></td>
+        <td colspan=6>
+          <div class="form-group upload_form" [formGroup]="uploadReceptionForm">
+
+            <label for="file"><i class="spinner" [hidden]="uploading"></i><i class="fas fa-cloud-upload-alt"
+                                                                             [animation]="true"
+                                                                             triggers="manual"
+                                                                             #t="ngbTooltip"
+                                                                             [style]="{'color': uploadReceptionForm.dirty ? (uploadingResult==true) ? '#33ff00' : 'orangered' : 'deepskyblue'}"
+                                                                             [ngbTooltip]=""
+                                                                             placement="left"
+                                                                             [autoClose]="'outside'"></i> Reception</label>
+            <ng-template #toolTipOk class="toolTipOk" style="color: #00ef00">
+              <div>File Successfully Saved</div>
+            </ng-template>
+            <ng-template #toolTipNok class="toolTipNok" style="color: #c7001c">
+              <div>Error Occurred. Check your file.</div>
+            </ng-template>
+            <input
+              formControlName="file"
+              id="file"
+              type="file"
+              class="form-control"
+              accept=".xlsx"
+              (change)="onFileChange($event)" hidden>
+          </div>
+        </td>
       </tr>
       </tfoot>
     </table>
@@ -105,8 +133,9 @@
         </div>
       </div>
     </div>
-      <a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', localStorage.retrieve('date')]"  class="btn btn-primary back_to_ttt" style="width: 7rem;">TTT</a>
-      <div class="btn btn-primary add_manifest">ADD MANIFEST</div>
+    <a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', localStorage.retrieve('date')]"
+       class="btn btn-primary back_to_ttt" style="width: 7rem;">TTT</a>
+    <div class="btn btn-primary add_manifest">ADD MANIFEST</div>
 
   </div>
 </div>

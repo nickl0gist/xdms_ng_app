@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TttNavService} from "../../shared/service/ttt-nav.service";
 import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dto";
@@ -13,17 +13,32 @@ import {NgVarDirective} from "../../shared/directives/ng-var.directive";
 import {Ttt} from "../../model/ttt/ttt";
 import * as myGlobals from "../../global";
 import { BrowserModule } from '@angular/platform-browser';
+import { saveAs } from 'file-saver';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+
 @Component({
   selector: 'app-ttt',
   templateUrl: './ttt.component.html',
   styleUrls: ['./ttt.component.css']
 })
 export class TttComponent implements OnInit {
+  @ViewChild('t') toolTipReception: NgbTooltip;
+  @ViewChild('toolTipOk') toolTipOk: TemplateRef<string>;
+  @ViewChild('toolTipNok') toolTipNok: TemplateRef<string>;
   tttId: number;
   tttWarehouseManifestDTO: TttWarehouseManifestDTO;
   private routeSub: Subscription;
   arrived: string = TttEnum.ARRIVED;
-  manually_added_postfix = myGlobals.MANUALLY_ADDED_POSTFIX;
+  MANUALLY_ADDED_POSTFIX = myGlobals.MANUALLY_ADDED_POSTFIX;
+  SYMBOL_NOT_ARRIVED = myGlobals.SYMBOL_NOT_ARRIVED;
+  uploadReceptionForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('', [Validators.required])
+  });
+  uploading = true;
+  uploadingResult: boolean;
 
   constructor(private tttNavService: TttNavService, private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, public localStorage: LocalStorageService) {
   }
@@ -116,5 +131,52 @@ export class TttComponent implements OnInit {
     this.tttNavService.warehouseManifest = warehouseManifest;
     this.localStorage.store('manifestId', warehouseManifest.manifest.manifestID);
     this.localStorage.store('customerId', warehouseManifest.manifest.customer.customerID);
+  }
+
+  getExcelReceptionFile(){
+    this.apiService.getExcelWithManifestReferencesForReception(this.nav.warehouseUrlCode, this.tttWarehouseManifestDTO.ttt.tttID).subscribe(
+      res => {
+        const blob = new Blob([res], {type: 'application/vnd.ms-excel'});
+        const file = new File([blob], `reception-${Date.now()}.xlsx`, { type: 'application/vnd.ms.excel' });
+        saveAs(file);
+      },
+      error => {
+        console.log(`Error occurred while getting Excel file with reception information Warehouse: ${this.nav.warehouseUrlCode} TTT id:${this.tttWarehouseManifestDTO.ttt.tttID}`);
+      }
+    )
+  }
+
+  get f(){
+    return this.uploadReceptionForm.controls;
+  }
+
+  onFileChange(event) {
+    const formData = new FormData();
+    if (event.target.files.length > 0) {
+      this.uploading = false;
+      const file = event.target.files[0];
+      this.uploadReceptionForm.patchValue({
+        fileSource: file
+      });
+      formData.append('file', this.uploadReceptionForm.get('fileSource').value);
+      this.apiService.postExcelWithManifestReferencesForReception(this.nav.warehouseUrlCode, this.tttWarehouseManifestDTO.ttt.tttID, formData).subscribe(
+        res=>{
+          console.log(res);
+          this.toolTipReception.ngbTooltip = this.toolTipOk;
+          this.toolTipReception.open();
+
+          this.uploading = true;
+          this.uploadingResult = true;
+          this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.localStorage.retrieve('tttId'));
+        },
+        error => {
+          console.log(`Error: ${error}`);
+          this.toolTipReception.ngbTooltip = this.toolTipNok;
+          this.toolTipReception.open();
+          this.uploading = true;
+          this.uploadingResult = false;
+        }
+      );
+    }
   }
 }
