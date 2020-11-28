@@ -186,7 +186,6 @@ export class ManifestComponent implements OnInit {
     let palletQtyReal = 0;
     let boxQtyReal = 0;
     this.warehouseManifest.manifest.manifestsReferenceSet.forEach((mRs, index) => {
-      console.log(`MR-f ${this.receptionForm.get(['manifestReferenceListForm', index]).get('mRiD').value} vs MR ${mRs.manifestReferenceId}`);
       mRs.qtyReal = this.getQtyReal(index);
       mRs.palletQtyReal = this.getPalletQtyReal(index);
       mRs.boxQtyReal = this.getBoxQtyReal(index);
