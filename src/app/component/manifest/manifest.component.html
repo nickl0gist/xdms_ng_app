@@ -118,6 +118,7 @@
              </span>
                   {{manifestReference.reference.number}}</td>
             <ng-template #toolTip><div [innerHTML]="getMessageAboutMadeError(receptionForm.get(['manifestReferenceListForm', index]))"></div></ng-template>
+            <td  hidden><input formControlName="mRiD" hidden [value]="manifestReference.manifestReferenceId"/></td>
             <!-- DN -->
             <td class="dnote_n"><input class="t_input_r" type="text" maxlength="13"
                                        [value]="manifestReference.deliveryNumber" formControlName="deliveryNumber"

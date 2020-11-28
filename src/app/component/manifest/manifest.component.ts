@@ -61,6 +61,7 @@ export class ManifestComponent implements OnInit {
       this.getListOfTpaNotClosedForCustomer(this.nav.warehouseUrlCode, this.warehouseManifest.manifest.customer.customerID);
       this.mapManifestReferenceSetToForm();
     }
+    this.sortManifestReferenceSet();
   }
 
   private getWarehouseManifestByWarehouseUrlAndTttIdAndManifestId(warehouseUrlCode: string, tttId: number, manifestId: number) {
@@ -81,10 +82,13 @@ export class ManifestComponent implements OnInit {
     if (ttt.tttStatus.tttStatusName === this.arrived) {
       if (manifestReference.qtyPlanned > manifestReference.qtyReal)
         result = 'red_row';
+
       if (manifestReference.qtyPlanned < manifestReference.qtyReal)
         result = 'yellow_row';
+
       if (manifestReference.qtyPlanned === manifestReference.qtyReal)
         result = 'green_row';
+
     }
     return result;
   }
@@ -130,6 +134,7 @@ export class ManifestComponent implements OnInit {
   }
 
   private mapManifestReferenceSetToForm() {
+    this.sortManifestReferenceSet();
     this.warehouseManifest.manifest.manifestsReferenceSet.map(mR =>
       this.manifestReferenceGetter.push(this.fb.group({
         qtyReal: [mR.qtyReal === 0 ? this.NOT_ARRIVED : this.numberFormat.transform(mR.qtyReal),
@@ -150,9 +155,19 @@ export class ManifestComponent implements OnInit {
         palletId: [mR.palletId, Validators.pattern('^[\\da-zA-Z]{1,3}$')],
         receptionNumber: [mR.receptionNumber, Validators.pattern('^\\d{1,11}$')],
         deliveryNumber: [mR.deliveryNumber, Validators.pattern('^[\\da-zA-Z\\-\\/]{1,12}$')],
-        tpaIdForm: mR.tpa?.tpaID
+        tpaIdForm: mR.tpa?.tpaID,
+        mRiD: mR.manifestReferenceId
       }, {validators: ManifestComponent.QtyRealValidator}))
     );
+  }
+
+  private sortManifestReferenceSet() {
+    this.warehouseManifest.manifest.manifestsReferenceSet.sort((mR1, mR2): number => {
+      if (mR1.manifestReferenceId > mR2.manifestReferenceId)
+        return 1;
+      if (mR1.manifestReferenceId < mR2.manifestReferenceId)
+        return -1;
+    });
   }
 
   editModeActivation() {
@@ -171,6 +186,7 @@ export class ManifestComponent implements OnInit {
     let palletQtyReal = 0;
     let boxQtyReal = 0;
     this.warehouseManifest.manifest.manifestsReferenceSet.forEach((mRs, index) => {
+      console.log(`MR-f ${this.receptionForm.get(['manifestReferenceListForm', index]).get('mRiD').value} vs MR ${mRs.manifestReferenceId}`);
       mRs.qtyReal = this.getQtyReal(index);
       mRs.palletQtyReal = this.getPalletQtyReal(index);
       mRs.boxQtyReal = this.getBoxQtyReal(index);
@@ -185,7 +201,6 @@ export class ManifestComponent implements OnInit {
       let dn = '';
       dn = this.receptionForm.get(['manifestReferenceListForm', index]).get('deliveryNumber').value == null ? '' : this.receptionForm.get(['manifestReferenceListForm', index]).get('deliveryNumber').value;
       mRs.deliveryNumber = dn.length == 0 ? null: dn;
-      console.log(this.receptionForm.get(['manifestReferenceListForm', index]).get('tpaIdForm').value);
       let tpaToPlace = this.getTpaToPlace(index);
       mRs.tpa = tpaToPlace === undefined ? this.warehouseManifest.tpa : tpaToPlace;
       palletQtyReal += mRs.palletQtyReal;
@@ -204,9 +219,11 @@ export class ManifestComponent implements OnInit {
     this.apiService.putManifestReferenceListAfterReception(this.nav.warehouseUrlCode, this.warehouseManifest.manifest.manifestsReferenceSet).subscribe(
       res => {
         this.warehouseManifest.manifest.manifestsReferenceSet = res;
+        this.sortManifestReferenceSet();
         this.apiService.putWarehouseManifestUpdate(this.nav.warehouseUrlCode, this.tttNavService.tttId, this.warehouseManifest).subscribe(
           res => {
             this.warehouseManifest = res;
+            this.sortManifestReferenceSet();
           },
           error => {
             console.log(`Error occurred while sending WarehouseManifest ${error.toString()}`);
