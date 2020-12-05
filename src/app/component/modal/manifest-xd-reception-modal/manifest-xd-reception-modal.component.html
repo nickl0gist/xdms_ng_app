@@ -1,0 +1,71 @@
+<div class="modal-header">
+  <p class="modal-title">Arrival Information of Manifest: <span
+    [ngClass]="warehouseManifest.manifest.manifestCode.includes(MANUALLY_ADDED_POSTFIX) ? 'underlined' : ''">{{this.warehouseManifest.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]}}</span>
+  </p>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="receptionForm">
+  <div class="modal-body">
+    <table #upper_table>
+      <thead class="pick_ref_table">
+      <tr>
+        <th></th>
+        <th>Pallet</th>
+        <th>Box</th>
+        <th>Weight, kg</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="planned">
+        <td>Qty Planned</td>
+        <td>{{this.warehouseManifest.manifest.palletQtyPlanned | numberFormat}}</td>
+        <td>{{this.warehouseManifest.manifest.boxQtyPlanned | numberFormat}}</td>
+        <td>{{this.warehouseManifest.manifest.totalWeightPlanned * 1000 | numberFormat}}</td>
+      </tr>
+      <tr class="real">
+        <td>Qty Real</td>
+        <td><input formControlName="palletQtyReal" class="t_input_r" type="text" maxlength="3" value=""/></td>
+        <td><input formControlName="boxQtyReal" class="t_input_r" type="text" maxlength="3" value=""/></td>
+        <td><input formControlName="weightReal" class="t_input_r" type="text" maxlength="8" value=""/></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table class="kpi_table" [style.left.px]="upper_table.offsetLeft">
+      <thead >
+      <tr class="kpi_head">
+        <th scope="col" rowspan="2">KPI</th>
+        <th scope="col">lab</th>
+        <th scope="col">doc</th>
+        <th scope="col">man</th>
+      </tr>
+      <tr class="kpi_body">
+        <td>
+          <div class="pretty p-switch p-fill"><input type="checkbox" [checked]="this.kpiLabel" (change)="changeKpiLabel()"/>
+            <div class="state p-success"><label></label></div>
+          </div>
+        </td>
+        <td>
+          <div class="pretty p-switch p-fill"><input type="checkbox" [checked]="this.kpiDocument" (change)="changeKpiDocument()"/>
+            <div class="state p-success"><label></label></div>
+          </div>
+        </td>
+        <td>
+          <div class="pretty p-switch p-fill"><input type="checkbox" [checked]="this.kpiManifest" (change)="changeKpiManifest()"/>
+            <div class="state p-success"><label></label></div>
+          </div>
+        </td>
+      </tr>
+      </thead>
+    </table>
+    <button type="button" class="btn btn-outline-success" (click)="planToReal()">Real=Plan</button>
+    <div class="alert-danger"></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelButtonAction()">Cancel</button>
+    <button type="submit" ngbAutofocus class="btn btn-danger" (click)="saveButtonAction()" [disabled]="receptionForm.invalid">Ok</button>
+  </div>
+
+</form>

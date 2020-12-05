@@ -69,7 +69,16 @@ export class ApiService {
   }
 
   putWarehouseManifestUpdate(urlCode: string, tttId: number, warehouseManifestUpdated: WarehouseManifest){
-    return this.httpWithoutInterceptor.put<WarehouseManifest>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/manifest/update`, warehouseManifestUpdated)
+    return this.httpWithoutInterceptor.put<WarehouseManifest>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/manifest/update`, warehouseManifestUpdated);
+  }
+
+  putUpdateTruckTimeTable(urlCode: string, ttt: Ttt){
+    return this.httpWithoutInterceptor.put<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/update`, ttt);
+  }
+
+
+  getTttByWarehouseAndTttId(urlCode: string, tttID: number) {
+    return this.httpWithoutInterceptor.get<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttID}`);
   }
 
    /*******************\
@@ -82,4 +91,5 @@ export class ApiService {
   postExcelWithManifestReferencesForReception(urlCode: string, tttId: number, formData: FormData){
     return this.httpWithoutInterceptor.post<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/uploadFile`,  formData, {});
   }
+
 }

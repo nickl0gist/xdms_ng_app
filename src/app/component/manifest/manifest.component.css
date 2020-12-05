@@ -483,7 +483,7 @@ select:disabled{
   width: 30rem;
 }
 
-:host::ng-deep.tooltip-inner{
+p-tooltip-inner{
   max-width: 40rem;
   background-color: #fffe00;
   color: darkred;

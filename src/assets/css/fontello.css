@@ -170,3 +170,4 @@ font-size:x-large;} /* '' */
 .icon-ok:before { content: '\2713'; } /* '✓' */
 .icon-cancel:before { content: '\2715'; } /* '✕' */
 .icon-file-excel:before { content: '\f1c3'; } /* '' */
+.icon-pencil-alt:before { content: '\e803'; } /* '' */

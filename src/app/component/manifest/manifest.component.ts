@@ -86,7 +86,7 @@ export class ManifestComponent implements OnInit {
       if (manifestReference.qtyPlanned < manifestReference.qtyReal)
         result = 'yellow_row';
 
-      if (manifestReference.qtyPlanned === manifestReference.qtyReal)
+      if (manifestReference.qtyPlanned == manifestReference.qtyReal)
         result = 'green_row';
 
     }
@@ -104,6 +104,10 @@ export class ManifestComponent implements OnInit {
     )
   }
 
+  /**
+   * Shows popup menu for reference adding in current manifest.
+   * Adds new ManifestReference entity to manifest.
+   */
   onAddReferenceClick() {
     const modalRef = this.modal.open(AddReferenceComponent,
       {
@@ -114,6 +118,7 @@ export class ManifestComponent implements OnInit {
       supplierId: this.warehouseManifest.manifest.supplier.supplierID,
       customerId: this.warehouseManifest.manifest.customer.customerID
     };
+
     modalRef.result.then((result) => {
         let manifestReferenceToAdd = this.getManifestReferenceToAdd(result);
         this.apiService.putAdditionalReferenceToManifest(this.nav.warehouseUrlCode, this.warehouseManifest.ttt.tttID, this.warehouseManifest.manifest.manifestID, manifestReferenceToAdd).subscribe(
@@ -196,10 +201,13 @@ export class ManifestComponent implements OnInit {
       mRs.palletId = this.receptionForm.get(['manifestReferenceListForm', index]).get('palletId').value;
       let reception = '';
       reception = this.receptionForm.get(['manifestReferenceListForm', index]).get('receptionNumber').value == null ? '' : this.receptionForm.get(['manifestReferenceListForm', index]).get('receptionNumber').value;
+
       mRs.receptionNumber = reception.length == 0 ? null: reception;
+
       let dn = '';
       dn = this.receptionForm.get(['manifestReferenceListForm', index]).get('deliveryNumber').value == null ? '' : this.receptionForm.get(['manifestReferenceListForm', index]).get('deliveryNumber').value;
       mRs.deliveryNumber = dn.length == 0 ? null: dn;
+
       let tpaToPlace = this.getTpaToPlace(index);
       mRs.tpa = tpaToPlace === undefined ? this.warehouseManifest.tpa : tpaToPlace;
       palletQtyReal += mRs.palletQtyReal;
@@ -269,6 +277,7 @@ export class ManifestComponent implements OnInit {
   getGrossTotal() {
     let gross = 0.0;
     this.warehouseManifest.manifest.manifestsReferenceSet.forEach(manifestReference => {
+      console.log(manifestReference);
       if (manifestReference.grossWeightReal === 0) {
         gross += Math.floor(manifestReference.grossWeightPlanned * 100);
       } else {

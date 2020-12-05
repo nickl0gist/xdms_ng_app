@@ -1,0 +1,146 @@
+.underlined {
+  text-decoration: underline;
+}
+
+::ng-deep .myCustomModalClass .modal-dialog {
+  max-width: 44rem;
+  margin-top: 7rem;
+}
+
+::ng-deep .modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 1, 247, 0.15);
+}
+
+.modal-header, .modal-body, .modal-footer {
+  background-color: darkgray;
+}
+
+.modal-header {
+  padding: 0.3rem;
+  font-size: large;
+  font-weight: 700;
+}
+
+.modal-footer {
+  padding: 0.3rem;
+}
+
+.modal-title {
+  padding-left: 2rem;
+}
+
+.modal-body {
+  text-align: center;
+  min-height: 11.5rem;
+}
+
+.kpi_table {
+  position: absolute;
+  margin-top: 10px;
+}
+
+tbody tr td select {
+  border-radius: 5px;
+  width: 8rem;
+}
+.kpi_head th{
+  width: 5rem;
+}
+tbody td, thead th, .kpi_body td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+tbody tr td .t_input_r {
+  text-align: center;
+  border-radius: 5px;
+  margin: 2px;
+  border: none;
+}
+
+tbody tr td .t_input_r, tbody tr td .t_input_r {
+  width: 6rem;
+}
+
+table {
+  margin: auto;
+}
+
+.btn-outline-success{
+  margin-left: 58%;
+  margin-top: 1rem;
+  background-color: #80808094;
+  color: #f8f8f8;
+}
+.btn-outline-success:hover {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-outline-secondary {
+  color: #fff;
+  text-decoration: none;
+  background-color: #728ee1;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #000dcc;
+}
+
+tbody tr:first-child {
+  background: #9ba9ba;
+  font-weight: 500;
+}
+
+.pretty.p-switch .state:before {
+  border: 1px solid #fb021e;
+}
+
+.pretty.p-switch.p-fill input:checked ~ .state label:after {
+  background-color: #fff !important;
+  left: 1em;
+}
+
+.pretty.p-switch .state label:after {
+  background-color: #ff1759 !important;
+}
+
+tbody tr {
+  background: #8ca9ff;
+  font-weight: 500;
+}
+
+.kpi_body td {
+  background: #b3ceff;
+}
+
+thead tr, tbody tr td:first-child {
+  background: #4a4846;
+  color: aliceblue;
+}
+
+.alert-danger div {
+  text-align: left;
+  margin-left: 1rem;
+  width: fit-content;
+}
+
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem -0.5rem -1rem auto;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  width: 93%;
+  margin: auto;
+}

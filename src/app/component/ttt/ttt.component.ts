@@ -12,15 +12,19 @@ import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {NgVarDirective} from "../../shared/directives/ng-var.directive";
 import {Ttt} from "../../model/ttt/ttt";
 import * as myGlobals from "../../global";
-import { BrowserModule } from '@angular/platform-browser';
-import { saveAs } from 'file-saver';
+import {BrowserModule} from '@angular/platform-browser';
+import {saveAs} from 'file-saver';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {AddReferenceComponent} from "../modal/add-reference/add-reference.component";
+import {ManifestXdReceptionModalComponent} from "../modal/manifest-xd-reception-modal/manifest-xd-reception-modal.component";
+import {NumberFormatPipe} from "../../shared/pipe/number-format.pipe";
 
 @Component({
   selector: 'app-ttt',
   templateUrl: './ttt.component.html',
-  styleUrls: ['./ttt.component.css']
+  styleUrls: ['./ttt.component.css'],
+  providers: [NumberFormatPipe]
 })
 export class TttComponent implements OnInit {
   @ViewChild('t') toolTipReception: NgbTooltip;
@@ -32,15 +36,19 @@ export class TttComponent implements OnInit {
   arrived: string = TttEnum.ARRIVED;
   MANUALLY_ADDED_POSTFIX = myGlobals.MANUALLY_ADDED_POSTFIX;
   SYMBOL_NOT_ARRIVED = myGlobals.SYMBOL_NOT_ARRIVED;
+
   uploadReceptionForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
   });
+
   uploading = true;
   uploadingResult: boolean;
 
-  constructor(private tttNavService: TttNavService, private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, public localStorage: LocalStorageService) {
+  constructor(private tttNavService: TttNavService, private apiService: ApiService, public nav: NavbarService,
+              private route: ActivatedRoute, public localStorage: LocalStorageService, private modal: NgbModal,
+              private numberFormat: NumberFormatPipe) {
   }
 
   ngOnInit(): void {
@@ -124,7 +132,7 @@ export class TttComponent implements OnInit {
       totalWeightReal += warehouseManifest.grossWeight;
       totalWeightPlan += warehouseManifest.manifest.totalWeightPlanned;
     });
-    return totalWeightReal > 0 ? totalWeightReal + ' t' : totalWeightPlan + ' t';
+    return totalWeightReal > 0 ? this.numberFormat.transform(totalWeightReal) + ' t' : this.numberFormat.transform(totalWeightPlan) + ' t';
   }
 
   getChosenWarehouseManifestId(warehouseManifest: WarehouseManifest) {
@@ -133,11 +141,11 @@ export class TttComponent implements OnInit {
     this.localStorage.store('customerId', warehouseManifest.manifest.customer.customerID);
   }
 
-  getExcelReceptionFile(){
+  getExcelReceptionFile() {
     this.apiService.getExcelWithManifestReferencesForReception(this.nav.warehouseUrlCode, this.tttWarehouseManifestDTO.ttt.tttID).subscribe(
       res => {
         const blob = new Blob([res], {type: 'application/vnd.ms-excel'});
-        const file = new File([blob], `reception-${Date.now()}.xlsx`, { type: 'application/vnd.ms.excel' });
+        const file = new File([blob], `reception-${Date.now()}.xlsx`, {type: 'application/vnd.ms.excel'});
         saveAs(file);
       },
       error => {
@@ -146,7 +154,7 @@ export class TttComponent implements OnInit {
     )
   }
 
-  get f(){
+  get f() {
     return this.uploadReceptionForm.controls;
   }
 
@@ -160,7 +168,7 @@ export class TttComponent implements OnInit {
       });
       formData.append('file', this.uploadReceptionForm.get('fileSource').value);
       this.apiService.postExcelWithManifestReferencesForReception(this.nav.warehouseUrlCode, this.tttWarehouseManifestDTO.ttt.tttID, formData).subscribe(
-        res=>{
+        res => {
           console.log(res);
           this.toolTipReception.ngbTooltip = this.toolTipOk;
           this.toolTipReception.open();
@@ -178,5 +186,21 @@ export class TttComponent implements OnInit {
         }
       );
     }
+  }
+
+  onReceiptManifestClick(warehouseManifest: WarehouseManifest) {
+    const manifestReceptionModal = this.modal.open(ManifestXdReceptionModalComponent,
+      {
+        windowClass: 'myCustomModalClass',
+      });
+    manifestReceptionModal.componentInstance.fromParent = {
+      warehouseManifest: warehouseManifest,
+      ttt: this.tttWarehouseManifestDTO.ttt,
+      urlCode: this.nav.warehouseUrlCode
+    };
+    manifestReceptionModal.result.then((result) => {
+      console.log(result);
+      this.tttWarehouseManifestDTO = result;
+    });
   }
 }

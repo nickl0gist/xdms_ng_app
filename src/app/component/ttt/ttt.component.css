@@ -76,7 +76,30 @@ tbody tr{
 .manifest_n, .supplier_n, .customer_n, .delivery_n, .qty_pal_n, .weight_n, .kpi_n, .is_n, .co_n, .tpa_n{
   padding-left: 5px;
 }
-.manifest_n, .supplier_n, .customer_n, .tpa_n{
+.manifest_n{
+  width: 16%;
+}
+
+em.fas.fa-edit {
+  width: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 1.4rem;
+  position: absolute;
+  left: 20px;
+  cursor: pointer;
+  transition: font-size 0.1s, color 0.3s;
+}
+em.fas.fa-edit:hover{
+  font-size: x-large;
+  color: #0705ff;
+  transform: rotate(7deg);
+}
+.man_link{
+  text-align: center;
+  display: inline;
+}
+.supplier_n, .customer_n, .tpa_n{
   width: 12%;
 }
 .kpi_n{
@@ -166,7 +189,7 @@ tfoot td:first-child{
   padding: 0 0 0 2rem;
 }
 tfoot td:nth-child(2){
-  width: 13%;
+  width: 16.5%;
   text-align: right;
   padding-right: 5px;
 }

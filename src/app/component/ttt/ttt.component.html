@@ -43,11 +43,12 @@
       <ng-container
         *ngFor="let warehouseManifest of this.tttWarehouseManifestDTO.warehouseManifestList; let index = index;">
         <tr [ngClass]="getClassForRow(warehouseManifest)">
-          <td class="manifest_n"><a
-            [ngClass]="warehouseManifest.manifest.manifestCode.includes(MANUALLY_ADDED_POSTFIX) ? 'underlined' : ''"
+          <td class="manifest_n">
+            <em class="fas fa-edit" (click)="onReceiptManifestClick(warehouseManifest)"></em>
+            <div class="man_link"><a [ngClass]="warehouseManifest.manifest.manifestCode.includes(MANUALLY_ADDED_POSTFIX) ? 'underlined' : ''"
             (click)="getChosenWarehouseManifestId(warehouseManifest)"
             class="table_link "
-            [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO?.ttt.truckName, 'manifest', warehouseManifest.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]]">{{warehouseManifest.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]}}</a>
+            [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'ttt', tttWarehouseManifestDTO?.ttt.truckName, 'manifest', warehouseManifest.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]]">{{warehouseManifest.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]}}</a></div>
           </td>
           <td class="supplier_n">{{warehouseManifest.manifest.supplier.name}}</td>
           <td class="customer_n">{{warehouseManifest.manifest.customer.name}}</td>
@@ -62,7 +63,7 @@
               {{pallets}} {{boxes}}</a>
           </td>
           <td class="weight_plan_n"
-              [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)">{{warehouseManifest.manifest.totalWeightPlanned}}</td>
+              [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)">{{warehouseManifest.manifest.totalWeightPlanned | numberFormat}}</td>
           <td class="weight_n" [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)"><a
             class="badge_n text-wrap" style="display:inline-block;"
             *ngVar="warehouseManifest.grossWeight > 0 ? warehouseManifest.grossWeight : this.SYMBOL_NOT_ARRIVED as weight">{{weight}}</a>
