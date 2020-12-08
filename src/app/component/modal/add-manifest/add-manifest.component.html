@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <p class="modal-title">Add new Manifest in TTT: <span>{{this.ttt.truckName}}</span>
+  </p>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="addManifestForm">
+  <div class="modal-body">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Manifest Code</th>
+          <th scope="col">Supplier</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Pallet Qty</th>
+          <th scope="col">Total LDM</th>
+          <th scope="col">Total Weight, [kg]</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input class="addManifest_code" type="text" maxlength="20" value="" formControlName="manifestCode"/></td>
+          <td>
+            <select formControlName="supplier">
+              <option *ngFor="let supplier of this.supplierList; let index = index;"
+                      [ngValue]="supplier">{{supplier.vendorCode}} | {{supplier.name}}</option>
+            </select>
+          </td>
+          <td>
+            <select formControlName="customer">
+              <option *ngFor="let customer of this.customerList; let index = index;"
+                      [ngValue]="customer">{{customer.customerCode}} | {{customer.name}}</option>
+            </select>
+          </td>
+          <td><input formControlName="palletQty" class="addManifest_palletQTy" type="text" maxlength="3" value=""/></td>
+          <td><input formControlName="totalLdm" class="addManifest_ldm" type="text" maxlength="5" value=""/></td>
+          <td><input formControlName="totalWeight" class="addManifest_weight" type="text" maxlength="6" value=""/></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary">Cancel</button>
+    <button type="submit" ngbAutofocus class="btn btn-danger" (click)="saveAction()">Ok</button>
+  </div>
+</form>

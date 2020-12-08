@@ -10,6 +10,8 @@ import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dt
 import {Reference} from "../../model/reference/reference";
 import {ManifestReference} from "../../model/manifest/manifest-reference";
 import {Manifest} from "../../model/manifest/manifest";
+import {Supplier} from "../../model/supplier/supplier";
+import {Customer} from "../../model/customer/customer";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,8 @@ export class ApiService {
 
   private ACTIVE_WAREHOUSES_URL = myGlobals.domain + '/warehouse/';
   private COORDINATOR_REFERENCE_URL = myGlobals.domain + '/coordinator/references';
+  private COORDINATOR_SUPPLIERS = myGlobals.domain + '/coordinator/suppliers';
+  private COORDINATOR_CUSTOMERS = myGlobals.domain + '/coordinator/customers';
   private httpWithoutInterceptor: HttpClient;
 
   constructor(private httpClient: HttpClient, private httpBackend: HttpBackend) {
@@ -72,10 +76,21 @@ export class ApiService {
     return this.httpWithoutInterceptor.put<WarehouseManifest>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/manifest/update`, warehouseManifestUpdated);
   }
 
+  getActiveCustomers() {
+    return this.httpWithoutInterceptor.get<Customer[]>(`${this.COORDINATOR_CUSTOMERS}/active`);
+  }
+
+  getActiveSuppliers() {
+    return this.httpWithoutInterceptor.get<Supplier[]>(`${this.COORDINATOR_SUPPLIERS}/active`);
+  }
+
+  addManifestToCurrentTttAndWarehouse(urlCode: string, ttt: Ttt, manifest: Manifest) {
+    return this.httpWithoutInterceptor.post<Manifest>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${ttt.tttID}`, manifest);
+  }
+
   putUpdateTruckTimeTable(urlCode: string, ttt: Ttt){
     return this.httpWithoutInterceptor.put<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/update`, ttt);
   }
-
 
   getTttByWarehouseAndTttId(urlCode: string, tttID: number) {
     return this.httpWithoutInterceptor.get<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttID}`);
@@ -91,5 +106,4 @@ export class ApiService {
   postExcelWithManifestReferencesForReception(urlCode: string, tttId: number, formData: FormData){
     return this.httpWithoutInterceptor.post<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/uploadFile`,  formData, {});
   }
-
 }

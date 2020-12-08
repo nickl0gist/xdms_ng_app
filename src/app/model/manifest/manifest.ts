@@ -4,7 +4,7 @@ import {Customer} from "../customer/customer";
 import {Supplier} from "../supplier/supplier";
 import {ManifestReference} from "./manifest-reference";
 
-export interface Manifest {
+export class Manifest {
   manifestID: number;
   manifestCode: string;
   palletQtyPlanned: number;
@@ -20,4 +20,7 @@ export interface Manifest {
   manifestsReferenceSet: ManifestReference[];
   truckTimeTableSet: Ttt[];
   tpaSet: Tpa[];
+
+  constructor() {
+  }
 }

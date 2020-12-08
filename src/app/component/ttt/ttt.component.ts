@@ -19,6 +19,8 @@ import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import {AddReferenceComponent} from "../modal/add-reference/add-reference.component";
 import {ManifestXdReceptionModalComponent} from "../modal/manifest-xd-reception-modal/manifest-xd-reception-modal.component";
 import {NumberFormatPipe} from "../../shared/pipe/number-format.pipe";
+import {TpaStatus} from "../../model/tpa/tpa-status";
+import {AddManifestComponent} from "../modal/add-manifest/add-manifest.component";
 
 @Component({
   selector: 'app-ttt',
@@ -36,6 +38,7 @@ export class TttComponent implements OnInit {
   arrived: string = TttEnum.ARRIVED;
   MANUALLY_ADDED_POSTFIX = myGlobals.MANUALLY_ADDED_POSTFIX;
   SYMBOL_NOT_ARRIVED = myGlobals.SYMBOL_NOT_ARRIVED;
+  closed = TpaStatus.CLOSED;
 
   uploadReceptionForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -77,15 +80,23 @@ export class TttComponent implements OnInit {
     )
   }
 
+  /**
+   * Used to calculate readable DateTimeStamp of the moment when the Manifest has to be delivered to the next
+   * warehouse?
+   * @param warehouseManifest - WarehouseManifest entity.
+   */
   getDeliveryDate(warehouseManifest: WarehouseManifest) {
-    let dateOfDeparture = new Date(warehouseManifest.tpa.departurePlan);
-    let transit = warehouseManifest.tpa.tpaDaysSetting.transitTime;
-    let transitDays = transit.substring(1, transit.indexOf('D'));
-    let transitHours = transit.substring(transit.indexOf('T') + 1, transit.indexOf('H'));
-    let transitMinutes = transit.substring(transit.indexOf('H') + 1, transit.indexOf('M'));
-    let dateOfDelivery = new Date(dateOfDeparture.getFullYear(), dateOfDeparture.getMonth(), dateOfDeparture.getDate() + (+transitDays),
-      dateOfDeparture.getHours() + (+transitHours), dateOfDeparture.getMinutes() + (+transitMinutes));
-    return dateOfDelivery.toLocaleDateString() + ' ' + dateOfDelivery.getHours() + ':' + dateOfDelivery.getMinutes();
+    if(warehouseManifest.tpa != null){
+      let dateOfDeparture = new Date(warehouseManifest.tpa.departurePlan);
+      let transit = warehouseManifest.tpa.tpaDaysSetting.transitTime;
+      let transitDays = transit.substring(1, transit.indexOf('D'));
+      let transitHours = transit.substring(transit.indexOf('T') + 1, transit.indexOf('H'));
+      let transitMinutes = transit.substring(transit.indexOf('H') + 1, transit.indexOf('M'));
+      let dateOfDelivery = new Date(dateOfDeparture.getFullYear(), dateOfDeparture.getMonth(), dateOfDeparture.getDate() + (+transitDays),
+        dateOfDeparture.getHours() + (+transitHours), dateOfDeparture.getMinutes() + (+transitMinutes));
+      return dateOfDelivery.toLocaleDateString() + ' ' + dateOfDelivery.getHours() + ':' + dateOfDelivery.getMinutes();
+    }
+    return myGlobals.SYMBOL_NOT_ARRIVED;
   }
 
   /**
@@ -102,19 +113,31 @@ export class TttComponent implements OnInit {
     return tagClass;
   }
 
+  /**
+   * Calculates conditional class for each row in template. If departure Date is planned for current day it will return
+   * 'today" class. If Departure Date is less than current day and related TPA not closed 'wrong_qty' will be returned
+   * @param warehouseManifest
+   */
   getClassForRow(warehouseManifest: WarehouseManifest) {
     let tagClass = '';
     let currentDate = new Date();
-    let departDate = new Date(warehouseManifest.tpa.departurePlan);
-    if (currentDate.getDate() === departDate.getDate() && currentDate.getMonth() === departDate.getMonth() && currentDate.getFullYear() === departDate.getFullYear()) {
-      tagClass = 'today';
-    }
-    if (departDate < currentDate) {
+    if(warehouseManifest.tpa != null){
+      let departDate = new Date(warehouseManifest.tpa.departurePlan);
+      if (currentDate.getDate() === departDate.getDate() && currentDate.getMonth() === departDate.getMonth() && currentDate.getFullYear() === departDate.getFullYear()) {
+        tagClass = 'today';
+      }
+      if (departDate < currentDate && warehouseManifest.tpa.status.statusName !== this.closed.statusName) {
+        tagClass = 'wrong_qty';
+      }
+    } else {
       tagClass = 'wrong_qty';
     }
     return tagClass;
   }
 
+  /**
+   * Calculates total amount of pallets and boxes for the TTT,
+   */
   getTotalAmountOfPalletsAndBoxes() {
     let palletsQty = 0;
     let boxesQty = 0;
@@ -125,6 +148,10 @@ export class TttComponent implements OnInit {
     return boxesQty > 0 ? palletsQty + 'p ' + boxesQty + 'b' : palletsQty + 'p';
   }
 
+  /**
+   * Calculates Total Gross weight of the TTT by adding the total real weight of each manifest. If real weight not provided
+   * the planned weight will be taken.
+   */
   getTotalWeight() {
     let totalWeightReal = 0;
     let totalWeightPlan = 0;
@@ -135,12 +162,19 @@ export class TttComponent implements OnInit {
     return totalWeightReal > 0 ? this.numberFormat.transform(totalWeightReal) + ' t' : this.numberFormat.transform(totalWeightPlan) + ' t';
   }
 
+  /**
+   * Keeps actual 'manifestId' and 'customerId' where the manifest goes to in LocalStorage.
+   * @param warehouseManifest
+   */
   getChosenWarehouseManifestId(warehouseManifest: WarehouseManifest) {
     this.tttNavService.warehouseManifest = warehouseManifest;
     this.localStorage.store('manifestId', warehouseManifest.manifest.manifestID);
     this.localStorage.store('customerId', warehouseManifest.manifest.customer.customerID);
   }
 
+  /**
+   * Called when user tries to get file with information for reception
+   */
   getExcelReceptionFile() {
     this.apiService.getExcelWithManifestReferencesForReception(this.nav.warehouseUrlCode, this.tttWarehouseManifestDTO.ttt.tttID).subscribe(
       res => {
@@ -154,10 +188,14 @@ export class TttComponent implements OnInit {
     )
   }
 
-  get f() {
-    return this.uploadReceptionForm.controls;
-  }
+  // get f() {
+  //   return this.uploadReceptionForm.controls;
+  // }
 
+  /**
+   * Serves for uploading Excel reception file back to server
+   * @param event
+   */
   onFileChange(event) {
     const formData = new FormData();
     if (event.target.files.length > 0) {
@@ -188,6 +226,10 @@ export class TttComponent implements OnInit {
     }
   }
 
+  /**
+   * Shows popup form for reception of the manifest.
+   * @param warehouseManifest
+   */
   onReceiptManifestClick(warehouseManifest: WarehouseManifest) {
     const manifestReceptionModal = this.modal.open(ManifestXdReceptionModalComponent,
       {
@@ -202,5 +244,21 @@ export class TttComponent implements OnInit {
       console.log(result);
       this.tttWarehouseManifestDTO = result;
     });
+  }
+
+  onAddManifestClick() {
+    const addManifestModal = this.modal.open(AddManifestComponent,
+      {
+        windowClass: 'addManifestClass',
+      });
+    addManifestModal.componentInstance.fromParent = {
+      ttt: this.tttWarehouseManifestDTO.ttt,
+      urlCode: this.nav.warehouseUrlCode
+    };
+    addManifestModal.result.then((result) => {
+        this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.tttId);
+    }, reason => {
+      console.log(`Error occurred while adding new manifest in TTT ${this.tttWarehouseManifestDTO.ttt.truckName}`);
+    })
   }
 }

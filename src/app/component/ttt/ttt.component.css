@@ -77,7 +77,7 @@ tbody tr{
   padding-left: 5px;
 }
 .manifest_n{
-  width: 16%;
+  width: 20%;
 }
 
 em.fas.fa-edit {
@@ -100,7 +100,7 @@ em.fas.fa-edit:hover{
   display: inline;
 }
 .supplier_n, .customer_n, .tpa_n{
-  width: 12%;
+  width: 9%;
 }
 .kpi_n{
   width: 3%; /*9%*/

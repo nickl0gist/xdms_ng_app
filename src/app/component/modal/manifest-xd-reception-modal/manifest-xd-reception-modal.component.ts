@@ -38,7 +38,7 @@ export class ManifestXdReceptionModalComponent implements OnInit {
   receptionForm: FormGroup;
 
   constructor(public activeModal: NgbActiveModal, private apiService: ApiService,
-              private fb: FormBuilder, private numberFormat: NumberFormatPipe,) {
+              private fb: FormBuilder, private numberFormat: NumberFormatPipe) {
   }
 
   ngOnInit(): void {

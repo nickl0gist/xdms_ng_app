@@ -66,7 +66,7 @@ export class AddReferenceComponent implements OnInit {
 
   private createForm() {
     this.referenceSelectionForm = this.fb.group({
-      reference: null,
+      reference: [null, Validators.required],
       palletQty: ['', Validators.pattern('^[1-9]\\d{0,2}')],
       boxQty: ['', Validators.compose([
         Validators.required,

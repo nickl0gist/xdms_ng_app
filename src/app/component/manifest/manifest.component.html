@@ -62,7 +62,7 @@
             <a id="" class="table_link i_s" href=""><i class="far fa-square"></i></a>
           </td>
           <td>
-            <input name="" type="text" [value]="warehouseManifest.tpa.name" maxlength="15" class="t_input"
+            <input name="" type="text" [value]="warehouseManifest.tpa?.name" maxlength="15" class="t_input"
                    [attr.disabled]="!this.isEditMode ? true : null"/>
           </td>
           <td>{{warehouseManifest.manifest.customer.name}}</td>
