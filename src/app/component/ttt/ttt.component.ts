@@ -62,7 +62,8 @@ export class TttComponent implements OnInit {
       this.nav.currentDate = params['date'];
     });
     if (this.tttWarehouseManifestDTO === undefined) {
-      this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.localStorage.retrieve('tttId'));
+      this.tttId = this.localStorage.retrieve('tttId');
+      this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.tttId);
     }
     this.nav.currentDateChangeObs.subscribe((theDate) => {
       }
@@ -94,7 +95,7 @@ export class TttComponent implements OnInit {
       let transitMinutes = transit.substring(transit.indexOf('H') + 1, transit.indexOf('M'));
       let dateOfDelivery = new Date(dateOfDeparture.getFullYear(), dateOfDeparture.getMonth(), dateOfDeparture.getDate() + (+transitDays),
         dateOfDeparture.getHours() + (+transitHours), dateOfDeparture.getMinutes() + (+transitMinutes));
-      return dateOfDelivery.toLocaleDateString() + ' ' + dateOfDelivery.getHours() + ':' + dateOfDelivery.getMinutes();
+      return dateOfDelivery.toLocaleDateString() + ' ' + dateOfDelivery.getHours() + ':' + (dateOfDelivery.getMinutes() == 0 ? '00' : dateOfDelivery.getMinutes());
     }
     return myGlobals.SYMBOL_NOT_ARRIVED;
   }
@@ -188,10 +189,6 @@ export class TttComponent implements OnInit {
     )
   }
 
-  // get f() {
-  //   return this.uploadReceptionForm.controls;
-  // }
-
   /**
    * Serves for uploading Excel reception file back to server
    * @param event
@@ -246,6 +243,9 @@ export class TttComponent implements OnInit {
     });
   }
 
+  /**
+   * Shows popup modal form for adding new manifest manually within current TTT
+   */
   onAddManifestClick() {
     const addManifestModal = this.modal.open(AddManifestComponent,
       {
@@ -257,6 +257,7 @@ export class TttComponent implements OnInit {
     };
     addManifestModal.result.then((result) => {
         this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.tttId);
+
     }, reason => {
       console.log(`Error occurred while adding new manifest in TTT ${this.tttWarehouseManifestDTO.ttt.truckName}`);
     })

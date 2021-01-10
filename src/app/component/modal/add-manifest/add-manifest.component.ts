@@ -22,6 +22,7 @@ export class AddManifestComponent implements OnInit {
   supplierList: Supplier[];
   customerList: Customer[];
   manifest: Manifest;
+  tpaList: Tpa[];
 
   private MANUALLY_ADDED_POSTFIX = myGlobals.MANUALLY_ADDED_POSTFIX;
   private urlCode: string;
@@ -36,6 +37,7 @@ export class AddManifestComponent implements OnInit {
     this.ttt = this.fromParent.ttt;
     this.urlCode = this.fromParent.urlCode;
     this.obtainCustomerAndSupplierLists();
+    this.obtainListOfNotClosedTpa();
     this.createForm();
   }
 
@@ -46,7 +48,8 @@ export class AddManifestComponent implements OnInit {
       customer: [null, Validators.compose([Validators.required])],
       palletQty: ['', Validators.compose([Validators.required, Validators.pattern('^\\d{1,3}$')])],
       totalLdm: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]?\\d{0,9},?\\d{1,3}$')])],
-      totalWeight: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]?\\d{0,9},?\\d{1,3}$')])]
+      totalWeight: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]?\\d{0,9},?\\d{1,3}$')])],
+      tpa: [null, Validators.compose([Validators.required])]
     });
   }
 
@@ -77,6 +80,8 @@ export class AddManifestComponent implements OnInit {
     this.manifest.palletQtyPlanned = parseInt(this.addManifestForm.get('palletQty').value);
     this.manifest.totalLdmPlanned = parseFloat(this.addManifestForm.get('totalLdm').value.toString().replace('.', '').replace(',', '.'));
     this.manifest.totalWeightPlanned = parseFloat(this.addManifestForm.get('totalWeight').value.toString().replace('.', '').replace(',', '.'));
+    this.manifest.tpaSet = [];
+    this.manifest.tpaSet.push(this.addManifestForm.get('tpa').value);
     this.saveManifest();
   }
 
@@ -90,5 +95,20 @@ export class AddManifestComponent implements OnInit {
         console.log(`Error occurred while adding new manifest ${this.manifest.manifestCode} in TTT ${this.ttt.truckName} for Warehouse ${this.urlCode}. Error: ${error}`);
       }
     );
+  }
+
+  cancelButtonAction() {
+    this.activeModal.dismiss();
+  }
+
+  private obtainListOfNotClosedTpa() {
+    this.apiService.getListOfTpaNotClosedForWarehouse(this.urlCode).subscribe(
+      res =>{
+        this.tpaList = res;
+      },
+      error => {
+        console.log(`Error occurred while getting List of not closed TPA for Warehouse ${this.urlCode}. Error: ${error}`);
+      }
+    )
   }
 }

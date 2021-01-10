@@ -60,6 +60,10 @@ export class ApiService {
     return this.httpWithoutInterceptor.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/tpa/customer/' + customerID);
   }
 
+  getListOfTpaNotClosedForWarehouse(urlCode: string) {
+    return this.httpWithoutInterceptor.get<Tpa[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/tpa/notClosed');
+  }
+
   getReferenceListByCustomerAndSupplier(supplierId: number, customerId: number) {
     return this.httpWithoutInterceptor.get<Reference[]>(this.COORDINATOR_REFERENCE_URL + '/supplier/' + supplierId +'/customer/' + customerId);
   }

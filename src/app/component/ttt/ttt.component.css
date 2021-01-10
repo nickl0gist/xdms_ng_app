@@ -270,7 +270,7 @@ tfoot td:nth-child(4){
 
 }
 .add_manifest{
-  margin-left: 4rem;
+  margin-left: 3rem;
   margin-right: 3rem;
   float: right;
   transition: color .5s, background-color .3s;

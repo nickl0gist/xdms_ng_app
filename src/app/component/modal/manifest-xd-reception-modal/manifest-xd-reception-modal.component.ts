@@ -22,6 +22,8 @@ export class ManifestXdReceptionModalComponent implements OnInit {
   @Input() fromParent;
   warehouseManifest: WarehouseManifest;
   MANUALLY_ADDED_POSTFIX = myGlobals.MANUALLY_ADDED_POSTFIX;
+  SYMBOL_NOT_ARRIVED = myGlobals.SYMBOL_NOT_ARRIVED;
+
   arrived = TttStatus.ARRIVED;
 
   palletQtyReal: number;
@@ -127,5 +129,9 @@ export class ManifestXdReceptionModalComponent implements OnInit {
         console.log(`Error occurred while getting TTT name=${this.ttt.truckName}`);
       }
     );
+  }
+
+  getBoxQty() {
+    return this.warehouseManifest.manifest.boxQtyPlanned == undefined ?  this.SYMBOL_NOT_ARRIVED : this.numberFormat.transform(this.warehouseManifest.manifest.boxQtyPlanned);
   }
 }

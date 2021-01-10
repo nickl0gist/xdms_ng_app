@@ -81,3 +81,23 @@ tbody tr td input {
   padding: 1rem 1rem;
   margin: -1rem -.5rem -1rem auto;
 }
+.tpa_table{
+  margin-top: 1.5rem;
+  margin-left: 1rem;
+}
+.tpa_table tr th{
+  border: 1px black solid;
+}
+.tpa_table tr th:first-child{
+  width: 10rem;
+  background: #4a4846;
+  color: aliceblue;
+}
+.tpa_table tr th:last-child{
+  width: 7rem;
+  background: #8ca9ff;
+}
+.tpa_table tr th:last-child select{
+  border-radius: 5px;
+  width: 9rem;
+}

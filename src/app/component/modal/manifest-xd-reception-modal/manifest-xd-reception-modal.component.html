@@ -21,7 +21,7 @@
       <tr class="planned">
         <td>Qty Planned</td>
         <td>{{this.warehouseManifest.manifest.palletQtyPlanned | numberFormat}}</td>
-        <td>{{this.warehouseManifest.manifest.boxQtyPlanned | numberFormat}}</td>
+        <td>{{getBoxQty()}}</td>
         <td>{{this.warehouseManifest.manifest.totalWeightPlanned * 1000 | numberFormat}}</td>
       </tr>
       <tr class="real">
