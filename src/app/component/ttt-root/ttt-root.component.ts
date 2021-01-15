@@ -11,6 +11,9 @@ import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dt
 import { CommonModule } from '@angular/common';
 import {TttNavService} from "../../shared/service/ttt-nav.service";
 import {LocalStorageService} from "ngx-webstorage";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddManifestComponent} from "../modal/add-manifest/add-manifest.component";
+import {AddTruckComponent} from "../modal/add-truck/add-truck.component";
 @Component({
   selector: 'app-ttt-root',
   templateUrl: './ttt-root.component.html',
@@ -22,7 +25,9 @@ export class TttRootComponent implements OnInit, OnDestroy{
   arrived: string = TttEnum.ARRIVED;
   private routeSub: Subscription;
 
-  constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, private tttNavService: TttNavService, private localStorage:LocalStorageService) {
+  constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute,
+              private tttNavService: TttNavService, private localStorage:LocalStorageService,
+              private modal: NgbModal,) {
   }
 
   ngOnInit(): void {
@@ -118,5 +123,20 @@ export class TttRootComponent implements OnInit, OnDestroy{
     this.tttNavService.tttWarehouseManifestDTO = tttWarehouseManifestDTO;
     this.localStorage.store('tttId', tttWarehouseManifestDTO.ttt.tttID);
     this.localStorage.store('date', this.nav.currentDate);
+  }
+
+  addTruckPopup() {
+    const addTruckModal = this.modal.open(AddTruckComponent,
+      {
+        windowClass: 'addTruckClass',
+      });
+    addTruckModal.componentInstance.fromParent = {
+      urlCode: this.nav.warehouseUrlCode
+    };
+    addTruckModal.result.then((result) => {
+      this.getTttWarehouseManifestsDtoSet(this.nav.currentDate);
+    }, reason => {
+      console.log(`Error occurred while adding new manifest in Warehouse ${this.nav.warehouseUrlCode}`);
+    })
   }
 }

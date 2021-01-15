@@ -33,6 +33,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { ManifestXdReceptionModalComponent } from './component/modal/manifest-xd-reception-modal/manifest-xd-reception-modal.component';
 import { AddManifestComponent } from './component/modal/add-manifest/add-manifest.component';
+import { AddTruckComponent } from './component/modal/add-truck/add-truck.component';
 
 const appRoutes: Routes = [
   {
@@ -108,7 +109,8 @@ const appRoutes: Routes = [
     NumberFormatPipe,
     AddReferenceComponent,
     ManifestXdReceptionModalComponent,
-    AddManifestComponent
+    AddManifestComponent,
+    AddTruckComponent
   ],
     imports: [
         BrowserModule,
@@ -130,7 +132,7 @@ const appRoutes: Routes = [
     ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AddReferenceComponent, ManifestXdReceptionModalComponent, AddManifestComponent]
+  entryComponents: [AddReferenceComponent, ManifestXdReceptionModalComponent, AddManifestComponent, AddTruckComponent]
 })
 export class AppModule {
 

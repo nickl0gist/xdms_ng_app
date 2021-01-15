@@ -3,7 +3,7 @@ import {TttStatus} from "./ttt-status";
 import {Manifest} from "../manifest/manifest";
 import {WarehouseManifest} from "../manifest/warehouse-manifest";
 
-export interface Ttt {
+export class Ttt {
   tttID:number;
   truckName:string;
   dispatchedFrom: string;
@@ -14,4 +14,7 @@ export interface Ttt {
   isActive: boolean;
   manifestSet: Manifest[];
   warehouseManifestSet: WarehouseManifest[];
+
+  constructor() {
+  }
 }

@@ -61,6 +61,6 @@
     <div style="display: table-cell; padding: 0 5px 0 5px; background-color: #FFFFFF;">truck not arrived but still has time</div>
     </div>
     <a [routerLink]="['/warehouse', this.nav.warehouseUrlCode]"  class="btn btn-primary back_to_wh">Back to Warehouse</a>
-    <div class="btn btn-primary add_truck">ADD TRUCK</div>
+    <div class="btn btn-primary add_truck" (click)="addTruckPopup()">ADD TRUCK</div>
   </div>
 </div>

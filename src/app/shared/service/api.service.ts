@@ -92,6 +92,10 @@ export class ApiService {
     return this.httpWithoutInterceptor.post<Manifest>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${ttt.tttID}`, manifest);
   }
 
+  addNewTttForWarehouseManually(urlCode: string, ttt: Ttt){
+    return this.httpWithoutInterceptor.post<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/create`, ttt);
+  }
+
   putUpdateTruckTimeTable(urlCode: string, ttt: Ttt){
     return this.httpWithoutInterceptor.put<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/update`, ttt);
   }

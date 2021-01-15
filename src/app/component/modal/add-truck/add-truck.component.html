@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <p class="modal-title">Add new TTT</p>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="addTruckForm">
+  <div class="modal-body">
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">Truck Name</th>
+        <th scope="col">Arrival Date Plan</th>
+        <th scope="col">Dispatched From</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><input class="ttt_name" type="text" maxlength="20" value="" formControlName="tttName"/></td>
+        <td><input class="arrivalDatePlan" id="datetime" type="datetime-local" formControlName="arrivalDatePlan" min="{{this.dateMinimum}}" value="{{this.dateMinimum}}" max="{{this.dateMaximum}}"/></td>
+        <td><select id="warehouseList" formControlName="dispatchedFrom">
+          <option [ngValue]="'Direct'">Direct</option>
+          <option *ngFor="let warehouse of this.warehouseList"
+                  [ngValue]="warehouse.name">{{warehouse.name}}</option>
+        </select>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelButtonAction()">Cancel</button>
+    <button type="submit" ngbAutofocus class="btn btn-danger" (click)="saveAction()" [disabled]="addTruckForm.invalid">Ok</button>
+  </div>
+</form>
