@@ -256,8 +256,7 @@ export class TttComponent implements OnInit {
       urlCode: this.nav.warehouseUrlCode
     };
     addManifestModal.result.then((result) => {
-        this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.tttId);
-
+        this.getTttWarehouseManifestDtoByWarehouseUrlAndTttId(this.tttWarehouseManifestDTO.ttt.tttID);
     }, reason => {
       console.log(`Error occurred while adding new manifest in TTT ${this.tttWarehouseManifestDTO.ttt.truckName}`);
     })

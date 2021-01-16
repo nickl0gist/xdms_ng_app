@@ -277,7 +277,6 @@ export class ManifestComponent implements OnInit {
   getGrossTotal() {
     let gross = 0.0;
     this.warehouseManifest.manifest.manifestsReferenceSet.forEach(manifestReference => {
-      console.log(manifestReference);
       if (manifestReference.grossWeightReal === 0) {
         gross += Math.floor(manifestReference.grossWeightPlanned * 100);
       } else {
