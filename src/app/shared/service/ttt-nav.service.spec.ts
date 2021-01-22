@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TttNavService } from './ttt-nav.service';
+import { TruckNavService } from './truck-nav.service';
 
 describe('TttNavService', () => {
-  let service: TttNavService;
+  let service: TruckNavService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TttNavService);
+    service = TestBed.inject(TruckNavService);
   });
 
   it('should be created', () => {

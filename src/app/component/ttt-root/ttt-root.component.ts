@@ -9,7 +9,7 @@ import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
 import {TttEnum} from "../../model/ttt/ttt-enum";
 import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dto";
 import { CommonModule } from '@angular/common';
-import {TttNavService} from "../../shared/service/ttt-nav.service";
+import {TruckNavService} from "../../shared/service/truck-nav.service";
 import {LocalStorageService} from "ngx-webstorage";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddManifestComponent} from "../modal/add-manifest/add-manifest.component";
@@ -26,7 +26,7 @@ export class TttRootComponent implements OnInit, OnDestroy{
   private routeSub: Subscription;
 
   constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute,
-              private tttNavService: TttNavService, private localStorage:LocalStorageService,
+              private tttNavService: TruckNavService, private localStorage:LocalStorageService,
               private modal: NgbModal,) {
   }
 

@@ -1,9 +1,11 @@
 .truck-table {
   display: contents;
 }
-.tttable table thead{
+
+.tttable table thead {
   display: inline-table;
 }
+
 .tttable {
   width: 98%;
   display: block;
@@ -13,6 +15,7 @@
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(255, 255, 255, 1);
 }
+
 .table-striped tbody tr:nth-of-type(even) {
   background-color: rgba(230, 230, 230, 1);
 }
@@ -22,11 +25,11 @@
   max-height: 30rem;
 }
 
-.clear-table{
+.clear-table {
   display: table;
 }
 
-.head-row{
+.head-row {
   display: inline-table;
   width: 100%;
 }
@@ -38,7 +41,6 @@
 .table td, .table th {
   padding: 0;
   border: 1px solid #4f5c68;
-
 }
 
 .table thead th {
@@ -77,7 +79,7 @@ a.table_link:hover {
   color: #f6055c;
 }
 
-tbody tr{
+tbody tr {
   display: inline-table;
   width: 100%;
 }
@@ -135,26 +137,33 @@ table.upper-table {
 .ttt_delay {
   width: 10%;
 }
-.ttt_Date{
+
+.ttt_Date {
   width: 10%;
 }
-.ttt_Hour{
+
+.ttt_Hour {
   width: 5%;
 }
-.ttt_ldm{
+
+.ttt_ldm {
   width: 7%;
 }
-.ttt_wg{
+
+.ttt_wg {
   width: 8%;
 }
+
 ::-webkit-scrollbar {
   width: 0;
 }
+
 .fa-square {
   content: "\f0c8";
   font-size: 2rem;
   vertical-align: -webkit-baseline-middle;
 }
+
 .fa-check-square {
   content: "\f0c8";
   font-size: 2rem;
@@ -167,13 +176,13 @@ table.upper-table {
   float: left;
 }
 
-.back_to_wh{
+.back_to_wh {
   margin-left: 8rem;
   transition: color .5s, background-color .3s;
   font-weight: bold;
-
 }
-.add_truck{
+
+.add_truck {
   margin-left: 4rem;
   margin-right: 3rem;
   float: right;
@@ -181,7 +190,7 @@ table.upper-table {
   font-weight: bold;
 }
 
-.back_to_wh:hover, .add_truck:hover{
+.back_to_wh:hover, .add_truck:hover {
   background-color: #f6055c;
   color: gold;
 }

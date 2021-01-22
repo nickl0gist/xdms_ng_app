@@ -34,6 +34,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { ManifestXdReceptionModalComponent } from './component/modal/manifest-xd-reception-modal/manifest-xd-reception-modal.component';
 import { AddManifestComponent } from './component/modal/add-manifest/add-manifest.component';
 import { AddTruckComponent } from './component/modal/add-truck/add-truck.component';
+import { SearchInListPipe } from './shared/pipe/search-in-list.pipe';
 
 const appRoutes: Routes = [
   {
@@ -79,7 +80,7 @@ const appRoutes: Routes = [
             component: TpaRootComponent
           },
           {
-            matcher: CustomUrlMatcher("id", /^\d+$/),
+            matcher: CustomUrlMatcher("id", /^[0-9A-Za-z\-_]+/),
             component: TpaComponent
           },
         ]
@@ -110,7 +111,8 @@ const appRoutes: Routes = [
     AddReferenceComponent,
     ManifestXdReceptionModalComponent,
     AddManifestComponent,
-    AddTruckComponent
+    AddTruckComponent,
+    SearchInListPipe
   ],
     imports: [
         BrowserModule,

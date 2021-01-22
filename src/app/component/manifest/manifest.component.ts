@@ -4,7 +4,7 @@ import {ApiService} from "../../shared/service/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {LocalStorageService} from "ngx-webstorage";
 import {WarehouseManifest} from "../../model/manifest/warehouse-manifest";
-import {TttNavService} from "../../shared/service/ttt-nav.service";
+import {TruckNavService} from "../../shared/service/truck-nav.service";
 import {Observable, Subscription} from "rxjs";
 import {HttpHeaders} from "@angular/common/http";
 import * as myGlobals from "../../global";
@@ -41,7 +41,7 @@ export class ManifestComponent implements OnInit {
   receptionForm: FormGroup;
 
   constructor(public nav: NavbarService, private apiService: ApiService, private route: ActivatedRoute,
-              public localStorage: LocalStorageService, private tttNavService: TttNavService,
+              public localStorage: LocalStorageService, private tttNavService: TruckNavService,
               private modal: NgbModal, private fb: FormBuilder, private numberFormat: NumberFormatPipe,
               private sanitizer: DomSanitizer) {
     this.createForm();

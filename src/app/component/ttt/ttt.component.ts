@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TttNavService} from "../../shared/service/ttt-nav.service";
+import {TruckNavService} from "../../shared/service/truck-nav.service";
 import {TttWarehouseManifestDTO} from "../../model/ttt/ttt-warehouse-manifest-dto";
 import {ApiService} from "../../shared/service/api.service";
 import {NavbarService} from "../../shared/service/navbar.service";
@@ -49,7 +49,7 @@ export class TttComponent implements OnInit {
   uploading = true;
   uploadingResult: boolean;
 
-  constructor(private tttNavService: TttNavService, private apiService: ApiService, public nav: NavbarService,
+  constructor(private tttNavService: TruckNavService, private apiService: ApiService, public nav: NavbarService,
               private route: ActivatedRoute, public localStorage: LocalStorageService, private modal: NgbModal,
               private numberFormat: NumberFormatPipe) {
   }

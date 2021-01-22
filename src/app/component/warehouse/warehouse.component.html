@@ -23,7 +23,7 @@
           <tr [ngClass]="index % 2 === 0 ? 'even_row' : 'odd_row'">
             <th><a [routerLink]="['/warehouse', nav.warehouseUrlCode ,'ttt', ttt.tttID]">{{ttt.truckName}}</a></th>
             <td>{{ttt.tttArrivalDatePlan.substring(11)}}</td>
-            <td>{{ttt.tttArrivalDateReal === undefined ? symbolNotArrived : ttt.tttArrivalDateReal}}</td>
+            <td>{{ttt.tttArrivalDateReal === undefined ? symbolNotArrived : ttt.tttArrivalDateReal.replace('T', ' ')}}</td>
             <td>{{ttt.tttStatus.tttStatusName}}</td>
             <td hidden>{{ttt.tttID}}</td>
           </tr>
