@@ -8,6 +8,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {CommonModule} from '@angular/common';
 import {LocalStorageService} from "ngx-webstorage";
+import {TruckNavService} from "../../shared/service/truck-nav.service";
 
 @Component({
   selector: 'app-warehouse',
@@ -21,7 +22,9 @@ export class WarehouseComponent implements OnInit {
   private symbolNotArrived = myGlobals.SYMBOL_NOT_ARRIVED;
   private routeSub: Subscription;
 
-  constructor(private apiService: ApiService, public nav: NavbarService, private route: ActivatedRoute, private localStorage: LocalStorageService) {
+  constructor(private apiService: ApiService, public nav: NavbarService,
+              private route: ActivatedRoute, private localStorage: LocalStorageService,
+              private truckNavService: TruckNavService) {
   }
 
   ngOnInit(): void {
@@ -32,14 +35,12 @@ export class WarehouseComponent implements OnInit {
     this.nav.currentDateChangeObs.subscribe((theDate) => {
         this.getTttSetForWarehouseByDate(theDate);
         this.getTpaSetForWarehouseByDate(theDate);
-        this.getTpaSetForWarehouseDelayed();
       }
     );
     if (this.nav.currentDate === undefined)
       this.nav.currentDate = this.localStorage.retrieve('date');
     this.getTttSetForWarehouseByDate(this.nav.currentDate);
     this.getTpaSetForWarehouseByDate(this.nav.currentDate);
-    this.getTpaSetForWarehouseDelayed();
   }
 
   getTttSetForWarehouseByDate(theDate: string) {
@@ -57,6 +58,7 @@ export class WarehouseComponent implements OnInit {
     this.apiService.getTpaListByWarehouseAndDate(this.nav.warehouseUrlCode, theDate).subscribe(
       res => {
         this.tpaListByDate = res;
+        this.getTpaSetForWarehouseDelayed();
       },
       err => {
         console.log('Something went wrong while getting TPA list by Date!');
@@ -67,7 +69,7 @@ export class WarehouseComponent implements OnInit {
   getTpaSetForWarehouseDelayed() {
     this.apiService.getTpaListWithStatusDelayed(this.nav.warehouseUrlCode).subscribe(
       res => {
-        this.tpaListDelayed = res;
+        this.unshiftDelayedTpa(res);
       },
       err => {
         console.log('Something went wrong with getting TPA with status DELAYED!');
@@ -75,4 +77,18 @@ export class WarehouseComponent implements OnInit {
     );
   }
 
+  private unshiftDelayedTpa(delayedTpas: Tpa[]) {
+    let ids = this.tpaListByDate.map(tpa => tpa.tpaID);
+    delayedTpas.forEach(delayedTpa => {
+      if (ids.indexOf(delayedTpa.tpaID) === -1) {
+        this.tpaListByDate.unshift(delayedTpa);
+      }
+    });
+  }
+
+  getTpaId(tpa: Tpa) {
+    this.truckNavService.tpa = tpa;
+    this.localStorage.store('tpaId', tpa.tpaID);
+    this.localStorage.store('date', this.nav.currentDate);
+  }
 }

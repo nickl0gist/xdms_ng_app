@@ -1,1 +1,156 @@
-<p>tpa works!</p>
+<form [formGroup]="changeTpaNameAndDateForm">
+<span class="badge badge-pill badge-primary tpa-info" [class]="!isEditMode ? '' : 'clear-padding'">TPA Name:
+  <u [hidden]="this.isEditMode ? true : null">{{tpa.name}}.</u>
+  <input formControlName="tpaName" class="tpaName" type="text" maxlength="12" value=""
+         [hidden]="!this.isEditMode ? true : null"/>
+  Destination: {{tpa.tpaDaysSetting.whCustomer.customer.name}}.</span>
+
+  <ng-container>
+  <span class="badge badge-pill badge-success dispatch-info"
+        *ngIf="tpa.status.statusName === this.closed, else notClosed">
+    Closed At: {{tpa.departureReal.replace('T', '  ')}}
+  </span>
+    <ng-template #notClosed>
+    <span class="badge badge-pill badge-warning dispatch-info not_dispatched-info"
+          [class]="!isEditMode ? '' : 'clear-padding'">
+      Planned Dispatch:
+      <span [hidden]="this.isEditMode ? true : null">
+        {{tpa.departurePlan.replace('T', '  ')}}</span>
+      <input formControlName="plannedDispatch" class="plannedDispatch" type="datetime-local" value=""
+             [hidden]="!this.isEditMode ? true : null"/>
+    </span>
+    </ng-template>
+  </ng-container>
+
+  <ng-container>
+    <div class="container-fluid tpa-detail"
+         *ngIf="tpa.tpaDaysSetting.whCustomer.warehouse.whType.type != txdType, else txd">
+      <div class="tpatable">
+        <table class="table table-striped">
+          <thead class="head-row">
+          <tr>
+            <th scope="col" rowspan=2 class="manifest_n">Manifest №</th>
+            <th scope="col" rowspan=2 class="supplier_n">Supplier</th>
+            <th scope="col" style="border-bottom: none;" class="delivery_n">Arrival</th>
+            <th scope="col" colspan=2>Qty of pallets</th>
+            <th scope="col" colspan=2>Weight, [t]</th>
+            <th scope="col" rowspan=2 class="is_n">IS</th>
+            <th scope="col" rowspan=2 class="co_n">CO</th>
+            <th scope="col" rowspan=2 class="tpa_n">TPA</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #txd>
+      <div class="container-fluid tpa-detail">
+        <div class="tpatable">
+          <table class="table table-striped">
+            <thead class="head-row">
+            <tr>
+              <th scope="col" rowspan=2 class="manifest_txd">Manifest №</th>
+              <th scope="col" rowspan=2 class="ref_txd">Reference Number</th>
+              <th scope="col" rowspan=2 class="ref_qty_txd">Real Qty</th>
+              <th scope="col" colspan=3 class="pal_size_txd" style="border-bottom: none;">Pallet Size, [mm]</th>
+              <th scope="col" rowspan=2 class="pal_qty_txd">Pallet Qty</th>
+              <th scope="col" rowspan=2 class="pal_id_txd">Pallet ID</th>
+              <th scope="col" rowspan=2 class="weight_txd">Gross Weight, [kg]</th>
+              <th scope="col" rowspan=2 class="stack_txd" ngbTooltip="Stackability" placement="bottom"><i
+                class="fas fa-layer-group"></i></th>
+              <th scope="col" rowspan=2 class="ldm_txd">LDM</th>
+              <th scope="col" rowspan=2 class="tpa_status_txd">Status</th>
+              <th scope="col" rowspan=2 class="tpa_txd">TPA</th>
+            </tr>
+            <tr>
+              <th scope="col" class="pal_size_lwh">L</th>
+              <th scope="col" class="pal_size_lwh">W</th>
+              <th scope="col" class="pal_size_lwh">H</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container formArrayName="manifestReferenceListForm">
+              <tr *ngFor="let manifestReference of tpa.manifestReferenceSet; let index = index; "
+                  [formGroupName]="index">
+                <td class="manifest_txd">{{manifestReference.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]}}
+                  <span
+                    style="float:right;">Split</span></td>
+                <td class="ref_txd">{{manifestReference.reference.number}}</td>
+                <td class="ref_qty_txd">{{manifestReference.qtyReal | numberFormat}}</td>
+                <td class="pal_size_lwh">{{manifestReference.palletLength}}</td>
+                <td class="pal_size_lwh">{{manifestReference.palletWidth}}</td>
+                <td class="pal_size_lwh">{{manifestReference.palletHeight}}</td>
+                <td class="pal_qty_txd">{{manifestReference.palletQtyReal}}</td>
+                <td class="pal_id_txd"><input class="t_input_r" type="text" maxlength="2"
+                                              formControlName="palletId"
+                                              value="{{manifestReference.palletId}}"
+                                              [attr.disabled]="!this.isEditMode ? true : null"/></td>
+
+                <td class="weight_txd"><input class="t_input_r" type="text" maxlength="9"
+                                              [attr.disabled]="!this.isEditMode ? true : null"
+                                              formControlName="grossWeightReal"/></td>
+
+                <td class="stack_txd"><input class="t_input_r" type="text" maxlength="1"
+                                             formControlName="stackability"
+                                             [attr.disabled]="!this.isEditMode ? true : null"/></td>
+
+                <td class="ldm_txd">{{getLdmForManifestReference(manifestReference) | numberFormat}}</td>
+                <td class="tpa_status_txd">{{isArrived(manifestReference)}}</td>
+                <td class="tpa_txd">
+                  <span *ngIf="tpa.status.statusName === this.closed, else notClosedSelect">{{tpa.name}}</span>
+                  <ng-template #notClosedSelect>
+                    <select name="chosenTpa" id="chosenTpa" [attr.disabled]="!this.isEditMode ? true : null"
+                            formControlName="tpaIdForm">
+                      <option *ngFor="let t of tpaListNotClosedForCustomer;" [ngValue]="t.tpaID"
+                              [selected]="manifestReference.tpa.tpaID == t.tpaID"
+                              [id]="t.tpaID">{{t.name}}</option>
+                    </select></ng-template>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td class="truck_type">
+                <label for="truck_type_id">Truck type:</label>
+                <select name="truck-type" id="truck_type_id" [(ngModel)]="chosenTruck" formControlName="truckType"
+                        [attr.disabled]="!this.isEditMode ? true : null" (ngModelChange)="setTruckType($event)">
+                  <option *ngFor="let truckType of truckTypes;" [ngValue]="truckType">{{truckType.name}}</option>
+                </select>
+              </td>
+              <td class="total_cbm">
+                <b>Total:</b>
+                <span class="total"
+                      *ngVar="volumeUtilization() as volumeUtil">CBM: <span>{{this.totalCbm | numberFormat}}
+                  &#13221;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    [ngClass]="getClassForUtilization(volumeUtil)">{{volumeUtil | numberFormat}}%</span></span></span>
+                <span class="total"
+                      *ngVar="getWeightUtilization() as weightUtil">Weight: <span>{{this.totalWeight | numberFormat}} kg&nbsp;&nbsp;&nbsp;&nbsp;<span
+                  [ngClass]="getClassForUtilization(weightUtil)">{{weightUtil | numberFormat}}%</span></span></span>
+                <span class="total" *ngVar="getLdmUtilization() as ldmUtil">LDM: <span>{{this.totalLdm | numberFormat}}
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span
+                    [ngClass]="getClassForUtilization(ldmUtil)">{{ldmUtil | numberFormat}}%</span></span></span>
+                <span class="total">Pallet Qty: {{getTotalPalletQtyAndBoxesQty()}}</span>
+              </td>
+              <td><em class="far fa-file-excel" ngbTooltip="Get Packing List" (click)="this.getExcelPackingList()"
+                      [attr.hidden]="tpa.status.statusName !== this.closed ? true : null"></em>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </ng-template>
+    <button class="btn btn-primary edit_tpa"
+            [attr.disabled]="(this.isEditMode && changeTpaNameAndDateForm.invalid) || this.tpa.status.statusName == closed ? true : null"
+            (click)="!this.isEditMode ? editModeActivation() : updateNameAndPlannedDeparture()">{{!this.isEditMode ? 'EDIT' : 'SAVE'}}</button>
+    <div class="btn btn-primary edit_tpa cancel-button" [hidden]="!this.isEditMode ? true : null"
+         (click)="cancelAction()">CANCEL
+    </div>
+    <button class="btn btn-primary close_tpa" [attr.disabled]="this.isEditMode || anyNotArrived ? true : null"
+            (click)="closeTpa()">Close TPA
+    </button>
+    <a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'tpa', localStorage.retrieve('date')]"
+       class="btn btn-primary back_to_tpa">Back to TPA</a>
+  </ng-container>
+</form>

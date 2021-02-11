@@ -96,6 +96,14 @@ export class ApiService {
     return this.httpWithoutInterceptor.post<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/create`, ttt);
   }
 
+  getTpaById(urlCode: string, tpaId: number) {
+    return this.httpWithoutInterceptor.get<Tpa>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/${tpaId}`);
+  }
+
+  updateTpaNameAndDepartureDatePlan(urlCode: string, tpa: Tpa) {
+    return this.httpWithoutInterceptor.put<Tpa>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/update`, tpa);
+  }
+
   putUpdateTruckTimeTable(urlCode: string, ttt: Ttt){
     return this.httpWithoutInterceptor.put<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/update`, ttt);
   }
@@ -114,4 +122,9 @@ export class ApiService {
   postExcelWithManifestReferencesForReception(urlCode: string, tttId: number, formData: FormData){
     return this.httpWithoutInterceptor.post<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/uploadFile`,  formData, {});
   }
+
+  getExcelPackingListForTpa(urlCode: string, tpaID: number) {
+    return this.httpWithoutInterceptor.get<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/${tpaID}/tpaPackingList.xlsx`,  { responseType: 'arraybuffer' as 'json' });
+  }
+
 }

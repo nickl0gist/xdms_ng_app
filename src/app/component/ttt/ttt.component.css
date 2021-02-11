@@ -1,19 +1,23 @@
 .ttt-detail {
   display: contents;
 }
+
 .tttable {
   width: 98%;
   display: block;
   margin-left: 1rem;
 }
-.tttable table thead{
+
+.tttable table thead {
   display: inline-table;
 }
+
 .tttable tbody {
   overflow-y: auto;
   max-height: 45rem;
 }
-.ttt-info, .arrived-info{
+
+.ttt-info, .arrived-info {
   margin-left: 7rem;
   font-size: large;
   padding-right: 1rem;
@@ -22,7 +26,7 @@
   margin-top: .6rem;
 }
 
-.arrived-info{
+.arrived-info {
   font-size: medium;
   border-top-right-radius: unset;
   float: right;
@@ -32,14 +36,16 @@
   border: 1px solid antiquewhite;
   margin-right: 23px;
 }
-.not_arrived-info{
+
+.not_arrived-info {
   background-color: #ffda09 !important;
 }
 
-.head-row{
+.head-row {
   display: inline-table;
   width: 100%;
 }
+
 .table thead th {
   border: 1px solid #dee2e6;
   text-align: center;
@@ -48,15 +54,19 @@
   color: aliceblue;
   padding: 2px 0 2px 0;
 }
+
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(255, 255, 255, 1);
 }
+
 .table-striped tbody tr:nth-of-type(even) {
   background-color: rgba(230, 230, 230, 1);
 }
+
 .table {
   display: inline-grid;
 }
+
 .table td, .table th {
   padding: 0;
   text-align: center;
@@ -66,17 +76,20 @@
   border-right: 1px solid #4f5c68;
 }
 
-tbody tr{
+tbody tr {
   display: inline-table;
   width: 100%;
 }
+
 ::-webkit-scrollbar {
   width: 0;
 }
-.manifest_n, .supplier_n, .customer_n, .delivery_n, .qty_pal_n, .weight_n, .kpi_n, .is_n, .co_n, .tpa_n{
+
+.manifest_n, .supplier_n, .customer_n, .delivery_n, .qty_pal_n, .weight_n, .kpi_n, .is_n, .co_n, .tpa_n {
   padding-left: 5px;
 }
-.manifest_n{
+
+.manifest_n {
   width: 20%;
 }
 
@@ -90,42 +103,54 @@ em.fas.fa-edit {
   cursor: pointer;
   transition: font-size 0.1s, color 0.3s;
 }
-em.fas.fa-edit:hover{
+
+em.fas.fa-edit:hover {
   font-size: x-large;
   color: #0705ff;
   transform: rotate(7deg);
 }
-.man_link{
+
+.man_link {
   text-align: center;
   display: inline;
 }
-.supplier_n, .customer_n, .tpa_n{
+
+.supplier_n, .customer_n, .tpa_n {
   width: 9%;
 }
-.kpi_n{
+
+.kpi_n {
   width: 3%; /*9%*/
 }
-.delivery_n{
+
+.delivery_n {
   width: 11%;
 }
-.qty_pal_n, .weight_n{
+
+.qty_pal_n, .weight_n {
   width: 7%; /*14*/
 }
-.is_n, .co_n{
+
+.is_n, .co_n {
   width: 3%; /*6*/
 }
-.weight_plan_n, .qty_pal_plan_n{
+
+.weight_plan_n, .qty_pal_plan_n {
   width: 5%;
 }
+
 tr.green_row {
   background-color: #a2ff8c !important;
 }
-.today{
+
+.today {
   background-color: #FFE9A3 !important;
 }
-.wrong_qty{
+
+.wrong_qty {
   background-color: #FF9999 !important;
 }
+
 .badge_n {
   font-size: 100%;
   text-align: center;
@@ -139,71 +164,85 @@ tr.green_row {
   padding: 2px 5px;
   cursor: pointer;
 }
-.badge_n:hover{
+
+.badge_n:hover {
   color: #fff;
   text-decoration: none;
   background-color: #0062cc;
 }
+
 .table td {
   text-align: center;
   padding-bottom: 1px;
   padding-top: 1px;
   vertical-align: middle;
 }
+
 .fa-square {
   color: black;
   content: "\f0c8";
   font-size: 2rem;
   vertical-align: -webkit-baseline-middle;
 }
+
 .fa-check-square {
   color: black;
   content: "\f0c8";
   font-size: 2rem;
   vertical-align: -webkit-baseline-middle;
 }
-.fa-square:hover, .fa-check-square:hover{
+
+.fa-square:hover, .fa-check-square:hover {
   color: red;
   background-color: pink;
 }
+
 a.table_link {
   text-decoration: none;
   color: black;
   font-weight: 550;
-  transition:color 0.2s;
+  transition: color 0.2s;
   cursor: pointer;
 }
+
 a.table_link:hover {
   text-decoration: none;
   color: #f6055c;
 }
-tfoot{
+
+tfoot {
   background: #5c5c5cf5;
   color: white;
   display: inline-table;
   width: 100%;
 }
-tfoot td:first-child{
+
+tfoot td:first-child {
   width: 40%;
   text-align: left;
   padding: 0 0 0 2rem;
 }
-tfoot td:nth-child(2){
+
+tfoot td:nth-child(2) {
   width: 16.5%;
   text-align: right;
   padding-right: 5px;
 }
-tfoot td:nth-child(3), tfoot td:nth-child(5){
+
+tfoot td:nth-child(3), tfoot td:nth-child(5) {
   width: 7%;
   text-align: center;
 }
-tfoot td:nth-child(4){
+
+tfoot td:nth-child(4) {
   width: 5%;
   text-align: center;
 }
+
 :host::ng-deep.tooltip-inner {
   max-width: 250px !important;
 }
+
 .upload_form label {
   background-color: #383838;
   color: white;
@@ -217,26 +256,32 @@ tfoot td:nth-child(4){
   transition: background-color 0.3s;
   margin-right: 2rem;
 }
-.upload_form label:hover{
+
+.upload_form label:hover {
   background-color: #111111;
 }
-.form-group.upload_form{
+
+.form-group.upload_form {
   margin-bottom: 0;
   text-align: right;
 }
-.fa-cloud-upload-alt{
+
+.fa-cloud-upload-alt {
   color: deepskyblue;
 }
 
-.green{
+.green {
   color: greenyellow !important;
 }
-.red{
+
+.red {
   color: orangered !important;
 }
 
 @keyframes spinner {
-  to {transform: rotate(360deg);}
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .spinner:before {
@@ -251,34 +296,41 @@ tfoot td:nth-child(4){
   border-right: 2px solid transparent;
   animation: spinner .6s linear infinite;
 }
+
 .legend {
   display: inline;
   margin-bottom: auto;
   float: left;
 }
-.underlined{
+
+.underlined {
   text-decoration: underline !important;
 }
-.back_to_ttt:hover, .add_manifest:hover{
+
+.back_to_ttt:hover, .add_manifest:hover {
   background-color: #f6055c;
   color: gold;
 }
-.back_to_ttt{
+
+.back_to_ttt {
   margin-left: 8rem;
   transition: color .5s, background-color .3s;
   font-weight: bold;
 
 }
-.add_manifest{
+
+.add_manifest {
   margin-left: 3rem;
   margin-right: 3rem;
   float: right;
   transition: color .5s, background-color .3s;
   font-weight: bold;
 }
+
 em.far.fa-file-excel {
   color: #00ef00;
   font-size: 1.7rem;
+  cursor: pointer;
 }
 
 .i_s {
@@ -294,21 +346,24 @@ em.far.fa-file-excel {
   animation-play-state: running;
   animation-name: BLINK-ANIMATION;
 }
+
 @keyframes BLINK-ANIMATION {
-  0%   {
+  0% {
     color: yellow;
   }
-  100%  {
+  100% {
     color: red;
   }
 }
+
 /*********************** 1400 px *********************************/
-@media only screen and (max-width: 1400px){
+@media only screen and (max-width: 1400px) {
   .tttable tbody {
     overflow-y: auto;
     max-height: 27rem;
   }
-  .arrived-info{
+
+  .arrived-info {
     margin-right: 12px;
   }
 }

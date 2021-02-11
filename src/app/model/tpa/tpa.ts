@@ -12,4 +12,6 @@ export interface Tpa {
   tpaDaysSetting: TpaDaysSetting;
   manifestReferenceSet: ManifestReference[];
   manifestSet: Manifest[];
+
+
 }

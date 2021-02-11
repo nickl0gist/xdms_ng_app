@@ -45,11 +45,32 @@ export class TpaRootComponent implements OnInit {
     this.apiService.getTpaListByWarehouseAndDate(this.nav.warehouseUrlCode, date).subscribe(
       res => {
         this.tpaList = res;
+        this.getTpaSetForWarehouseDelayed();
       },
       error => {
         console.log(`Error occurred while getting list of TPA for warehouse ${this.nav.warehouseUrlCode} for Date ${this.nav.currentDate}`);
       }
     );
+  }
+
+  getTpaSetForWarehouseDelayed() {
+    this.apiService.getTpaListWithStatusDelayed(this.nav.warehouseUrlCode).subscribe(
+      res => {
+        this.unshiftDelayedTpa(res);
+      },
+      err => {
+        console.log('Something went wrong with getting TPA with status DELAYED!');
+      }
+    );
+  }
+
+  private unshiftDelayedTpa(delayedTpas: Tpa[]) {
+    let ids = this.tpaList.map(tpa => tpa.tpaID);
+    delayedTpas.forEach(delayedTpa => {
+      if (ids.indexOf(delayedTpa.tpaID) === -1){
+        this.tpaList.unshift(delayedTpa);
+      }
+    });
   }
 
   /**

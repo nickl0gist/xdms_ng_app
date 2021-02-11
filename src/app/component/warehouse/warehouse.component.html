@@ -51,15 +51,15 @@
         </tr>
         </thead>
         <tbody>
-        <ng-container *ngFor="let tpa of tpaListDelayed; let index = index">
-          <tr [ngClass]="index % 2 === 0 ? 'tpa-even' : 'tpa-odd'">
-            <th><a [routerLink]="['/warehouse', nav.warehouseUrlCode ,'tpa', tpa.tpaID]">{{tpa.name}}</a></th>
-            <td>{{tpa.departurePlan.substring(11)}}</td>
-            <td>{{tpa.departureReal === undefined ? symbolNotArrived : tpa.departureReal.replace('T', " ")}}</td>
-            <td>{{tpa.status.statusName}}</td>
-            <td hidden>{{tpa.tpaID}}</td>
-          </tr>
-        </ng-container>
+<!--        <ng-container *ngFor="let tpa of tpaListDelayed; let index = index">-->
+<!--          <tr [ngClass]="index % 2 === 0 ? 'tpa-even' : 'tpa-odd'">-->
+<!--            <th><a [routerLink]="['/warehouse', nav.warehouseUrlCode ,'tpa', tpa.tpaID]" (click)="getTpaId(tpa)">{{tpa.name}}</a></th>-->
+<!--            <td>{{tpa.departurePlan.substring(11)}}</td>-->
+<!--            <td>{{tpa.departureReal === undefined ? symbolNotArrived : tpa.departureReal.replace('T', " ")}}</td>-->
+<!--            <td>{{tpa.status.statusName}}</td>-->
+<!--            <td hidden>{{tpa.tpaID}}</td>-->
+<!--          </tr>-->
+<!--        </ng-container>-->
         <ng-container *ngFor="let tpa of tpaListByDate; let i = index">
           <tr [ngClass]="i % 2 === 0 ? 'tpa-even' : 'tpa-odd'">
             <th><a [routerLink]="['/warehouse', nav.warehouseUrlCode ,'tpa', tpa.tpaID]">{{tpa.name}}</a></th>

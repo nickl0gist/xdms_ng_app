@@ -16,7 +16,6 @@
       </tr>
       </thead>
       <tbody>
-
         <ng-container *ngFor="let tpa of tpaList | search:'name':query ; let index = index">
           <tr [ngClass]="isDelayed(tpa) ? 'red_row' : tpa.status.statusName === closed ? 'green_row' : ''">
             <td class="tpa_truck_id"><a [routerLink]="['/warehouse', this.nav.warehouseUrlCode, 'tpa', tpa.name]"
@@ -27,90 +26,9 @@
             <td class="tpa_manQty">{{getManifestQty(tpa)}}</td>
             <td class="tpa_palQty">{{getPalletQty(tpa)}}</td>
             <td class="tpa_weight">{{getTotalWeight(tpa)}}</td>
-            <td class="tpa_status">{{tpa.status.statusName}}</td>
+            <td class="tpa_status">{{tpa.status.statusName.replace('_', ' ')}}</td>
           </tr>
         </ng-container>
-          <tr>
-            <td class="tpa_truck_id">A-TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-          <tr>
-            <td class="tpa_truck_id">AA-TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-          <tr>
-            <td class="tpa_truck_id">TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-          <tr class="red_row">
-            <td class="tpa_truck_id">B-TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-          <tr>
-            <td class="tpa_truck_id">BB-TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-          <tr class="green_row">
-            <td class="tpa_truck_id">C-TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-          <tr>
-            <td class="tpa_truck_id">C-TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-          <tr>
-            <td class="tpa_truck_id">CC-TRUCK NAME</td>
-            <td class="tpa_destination">XD GRÓJEC</td>
-            <td class="tpa_departure_at">2021-01-18 16:00</td>
-            <td class="tpa_delivery">2021-01-20 16:00</td>
-            <td class="tpa_manQty">5</td>
-            <td class="tpa_palQty">6</td>
-            <td class="tpa_weight">6</td>
-            <td class="tpa_status">DELAYED</td>
-          </tr>
-
       </tbody>
     </table>
     <div class="legend">

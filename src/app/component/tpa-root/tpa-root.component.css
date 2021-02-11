@@ -44,7 +44,10 @@
 
 .table td, .table th {
   padding: 0;
-  border: 1px solid #4f5c68;
+  border-left: 1px solid #4f5c68;
+  border-right: 1px solid #4f5c68;
+  border-bottom: 1px solid #4f5c68;
+  border-top: none;
 }
 
 .table thead th {
