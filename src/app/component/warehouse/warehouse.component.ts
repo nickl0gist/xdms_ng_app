@@ -58,32 +58,11 @@ export class WarehouseComponent implements OnInit {
     this.apiService.getTpaListByWarehouseAndDate(this.nav.warehouseUrlCode, theDate).subscribe(
       res => {
         this.tpaListByDate = res;
-        this.getTpaSetForWarehouseDelayed();
       },
       err => {
         console.log('Something went wrong while getting TPA list by Date!');
       }
     );
-  }
-
-  getTpaSetForWarehouseDelayed() {
-    this.apiService.getTpaListWithStatusDelayed(this.nav.warehouseUrlCode).subscribe(
-      res => {
-        this.unshiftDelayedTpa(res);
-      },
-      err => {
-        console.log('Something went wrong with getting TPA with status DELAYED!');
-      }
-    );
-  }
-
-  private unshiftDelayedTpa(delayedTpas: Tpa[]) {
-    let ids = this.tpaListByDate.map(tpa => tpa.tpaID);
-    delayedTpas.forEach(delayedTpa => {
-      if (ids.indexOf(delayedTpa.tpaID) === -1) {
-        this.tpaListByDate.unshift(delayedTpa);
-      }
-    });
   }
 
   getTpaId(tpa: Tpa) {

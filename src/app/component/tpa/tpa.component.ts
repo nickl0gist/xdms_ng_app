@@ -225,7 +225,14 @@ export class TpaComponent implements OnInit {
   }
 
   closeTpa() {
-    alert("close TPA request!");
+    this.apiService.closeTpa(this.nav.warehouseUrlCode, this.tpa.tpaID).subscribe(
+      res => {
+        this.tpa = res;
+      },
+      error => {
+        console.log(`Error occurred while updating TPA Status of TPA ${this.tpa.name} in Warehouse: ${this.nav.warehouseUrlCode}`);
+      }
+    );
   }
 
   updateNameAndPlannedDeparture() {

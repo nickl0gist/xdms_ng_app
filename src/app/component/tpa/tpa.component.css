@@ -171,6 +171,7 @@ tbody tr {
 select#chosenTpa:disabled {
   color: black;
   opacity: 1;
+  width: 8rem;
 }
 
 .manifest_txd span {
