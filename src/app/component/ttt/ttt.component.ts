@@ -160,6 +160,8 @@ export class TttComponent implements OnInit {
       totalWeightReal += warehouseManifest.grossWeight;
       totalWeightPlan += warehouseManifest.manifest.totalWeightPlanned;
     });
+    totalWeightReal = parseFloat((totalWeightReal / 1000).toFixed(3));
+    totalWeightPlan = parseFloat((totalWeightPlan / 1000).toFixed(3));
     return totalWeightReal > 0 ? this.numberFormat.transform(totalWeightReal) + ' t' : this.numberFormat.transform(totalWeightPlan) + ' t';
   }
 
@@ -260,5 +262,17 @@ export class TttComponent implements OnInit {
     }, reason => {
       console.log(`Error occurred while adding new manifest in TTT ${this.tttWarehouseManifestDTO.ttt.truckName}`);
     })
+  }
+
+  getWeightOfWarehouseManifest(warehouseManifest: WarehouseManifest) {
+    let result = 0;
+    if (warehouseManifest.grossWeight > 0) {
+      return warehouseManifest.grossWeight;
+    } else {
+      warehouseManifest.manifest.manifestsReferenceSet.forEach( mr =>{
+        result += mr.grossWeightReal;
+      });
+    }
+    return result;
   }
 }

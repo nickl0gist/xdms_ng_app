@@ -1,0 +1,87 @@
+<div class="modal-header" data-keyboard="false">
+  <p class="modal-title">Split reference: <span>{{this.manifestReferenceSource.reference.number}}</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manifest: <span>{{this.manifestReferenceSource.manifest.manifestCode}}</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TPA: <span>{{this.tpa.name}}</span>
+  </p>
+  <button type="button" class="close" aria-label="Close" (click)="cancelButtonAction()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="splitManifestReferenceForm">
+  <div class="modal-body">
+    <table class="source">
+      <caption>Reference to split:</caption>
+      <thead>
+      <tr>
+        <th scope="col" class="split_man">Manifest Code</th>
+        <th scope="col" class="split_supl">Supplier</th>
+        <th scope="col" class="split_cust">Customer</th>
+        <th scope="col" class="split_ref">Reference</th>
+        <th scope="col" class="split_qty">Ref. Qty</th>
+        <th scope="col" class="split_pal_qty">Pallet Qty</th>
+        <th scope="col" class="split_pal_qty">Box Qty</th>
+        <th scope="col" class="split_ldm">Total LDM</th>
+        <th scope="col" class="split_weight">Total Weight, [kg]</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td
+          class="split_man">{{this.manifestReferenceSource.manifest.manifestCode.split(this.MANUALLY_ADDED_POSTFIX)[0]}}</td>
+        <td class="split_supl">{{this.manifestReferenceSource.reference.supplier.name}}</td>
+        <td class="split_cust">{{this.manifestReferenceSource.reference.customer.name}}</td>
+        <td class="split_ref">{{this.manifestReferenceSource.reference.number}}</td>
+        <td class="split_qty" [style]="this.manifestReferenceSource.qtyReal <= 0 ? 'color:red;' : ''">{{this.manifestReferenceSource.qtyReal | numberFormat}}</td>
+        <td class="split_pal_qty" [style]="this.manifestReferenceSource.palletQtyReal <= 0 ? 'color:red;' : ''">{{this.manifestReferenceSource.palletQtyReal}}</td>
+        <td class="split_pal_qty" [style]="this.manifestReferenceSource.boxQtyReal <= 0 ? 'color:red;' : ''">{{this.manifestReferenceSource.boxQtyReal}}</td>
+        <td class="split_ldm">{{getLdmForManifestReference(this.manifestReferenceSource) | numberFormat}}</td>
+        <td class="split_weight" [style]="this.manifestReferenceSource.grossWeightReal <= 0 ? 'color:red;' : ''">{{this.manifestReferenceSource.grossWeightReal | numberFormat}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <table class="divided">
+      <caption>New divided part to the reference:</caption>
+      <thead>
+      <tr>
+        <th scope="col" class="split_man">Pick TPA:</th>
+        <th scope="col" class="split_ref">Reference</th>
+        <th scope="col" class="split_qty">Ref. Qty</th>
+        <th scope="col" class="split_pal_qty">Pallet Qty</th>
+        <th scope="col" class="split_pal_qty">Box Qty</th>
+        <th scope="col" class="split_ldm">Total LDM</th>
+        <th scope="col" class="split_weight">Total Weight, [kg]</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <td class="split_supl">
+          <select formControlName="tpa">
+            <option *ngFor="let t of this.tpaList; let index = index;"
+                    [ngValue]="t" [disabled]="this.tpa.tpaID == t.tpaID ? true : null">{{t.name}}</option>
+          </select>
+        </td>
+        <td class="split_ref">{{this.manifestReferenceResult?.reference.number}}</td>
+        <td class="split_qty"><input formControlName="refQty" class="t_input_r" type="text"
+                                     (input)="recalculateRefQty()"
+                                     maxlength="10" value=""/></td>
+        <td class="split_pal_qty"><input formControlName="palletQty" class="t_input_r" (input)="recalculateLdm()"
+                                         type="text" maxlength="3" value=""/></td>
+        <td class="split_pal_qty"><input formControlName="boxQty" class="t_input_r" (input)="recalculateBoxQty()"
+                                         type="text"
+                                         maxlength="4" value=""/></td>
+        <td class="split_ldm">{{getLdmForManifestReference(this.manifestReferenceResult) | numberFormat}}</td>
+        <td class="split_weight"><input formControlName="totalWeight" class="t_input_r" type="text"
+                                        maxlength="9" value="" (input)="recalculateWeight()"/></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelButtonAction()">Cancel</button>
+    <button type="submit" ngbAutofocus class="btn btn-danger"
+            [disabled]="splitManifestReferenceForm.pristine || splitManifestReferenceForm.invalid"
+            (click)="okButtonAction()">Ok
+    </button>
+  </div>
+</form>

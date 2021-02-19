@@ -6,6 +6,7 @@
   background-color: #5a92ce;
   margin-top: .6rem;
 }
+
 .clear-padding {
   padding: 0 .5em !important;
 }
@@ -34,18 +35,19 @@
   background: #e9eced;
 }
 
-.plannedDispatch{
+.plannedDispatch {
   height: 1.5rem;
   border-radius: 8px;
   border: 1px solid grey;
   background: #e9eced;
 }
 
-.cancel-button{
+.cancel-button {
   background-color: #cd0f0f;
 }
-.cancel-button:hover{
-  background-color: red!important;
+
+.cancel-button:hover {
+  background-color: red !important;
 }
 
 .tpa-detail {
@@ -145,23 +147,23 @@ tbody tr {
   width: 15%;
 }
 
-.stack_txd{
+.stack_txd {
   width: 3%;
 }
 
-.pal_id_txd input{
+.pal_id_txd input {
   width: 3rem;
 }
 
-.weight_txd input{
+.weight_txd input {
   width: 6rem;
 }
 
-.stack_txd input{
+.stack_txd input {
   width: 2rem;
 }
 
-.pal_id_txd input, .weight_txd input, .stack_txd input, select#chosenTpa{
+.pal_id_txd input, .weight_txd input, .stack_txd input, select#chosenTpa {
   border: 1px solid #b1b1b1;
   border-radius: 5px;
   text-align: center;
@@ -180,7 +182,7 @@ select#chosenTpa:disabled {
   cursor: pointer;
 }
 
-.manifest_txd span:hover{
+.manifest_txd span:hover {
   color: #0705ff;
   background: #fced0275;
   backdrop-filter: blur(6px);
@@ -233,7 +235,7 @@ tfoot {
   width: 100%;
 }
 
-tfoot tr{
+tfoot tr {
   height: 2rem;
 }
 
@@ -335,7 +337,7 @@ span.green_alert {
   color: black;
 }
 
-.fa-layer-group{
+.fa-layer-group {
   font-size: 2em;
 }
 

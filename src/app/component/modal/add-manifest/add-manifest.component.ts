@@ -73,7 +73,7 @@ export class AddManifestComponent implements OnInit {
   }
 
   saveAction() {
-    this.manifest = new  Manifest ();
+    this.manifest = new Manifest ();
     this.manifest.manifestCode = this.addManifestForm.get('manifestCode').value + this.MANUALLY_ADDED_POSTFIX;
     this.manifest.supplier = this.addManifestForm.get('supplier').value;
     this.manifest.customer = this.addManifestForm.get('customer').value;

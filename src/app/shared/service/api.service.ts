@@ -65,18 +65,18 @@ export class ApiService {
   }
 
   getReferenceListByCustomerAndSupplier(supplierId: number, customerId: number) {
-    return this.httpWithoutInterceptor.get<Reference[]>(this.COORDINATOR_REFERENCE_URL + '/supplier/' + supplierId +'/customer/' + customerId);
+    return this.httpWithoutInterceptor.get<Reference[]>(this.COORDINATOR_REFERENCE_URL + '/supplier/' + supplierId + '/customer/' + customerId);
   }
 
-  putAdditionalReferenceToManifest(urlCode: string, tttId: number, manifestId: number, manifestReference: ManifestReference){
+  putAdditionalReferenceToManifest(urlCode: string, tttId: number, manifestId: number, manifestReference: ManifestReference) {
     return this.httpWithoutInterceptor.put<Manifest>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/ttt/' + tttId + '/manifest/' + manifestId + '/addReference', manifestReference);
   }
 
-  putManifestReferenceListAfterReception(urlCode: string, manifestReferenceList: ManifestReference[]){
+  putManifestReferenceListAfterReception(urlCode: string, manifestReferenceList: ManifestReference[]) {
     return this.httpWithoutInterceptor.put<ManifestReference[]>(this.ACTIVE_WAREHOUSES_URL + urlCode + '/man_ref/reception', manifestReferenceList);
   }
 
-  putWarehouseManifestUpdate(urlCode: string, tttId: number, warehouseManifestUpdated: WarehouseManifest){
+  putWarehouseManifestUpdate(urlCode: string, tttId: number, warehouseManifestUpdated: WarehouseManifest) {
     return this.httpWithoutInterceptor.put<WarehouseManifest>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/manifest/update`, warehouseManifestUpdated);
   }
 
@@ -92,7 +92,7 @@ export class ApiService {
     return this.httpWithoutInterceptor.post<Manifest>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${ttt.tttID}`, manifest);
   }
 
-  addNewTttForWarehouseManually(urlCode: string, ttt: Ttt){
+  addNewTttForWarehouseManually(urlCode: string, ttt: Ttt) {
     return this.httpWithoutInterceptor.post<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/create`, ttt);
   }
 
@@ -104,7 +104,7 @@ export class ApiService {
     return this.httpWithoutInterceptor.put<Tpa>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/update`, tpa);
   }
 
-  putUpdateTruckTimeTable(urlCode: string, ttt: Ttt){
+  putUpdateTruckTimeTable(urlCode: string, ttt: Ttt) {
     return this.httpWithoutInterceptor.put<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/update`, ttt);
   }
 
@@ -112,22 +112,27 @@ export class ApiService {
     return this.httpWithoutInterceptor.get<Ttt>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttID}`);
   }
 
-
   closeTpa(urlCode: string, tpaId: number) {
     return this.httpWithoutInterceptor.put<Tpa>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/${tpaId}/close`, null);
   }
 
-   /*******************\
-    * EXCEL ENDPOINTS *
-   \*******************/
-  getExcelWithManifestReferencesForReception(urlCode: string, tttId: number){
-     return this.httpWithoutInterceptor.get<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/reception.xlsx`,  { responseType: 'arraybuffer' as 'json' });
-   }
+  putSplitManifestReference(urlCode: string, tpaFromId: number, manRefId: number, manifestReferenceResult: ManifestReference) {
+    return this.httpWithoutInterceptor.put<Tpa>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/${tpaFromId}/split/man_ref/${manRefId}/tpa_to/${manifestReferenceResult.tpa.tpaID}`, manifestReferenceResult);
+  }
 
-  postExcelWithManifestReferencesForReception(urlCode: string, tttId: number, formData: FormData){
-    return this.httpWithoutInterceptor.post<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/uploadFile`,  formData, {});
+  /*******************\
+   * EXCEL ENDPOINTS *
+   \*******************/
+  getExcelWithManifestReferencesForReception(urlCode: string, tttId: number) {
+    return this.httpWithoutInterceptor.get<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/reception.xlsx`, {responseType: 'arraybuffer' as 'json'});
   }
+
+  postExcelWithManifestReferencesForReception(urlCode: string, tttId: number, formData: FormData) {
+    return this.httpWithoutInterceptor.post<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/ttt/${tttId}/uploadFile`, formData, {});
+  }
+
   getExcelPackingListForTpa(urlCode: string, tpaID: number) {
-    return this.httpWithoutInterceptor.get<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/${tpaID}/tpaPackingList.xlsx`,  { responseType: 'arraybuffer' as 'json' });
+    return this.httpWithoutInterceptor.get<any>(`${this.ACTIVE_WAREHOUSES_URL}${urlCode}/tpa/${tpaID}/tpaPackingList.xlsx`, {responseType: 'arraybuffer' as 'json'});
   }
+
 }

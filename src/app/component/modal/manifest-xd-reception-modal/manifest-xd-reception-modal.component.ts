@@ -84,7 +84,7 @@ export class ManifestXdReceptionModalComponent implements OnInit {
     this.kpiManifest = true;
     this.receptionForm.get('palletQtyReal').setValue(this.warehouseManifest.manifest.palletQtyPlanned);
     this.receptionForm.get('boxQtyReal').setValue(this.warehouseManifest.manifest.boxQtyPlanned);
-    this.receptionForm.get('weightReal').setValue(this.warehouseManifest.manifest.totalWeightPlanned * 1000);
+    this.receptionForm.get('weightReal').setValue(this.warehouseManifest.manifest.totalWeightPlanned);
   }
 
   saveButtonAction() {

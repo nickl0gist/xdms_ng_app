@@ -140,7 +140,7 @@ export class ManifestComponent implements OnInit {
 
   private mapManifestReferenceSetToForm() {
     this.sortManifestReferenceSet();
-    this.warehouseManifest.manifest.manifestsReferenceSet.map(mR =>
+    this.warehouseManifest.manifest.manifestsReferenceSet.forEach(mR =>
       this.manifestReferenceGetter.push(this.fb.group({
         qtyReal: [mR.qtyReal === 0 ? this.NOT_ARRIVED : this.numberFormat.transform(mR.qtyReal),
           Validators.pattern('^[0-9]?\\d{0,9},?\\d{1,3}$|\\'+this.NOT_ARRIVED)],
@@ -338,7 +338,7 @@ export class ManifestComponent implements OnInit {
    * Fires Up when user hits cancel button while ReceptionForm is in edit mode.
    */
   cancelClickAction() {
-    this.warehouseManifest.manifest.manifestsReferenceSet.map((mR, index) => {
+    this.warehouseManifest.manifest.manifestsReferenceSet.forEach((mR, index) => {
       this.manifestReferenceGetter.at(index).get('qtyReal').markAsPristine();
       this.manifestReferenceGetter.at(index).get('palletQtyReal').markAsPristine();
       this.manifestReferenceGetter.at(index).get('boxQtyReal').markAsPristine();

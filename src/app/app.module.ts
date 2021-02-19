@@ -35,6 +35,7 @@ import { ManifestXdReceptionModalComponent } from './component/modal/manifest-xd
 import { AddManifestComponent } from './component/modal/add-manifest/add-manifest.component';
 import { AddTruckComponent } from './component/modal/add-truck/add-truck.component';
 import { SearchInListPipe } from './shared/pipe/search-in-list.pipe';
+import { SplitReferenceComponent } from './component/modal/split-reference/split-reference.component';
 
 const appRoutes: Routes = [
   {
@@ -112,7 +113,8 @@ const appRoutes: Routes = [
     ManifestXdReceptionModalComponent,
     AddManifestComponent,
     AddTruckComponent,
-    SearchInListPipe
+    SearchInListPipe,
+    SplitReferenceComponent
   ],
     imports: [
         BrowserModule,
@@ -134,7 +136,13 @@ const appRoutes: Routes = [
     ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AddReferenceComponent, ManifestXdReceptionModalComponent, AddManifestComponent, AddTruckComponent]
+  entryComponents: [
+    AddReferenceComponent,
+    ManifestXdReceptionModalComponent,
+    AddManifestComponent,
+    AddTruckComponent,
+    SplitReferenceComponent
+  ]
 })
 export class AppModule {
 

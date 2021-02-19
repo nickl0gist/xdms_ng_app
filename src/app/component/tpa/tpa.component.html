@@ -73,7 +73,7 @@
               <tr *ngFor="let manifestReference of tpa.manifestReferenceSet; let index = index; "
                   [formGroupName]="index">
                 <td class="manifest_txd">{{manifestReference.manifest.manifestCode.split(MANUALLY_ADDED_POSTFIX)[0]}}
-                  <span style="float:right;" [attr.hidden]="this.tpa.status.statusName == closed ? true : null">Split</span></td>
+                  <span style="float:right;" [attr.hidden]="this.tpa.status.statusName == closed ? true : null" (click)="splitManifestReference(manifestReference)">Split</span></td>
                 <td class="ref_txd">{{manifestReference.reference.number}}</td>
                 <td class="ref_qty_txd">{{manifestReference.qtyReal | numberFormat}}</td>
                 <td class="pal_size_lwh">{{manifestReference.palletLength}}</td>

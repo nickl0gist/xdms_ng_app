@@ -42,9 +42,11 @@
   text-decoration: none;
   background-color: #000dcc;
 }
+
 table {
   margin: auto;
 }
+
 tbody tr td select {
   border-radius: 5px;
   width: 8rem;
@@ -56,20 +58,24 @@ tbody td, thead th {
   padding-left: .5rem;
   padding-right: .5rem;
 }
+
 tbody tr {
   background: #8ca9ff;
   font-weight: 500;
 }
+
 thead tr {
   background: #4a4846;
   color: aliceblue;
 }
+
 tbody tr td input {
   text-align: center;
   border-radius: 5px;
   margin: 2px;
   border: none;
 }
+
 .addManifest_palletQTy, .addManifest_ldm {
   width: 4rem;
 }
@@ -77,27 +83,33 @@ tbody tr td input {
 .addManifest_weight {
   width: 6rem;
 }
+
 .modal-header .close {
   padding: 1rem 1rem;
   margin: -1rem -.5rem -1rem auto;
 }
-.tpa_table{
+
+.tpa_table {
   margin-top: 1.5rem;
   margin-left: 1rem;
 }
-.tpa_table tr th{
+
+.tpa_table tr th {
   border: 1px black solid;
 }
-.tpa_table tr th:first-child{
+
+.tpa_table tr th:first-child {
   width: 10rem;
   background: #4a4846;
   color: aliceblue;
 }
-.tpa_table tr th:last-child{
+
+.tpa_table tr th:last-child {
   width: 7rem;
   background: #8ca9ff;
 }
-.tpa_table tr th:last-child select{
+
+.tpa_table tr th:last-child select {
   border-radius: 5px;
   width: 9rem;
 }

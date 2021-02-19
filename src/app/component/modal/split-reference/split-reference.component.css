@@ -1,0 +1,165 @@
+::ng-deep .splitManifestReference .modal-dialog {
+  max-width: 60rem;
+  margin-top: 7rem;
+}
+
+::ng-deep .modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 1, 247, 0.15);
+}
+
+.modal-header, .modal-body, .modal-footer {
+  background-color: darkgray;
+}
+
+.modal-header {
+  padding: 0.3rem;
+  font-size: large;
+  font-weight: 700;
+}
+
+.modal-footer {
+  padding: 0.3rem;
+}
+
+.modal-title {
+  padding-left: 2rem;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+
+.btn-outline-secondary {
+  color: #fff;
+  text-decoration: none;
+  background-color: #728ee1;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #000dcc;
+}
+
+table {
+  margin: auto;
+}
+
+tbody tr td select {
+  border-radius: 5px;
+  width: 8rem;
+}
+
+tbody td, thead th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+tbody tr {
+  background: #fff;
+  font-weight: 500;
+}
+
+.source tbody tr {
+  background: #c6d4ff;
+}
+
+thead tr {
+  background: #4a4846;
+  color: aliceblue;
+}
+
+.dark_row {
+  text-align: left;
+  background: #8ca9ff;
+  color: #000000;
+}
+
+tbody tr td input {
+  text-align: center;
+  border-radius: 5px;
+  margin: 2px;
+  border: none;
+}
+
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem -.5rem -1rem auto;
+}
+
+.source .split_man {
+  width: 20%;
+}
+
+.source .split_supl {
+  width: 13%;
+}
+
+.source .split_cust {
+  width: 13%;
+}
+
+.source .split_ref {
+  width: 13%;
+}
+
+.source .split_qty {
+  width: 10%;
+}
+
+.source .split_pal_qty {
+  width: 6%;
+}
+
+.source .split_ldm {
+  width: 7%;
+}
+
+.source .split_weight {
+  width: 14%;
+}
+
+caption {
+  padding-top: 0;
+  padding-bottom: 0;
+  color: #fcfcfc;
+  text-align: left;
+  caption-side: top;
+  background: #001eff;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 2rem;
+  padding-left: 1rem;
+  font-weight: 500;
+  width: 15rem;
+}
+
+.divided caption {
+  background: forestgreen;
+  width: 18rem;
+  margin-top: 1rem;
+}
+
+.divided {
+  margin: 0;
+}
+
+tbody tr td .t_input_r {
+  text-align: center;
+  border-radius: 5px;
+  margin: 2px;
+  border: 1px solid black;
+}
+
+tbody tr .t_input_r{
+  width: 6rem;
+}
+
+tbody tr td:last-child .t_input_r{
+  width: 8rem;
+}
+

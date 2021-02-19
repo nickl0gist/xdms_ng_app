@@ -65,7 +65,7 @@
               [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)">{{warehouseManifest.manifest.totalWeightPlanned | numberFormat}}</td>
           <td class="weight_n" [ngClass]="getAppropriateClass(warehouseManifest, tttWarehouseManifestDTO.ttt, true)"><a
             class="badge_n text-wrap" style="display:inline-block;"
-            *ngVar="warehouseManifest.grossWeight > 0 ? warehouseManifest.grossWeight : this.SYMBOL_NOT_ARRIVED as weight">{{weight}}</a>
+            *ngVar="getWeightOfWarehouseManifest(warehouseManifest) > 0 ? getWeightOfWarehouseManifest(warehouseManifest) : this.SYMBOL_NOT_ARRIVED as weight">{{weight | numberFormat}}</a>
           </td>
           <td class="kpi_n" *ngVar="warehouseManifest.kpiLabel ? 'Y' : 'N' as  condition"><a
             class="badge_n text-wrap">{{condition}}</a></td>

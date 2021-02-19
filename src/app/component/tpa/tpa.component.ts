@@ -17,6 +17,8 @@ import {TruckType} from "../../model/truck/truck-type";
 import {newArray} from "@angular/compiler/src/util";
 import {saveAs} from 'file-saver';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AddManifestComponent} from "../modal/add-manifest/add-manifest.component";
+import {SplitReferenceComponent} from "../modal/split-reference/split-reference.component";
 
 @Component({
   selector: 'app-tpa',
@@ -258,7 +260,7 @@ export class TpaComponent implements OnInit {
       })
   }
 
-  private updateManifestReferenceWithinTpa(){
+  private updateManifestReferenceWithinTpa() {
     this.apiService.putManifestReferenceListAfterReception(this.nav.warehouseUrlCode, this.tpa.manifestReferenceSet).subscribe(
       res => {
         this.tpa.manifestReferenceSet = res;
@@ -301,7 +303,7 @@ export class TpaComponent implements OnInit {
   }
 
   private mapManifestReferenceSetToForm() {
-    this.tpa.manifestReferenceSet.map(mR =>
+    this.tpa.manifestReferenceSet.forEach(mR =>
       this.manifestReferenceGetter.push(this.fb.group({
         grossWeightReal: [this.numberFormat.transform(mR.grossWeightReal),
           Validators.pattern('^[0-9]?\\d{0,4},?\\d{1,3}$')],
@@ -323,7 +325,7 @@ export class TpaComponent implements OnInit {
   }
 
   cancelAction() {
-    this.tpa.manifestReferenceSet.map((mR, index) => {
+    this.tpa.manifestReferenceSet.forEach((mR, index) => {
       this.manifestReferenceGetter.at(index).get('grossWeightReal').markAsPristine();
       this.manifestReferenceGetter.at(index).get('palletId').markAsPristine();
       this.manifestReferenceGetter.at(index).get('stackability').markAsPristine();
@@ -340,9 +342,30 @@ export class TpaComponent implements OnInit {
   }
 
   private getTpaToPlace(index: number) {
-      return this.tpaListNotClosedForCustomer.find(tpa => {
-        if (tpa.tpaID == this.changeTpaNameAndDateForm.get(['manifestReferenceListForm', index]).get('tpaIdForm').value)
-          return true;
+    return this.tpaListNotClosedForCustomer.find(tpa => {
+      if (tpa.tpaID == this.changeTpaNameAndDateForm.get(['manifestReferenceListForm', index]).get('tpaIdForm').value)
+        return true;
+    });
+  }
+
+  splitManifestReference(manifestReference: ManifestReference) {
+    const splitReferenceModal = this.modal.open(SplitReferenceComponent,
+      {
+        windowClass: 'splitManifestReference',
       });
-    }
+    splitReferenceModal.componentInstance.fromParent = {
+      manifestReference: manifestReference,
+      urlCode: this.nav.warehouseUrlCode,
+      tpa: this.tpa,
+      tpaListNotClosedForCustomer: this.tpaListNotClosedForCustomer,
+      truckType: this.chosenTruck,
+    };
+    splitReferenceModal.result.then((result) => {
+        this.manifestReferenceGetter.clear();
+        this.tpa = result;
+        this.mapManifestReferenceSetToForm();
+      },
+      (reason) => {
+      });
+  }
 }

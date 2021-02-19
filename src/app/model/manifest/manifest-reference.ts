@@ -2,7 +2,7 @@ import {Manifest} from "./manifest";
 import {Reference} from "../reference/reference";
 import {Tpa} from "../tpa/tpa";
 
-export interface ManifestReference {
+export class ManifestReference {
   manifestReferenceId: number;
   qtyPlanned: number;
   qtyReal: number;
@@ -24,4 +24,7 @@ export interface ManifestReference {
   manifest: Manifest;
   reference: Reference;
   tpa: Tpa;
+
+  constructor() {
+  }
 }
